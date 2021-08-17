@@ -16,7 +16,7 @@ class AppStateController extends GetxController {
       speechSpeed.value = prefs.getDouble("ReaderSpeechRate")!;
   }
 
-
+  
 
 
 
