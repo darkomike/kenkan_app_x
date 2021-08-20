@@ -7,17 +7,17 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
 
       dialogTheme: DialogTheme(
-        backgroundColor:  Colors.white,
+        backgroundColor:  lightColor,
 
       ),
     fontFamily: "IBMPlexSans",
       iconTheme: IconThemeData(color: Colors.black, size: 20),
       switchTheme: SwitchThemeData(),
       accentColor: accentColor,
-      backgroundColor: Colors.white,
+      backgroundColor: lightColor,
       cardTheme: CardTheme(
         elevation: 0.0,
-        color: Colors.white,
+        color: lightColor,
       ),
       dividerColor: Colors.black,
       textTheme: TextTheme(
@@ -32,7 +32,7 @@ class AppTheme {
         subtitle1:  TextStyle(
             fontSize: 25, fontFamily: "IBMPlexSans", color: Colors.black)
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: lightColor,
       appBarTheme: AppBarTheme(
           backgroundColor: accentColor,
           textTheme: TextTheme(
@@ -41,15 +41,15 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     dialogTheme: DialogTheme(
-      backgroundColor:  Colors.blueGrey[800],
+      backgroundColor:  darkColor,
 
     ),
 
     fontFamily: "IBMPlexSans",
       iconTheme: IconThemeData(color: Colors.white, size: 20),
       dividerTheme: DividerThemeData(color: Colors.white),
-      scaffoldBackgroundColor: Colors.blueGrey[800],
-      backgroundColor: Colors.blueGrey[800],
+      scaffoldBackgroundColor:darkColor,
+      backgroundColor: darkColor,
 
       textTheme: TextTheme(
         headline6: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "BalooTammudu2", fontWeight: FontWeight.w600),
@@ -68,6 +68,6 @@ class AppTheme {
 
       dividerColor: Colors.white,
       appBarTheme: AppBarTheme(
-          color: Colors.blueGrey[800],
+          color: darkColor,
           iconTheme: IconThemeData(color: Colors.white)));
 }

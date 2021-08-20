@@ -107,6 +107,6 @@ class DictionaryController extends GetxController {
   Future clearHistory() async {
     // history.clear();
     await AppDatabase.db.removeAllRecentWORDs();
-    setRecentWORDs()();
+    setRecentWORDs();
   }
 }

@@ -30,7 +30,6 @@ import 'package:kenkan_app_x/helpers/reader_functions.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class DictionFunctions {
   static String display(String word, Map<String, dynamic> map) {
     String value = '';
@@ -43,10 +42,7 @@ class DictionFunctions {
     return value;
   }
 
-
   // --------------------------------------------------------------------------------------------------------
-
-  
 
 // -----------------------------------------------------------------------------------------------------
   static List<dynamic> searchMany(String word, Map<String, dynamic> map) {
@@ -79,8 +75,8 @@ class DictionFunctions {
 // ----------------------------------------------------------------------------------------------------------
 
   static WordModel searchOne(String word, Map<String, dynamic> map) {
-    late WordModel wordModelToReturn =
-        new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    late WordModel wordModelToReturn = new WordModel(
+        wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
 
     map.forEach((key, value) {
       if (word.toUpperCase().compareTo(key) == 0) {
@@ -96,10 +92,10 @@ class DictionFunctions {
 // ------------------------------------------------------------------------------------------------------------
 
   static WordModel randomSearch(String word) {
-    late WordModel wordModelToReturn =
-        new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    late WordModel wordModelToReturn = new WordModel(
+        wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
 
-    wordModelToReturn =ReaderFunctions.wordOfTheDayModel(word);
+    wordModelToReturn = ReaderFunctions.wordOfTheDayModel(word);
 
     return wordModelToReturn;
   }
@@ -115,10 +111,9 @@ class DictionFunctions {
 
   // -----------------------------------------------------------------------------------------------
 
-
   static WordModel wordOfTheDayModel(String? value) {
     WordModel wordSearched;
-        
+
     switch (value!.toUpperCase()[0].trim()) {
       case "A":
         wordSearched = searchOne(value.trim(), CategoryA.categoryA);
@@ -200,12 +195,13 @@ class DictionFunctions {
         break;
 
       default:
-               wordSearched = searchOne("fixed", CategoryI.categoryI);
+        wordSearched = searchOne("fixed", CategoryI.categoryI);
         break;
     }
 
     return wordSearched;
   }
+
   static String transformStringForGoogleSearch(String string) {
     String transformedWord = '';
 
@@ -216,8 +212,11 @@ class DictionFunctions {
 // ---------------------------------------------------------------------------------------------------------
 
   static String transformStringWithOperators(String string) {
-    String transformedWord = string.replaceAll(new RegExp('/W+'), '');
 
+    String regEpx = "[- + . ^ : , ]";
+
+    String transformedWord = string.replaceAll(regEpx, '');
+    print(transformedWord);
     return transformedWord;
   }
 
@@ -375,11 +374,4 @@ class DictionFunctions {
 
     return min + random.nextInt(max - min);
   }
-
-  
-
-
-
-
-
 }

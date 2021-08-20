@@ -81,9 +81,9 @@ separatorBuilder: (_, __)=> Divider(height: 0.5,),
                           child: ListTile(
                             
                             title: Text("${DictionFunctions.capitalise(wordModel.wordName)}", style: Theme.of(context).textTheme.headline3,),
-                            onTap: ()   {
+                            onTap: ()  async  {
 
-                                if ( dictionaryController.isFavWord(wordModel) ==
+                                if (await  dictionaryController.isFavWord(wordModel) ==
                                       1) {
                                     wordModel.isFav = 1;
                                   } else {

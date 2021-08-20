@@ -22,6 +22,8 @@ const wordOfTheDayTaskID = "1";
 
 void callbackDispatcher() {
   Workmanager().executeTask((taskName, inputData) async {
+    Get.put(DictionaryController());
+
     switch (taskName) {
       case wordOfTheDayTask:
         dictionaryController.updateWordForDay();
@@ -70,8 +72,9 @@ void main() async {
       : prefs.setDouble(
           "ReaderSpeechRate", prefs.getDouble("ReaderSpeechRate")!);
 
- await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
 await  Workmanager().registerPeriodicTask(wordOfTheDayTaskID, wordOfTheDayTask);
+  // await Workmanager().registerOneOffTask(wordOfTheDayTaskID, wordOfTheDayTask);
   runApp(MyApp());
 }
 
