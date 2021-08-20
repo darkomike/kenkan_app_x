@@ -5,8 +5,9 @@ import 'package:kenkan_app_x/controllers/notes_controller.dart';
 import 'package:kenkan_app_x/controllers/pdf_view_controller.dart';
 import 'package:kenkan_app_x/controllers/reader_controller.dart';
 
-AppStateController appStateController = AppStateController.instance;
+import '../main.dart';
 
+AppStateController appStateController = AppStateController.instance;
 
 PDFViewerController pdfViewerController = PDFViewerController.instance;
 
@@ -15,3 +16,5 @@ NotesController notesController = NotesController.instance;
 ReaderController readerController = ReaderController.instance;
 
 DictionaryController dictionaryController = DictionaryController.instance;
+
+bool? themeController = prefs.getBool("isDarkModeOn");

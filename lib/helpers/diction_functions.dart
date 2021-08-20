@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 import 'package:kenkan_app_x/constants/names.dart';
 import 'package:kenkan_app_x/db/diction_db/a.dart';
 import 'package:kenkan_app_x/db/diction_db/b.dart';
@@ -74,14 +75,14 @@ class DictionFunctions {
 
 // ----------------------------------------------------------------------------------------------------------
 
-  static WordModel searchOne(String word, Map<String, dynamic> map) {
+  static WordModel searchOne(String word, Map<String, dynamic> map, [String? date, String? day]) {
     late WordModel wordModelToReturn = new WordModel(
         wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
 
-    map.forEach((key, value) {
+    map.forEach((key, value) { 
       if (word.toUpperCase().compareTo(key) == 0) {
         WordModel wordModel =
-            new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+            new WordModel(wordName: key, wordDefinition: value, isFav: 0, date: date, day: day);
         wordModelToReturn = wordModel;
       }
     });
@@ -111,91 +112,97 @@ class DictionFunctions {
 
   // -----------------------------------------------------------------------------------------------
 
-  static WordModel wordOfTheDayModel(String? value) {
+  static WordModel wordOfTheDayModel(String? value, [String ? date, String ? day] ) {
     WordModel wordSearched;
+
+    DateTime now = DateTime.now();
+     if (date == null && day == null){
+        day = DateFormat(DateFormat.WEEKDAY).format(now);
+    date = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
+     }
 
     switch (value!.toUpperCase()[0].trim()) {
       case "A":
-        wordSearched = searchOne(value.trim(), CategoryA.categoryA);
+        wordSearched = searchOne(value.trim(), CategoryA.categoryA, date , day);
         break;
       case "B":
-        wordSearched = searchOne(value.trim(), CategoryB.categoryB);
+        wordSearched = searchOne(value.trim(), CategoryB.categoryB,  date , day);
         break;
       case "C":
-        wordSearched = searchOne(value.trim(), CategoryC.categoryC);
+        wordSearched = searchOne(value.trim(), CategoryC.categoryC,  date , day);
         break;
       case "D":
-        wordSearched = searchOne(value.trim(), CategoryD.categoryD);
+        wordSearched = searchOne(value.trim(), CategoryD.categoryD,  date , day);
         break;
       case "E":
-        wordSearched = searchOne(value.trim(), CategoryE.categoryE);
+        wordSearched = searchOne(value.trim(), CategoryE.categoryE,  date , day);
         break;
       case "F":
-        wordSearched = searchOne(value.trim(), CategoryF.categoryF);
+        wordSearched = searchOne(value.trim(), CategoryF.categoryF,  date , day);
         break;
       case "G":
-        wordSearched = searchOne(value.trim(), CategoryG.categoryG);
+        wordSearched = searchOne(value.trim(), CategoryG.categoryG,  date , day);
         break;
       case "H":
-        wordSearched = searchOne(value.trim(), CategoryH.categoryH);
+        wordSearched = searchOne(value.trim(), CategoryH.categoryH,  date , day);
         break;
       case "I":
-        wordSearched = searchOne(value.trim(), CategoryI.categoryI);
+        wordSearched = searchOne(value.trim(), CategoryI.categoryI,  date , day);
         break;
       case "J":
-        wordSearched = searchOne(value.trim(), CategoryJ.categoryJ);
+        wordSearched = searchOne(value.trim(), CategoryJ.categoryJ,  date , day);
         break;
       case "K":
-        wordSearched = searchOne(value.trim(), CategoryK.categoryK);
+        wordSearched = searchOne(value.trim(), CategoryK.categoryK,  date , day);
         break;
       case "L":
-        wordSearched = searchOne(value.trim(), CategoryL.categoryL);
+        wordSearched = searchOne(value.trim(), CategoryL.categoryL,  date , day);
         break;
       case "M":
-        wordSearched = searchOne(value.trim(), CategoryM.categoryM);
+        wordSearched = searchOne(value.trim(), CategoryM.categoryM,  date , day);
         break;
       case "N":
-        wordSearched = searchOne(value.trim(), CategoryN.categoryN);
+        wordSearched = searchOne(value.trim(), CategoryN.categoryN,  date , day);
         break;
       case "O":
-        wordSearched = searchOne(value.trim(), CategoryO.categoryO);
+        wordSearched = searchOne(value.trim(), CategoryO.categoryO,  date , day);
         break;
       case "P":
-        wordSearched = searchOne(value.trim(), CategoryP.categoryP);
+        wordSearched = searchOne(value.trim(), CategoryP.categoryP,  date , day);
         break;
       case "Q":
-        wordSearched = searchOne(value.trim(), CategoryQ.categoryQ);
+        wordSearched = searchOne(value.trim(), CategoryQ.categoryQ,  date , day);
         break;
       case "R":
-        wordSearched = searchOne(value.trim(), CategoryR.categoryR);
+        wordSearched = searchOne(value.trim(), CategoryR.categoryR,  date , day);
         break;
       case "S":
-        wordSearched = searchOne(value.trim(), CategoryS.categoryS);
+        wordSearched = searchOne(value.trim(), CategoryS.categoryS,  date , day);
         break;
       case "T":
-        wordSearched = searchOne(value.trim(), CategoryT.categoryT);
+        wordSearched = searchOne(value.trim(), CategoryT.categoryT,  date , day);
         break;
       case "U":
-        wordSearched = searchOne(value.trim(), CategoryU.categoryU);
+        wordSearched = searchOne(value.trim(), CategoryU.categoryU,  date , day);
         break;
       case "V":
-        wordSearched = searchOne(value.trim(), CategoryV.categoryV);
+        wordSearched = searchOne(value.trim(), CategoryV.categoryV,  date , day);
         break;
       case "W":
-        wordSearched = searchOne(value.trim(), CategoryW.categoryW);
+        wordSearched = searchOne(value.trim(), CategoryW.categoryW,  date , day);
         break;
       case "X":
-        wordSearched = searchOne(value.trim(), CategoryX.categoryX);
+        wordSearched = searchOne(value.trim(), CategoryX.categoryX,  date , day);
         break;
       case "Y":
-        wordSearched = searchOne(value.trim(), CategoryY.categoryY);
+        wordSearched = searchOne(value.trim(), CategoryY.categoryY,  date , day);
         break;
       case "Z":
-        wordSearched = searchOne(value.trim(), CategoryZ.categoryZ);
+        wordSearched = searchOne(value.trim(), CategoryZ.categoryZ,  date , day);
         break;
 
       default:
-        wordSearched = searchOne("fixed", CategoryI.categoryI);
+        wordSearched = searchOne("fixed", CategoryI.categoryI,  date , day);
         break;
     }
 
@@ -213,7 +220,7 @@ class DictionFunctions {
 
   static String transformStringWithOperators(String string) {
 
-    String regEpx = "[- + . ^ : , ]";
+    var regEpx = RegExp(r"[^\w\s]+");
 
     String transformedWord = string.replaceAll(regEpx, '');
     print(transformedWord);

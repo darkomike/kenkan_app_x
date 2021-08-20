@@ -11,7 +11,7 @@ class AppTheme {
 
       ),
     fontFamily: "IBMPlexSans",
-      iconTheme: IconThemeData(color: Colors.black, size: 20),
+      iconTheme: IconThemeData(color: Colors.black, size: 18),
       switchTheme: SwitchThemeData(),
       accentColor: accentColor,
       backgroundColor: lightColor,
@@ -46,7 +46,7 @@ class AppTheme {
     ),
 
     fontFamily: "IBMPlexSans",
-      iconTheme: IconThemeData(color: Colors.white, size: 20),
+      iconTheme: IconThemeData(color: Colors.white, size: 18),
       dividerTheme: DividerThemeData(color: Colors.white),
       scaffoldBackgroundColor:darkColor,
       backgroundColor: darkColor,
@@ -57,7 +57,7 @@ class AppTheme {
         headline4: TextStyle(color: Colors.white, fontSize: 16),
         headline3: TextStyle(color: Colors.white, fontSize: 18), //Normal text
         headline2: TextStyle(color: Colors.white, fontSize: 14),
-        headline1: TextStyle(color: Colors.white),
+        headline1: TextStyle(color: Colors.white, fontSize: 12),
           caption:  TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
 
           subtitle1: TextStyle(

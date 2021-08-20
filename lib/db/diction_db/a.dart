@@ -84,12 +84,12 @@ class CategoryA {
         "Inability to coordinate muscular actions properly in walking. -- A*ba\"sic (#), a.",
     "ABATABLE": "Capable of being abated; as, an abatable writ or nuisance.",
     "ABATE":
-        "(a) To bring entirely down or put an end to; to do away with;as, to abate a nuisance, to abate a writ. (b) (Eng. Law) To diminish;to reduce. Legacies are liable to be abated entirely or in proportion, upon a deficiency of assets. To abate a tax, to remit iteither wholly or in part.",
+        "(a) To bring entirely down or put an end to; to do away with ; as, to abate a nuisance, to abate a writ. (b) (Eng. Law) To diminish;to reduce. Legacies are liable to be abated entirely or in proportion, upon a deficiency of assets. To abate a tax, to remit iteither wholly or in part.",
     "ABATEMENT": "A mark of dishonor on an escutcheon.",
     "ABATER": "One who, or that which, abates.",
     "ABATISED": "Provided with an abatis.",
     "ABATOR":
-        "(a) One who abates a nuisance. (b) A person who, without right,enters into a freehold on the death of the last possessor, before the heir or devise. Blackstone.",
+        "(a) One who abates a nuisance. (b) A person who, without right , enters into a freehold on the death of the last possessor, before the heir or devise. Blackstone.",
     "ABATTOIR": "A public slaughterhouse for cattle, sheep, etc.",
     "ABATURE":
         "Grass and sprigs beaten or trampled down by a stag passing through them. Crabb.",
@@ -97,8 +97,8 @@ class CategoryA {
     "ABAWED": "Astonished; abashed. [Obs.] Chaucer.",
     "ABAY": "Barking; baying of dogs upon their prey. See Bay. [Obs.]",
     "ABB":
-        "Among weaves, yarn for the warp. Hence, abb wool is wool for the abb.",
-    "ABB WOOL": "See Abb.",
+        "Among weaves, yarn for the warp. Hence, abb wool is wool for the abb .",
+    "ABB WOOL": "See Abb .",
     "ABBA":
         "Father; religious superior; -- in the Syriac, Coptic, and Ethiopic churches, a title given to the bishops, and by the bishops to the patriarch.",
     "ABBACY": "The dignity, estate, or jurisdiction of an abbot.",
@@ -120,29 +120,29 @@ class CategoryA {
     "ABDERITE":
         "An inhabitant of Abdera, in Thrace. The Abderite, Democritus,the Laughing Philosopher.",
     "ABDEST":
-        "Purification by washing the hands before prayer; -- aMohammedan rite. Heyse.",
+        "Purification by washing the hands before prayer; \na Mohammedan rite. Heyse.",
     "ABDICABLE": "Capable of being abdicated.",
     "ABDICANT":
-        "Abdicating; renouncing; -- followed by of.Monks abdicant of their orders. Whitlock.",
+        "Abdicating; renouncing; followed by of Monks abdicant of their orders. Whitlock.",
     "ABDICATE":
-        "To disclaim and expel from the family, as a father his child;to disown; to disinherit.",
+        "To disclaim and expel from the family, as a father his child; to disown; to disinherit.",
     "ABDICATION":
-        "The act of abdicating; the renunciation of a high office,dignity, or trust, by its holder; commonly the voluntary renunciation of sovereign power; as, abdication of the throne, government, power,authority.",
+        "The act of abdicating; the renunciation of a high office , dignity, or trust, by its holder; commonly the voluntary renunciation of sovereign power ; as, abdication of the throne, government, power, authority.",
     "ABDICATIVE": "Causing, or implying, abdication. [R.] Bailey.",
     "ABDICATOR": "One who abdicates.",
     "ABDITIVE": "Having the quality of hiding. [R.] Bailey.",
     "ABDITORY": "A place for hiding or preserving articles of value. Cowell.",
     "ABDOMEN":
-        "The belly, or that part of the body between the thorax and the pelvis. Also, the cavity of the belly, which is lined by the peritoneum, and contains the stomach, bowels, and other viscera. Inman, often restricted to the part between the diaphragm and thecommencement of the pelvis, the remainder being called the pelviccavity.",
+        "The belly, or that part of the body between the thorax and the pelvis. Also, the cavity of the belly, which is lined by the peritoneum, and contains the stomach, bowels, and other viscera. Inman, often restricted to the part between the diaphragm and the commencement of the pelvis, the remainder being called the pelviccavity.",
     "ABDOMINAL":
-        "Having abdominal fins; belonging to the Abdominales; as,abdominal fishes. Abdominal ring (Anat.), a fancied ringlike opening on each side of the abdomen, external and superior to the pubes; --called also inguinal ring.",
+        "Having abdominal fins; belonging to the Abdominales; as,abdominal fishes. Abdominal ring (Anat.), a fancied ringlike opening on each side of the abdomen, external and superior to the pubes; called also inguinal ring.",
     "ABDOMINALES":
-        "A group including the greater part of fresh-water fishes, andmany marine ones, having the ventral fins under the abdomen behind the pectorals.",
+        "A group including the greater part of fresh-water fishes, and many marine ones, having the ventral fins under the abdomen behind the pectorals.",
     "ABDOMINALIA": "A group of cirripeds having abdominal appendages.",
     "ABDOMINOSCOPY": "Examination of the abdomen to detect abdominal disease.",
     "ABDOMINOTHORACIC": "Relating to the abdomen and the thorax, or chest.",
     "ABDOMINOUS":
-        "Having a protuberant belly; pot-bellied.Gorgonius sits, abdominous and wan, Like a fat squab upon a Chinesefan. Cowper.",
+        "Having a protuberant belly; pot-bellied. Gorgonius sits, abdominous and wan, Like a fat squab upon a Chinesefan. Cowper.",
     "ABDUCE":
         "To draw or conduct away; to withdraw; to draw to a different part. [Obs.]If we abduce the eye unto either corner, the object will not duplicate. Sir T. Browne.",
     "ABDUCTION":
@@ -154,37 +154,37 @@ class CategoryA {
     "ABEARANCE": "Behavior. [Obs.] Blackstone.",
     "ABEARING": "Behavior. [Obs.] Sir. T. More.",
     "ABECEDARIAN":
-        "Pertaining to, or formed by, the letters of the alphabet;alphabetic; hence, rudimentary. Abecedarian psalms, hymns, etc.,compositions in which (like the 119th psalm in Hebrew) distinct portions or verses commence with successive letters of the alphabet.Hook.",
+        "Pertaining to, or formed by, the letters of the alphabet;\nalphabetic; hence, rudimentary. Abecedarian psalms, hymns, etc. ,compositions in which (like the 119th psalm in Hebrew) distinct portions or verses commence with successive letters of the alphabet.Hook.",
     "ABECEDARY":
         "A primer; the first principle or rudiment of anything. [R.]Fuller.",
     "ABEGGE": "Same as Aby. [Obs.] Chaucer.",
     "ABELE":
-        "The white polar (Populus alba).Six abeles i' the churchyard grow. Mrs. Browning.",
+        "The white polar (Populus alba). Six abeles i' the churchyard grow. Mrs. Browning.",
     "ABELMOSK":
-        "An evergreen shrub (Hibiscus -- formerly Abelmoschus-moschatus), of the East and West Indies and Northern Africa, whose musky seeds are used in perfumery and to flavor coffee; -- sometimes called musk mallow.",
+        "An evergreen shrub (Hibiscus -- formerly Abelmoschus-moschatus), of the East and West Indies and Northern Africa, whose musky seeds are used in perfumery and to flavor coffee;  sometimes called musk mallow.",
     "ABER-DE-VINE":
         "The European siskin (Carduelis spinus), a small green andyellow finch, related to the goldfinch.",
     "ABERR": "To wander; to stray. [Obs.] Sir T. Browne.",
-    "ABERRANT": "See Aberr.]",
+    "ABERRANT": "See Aberr.",
     "ABERRATE":
-        "To go astray; to diverge. [R.]Their own defective and aberrating vision. De Quincey.",
+        "1.To go astray \n2.To diverge. [R.]Their own defective and aberrating vision. De Quincey.",
     "ABERRATION":
-        "A small periodical change of position in the stars and otherheavenly bodies, due to the combined effect of the motion of lightand the motion of the observer; called annual aberration, when theobserver's motion is that of the earth in its orbit, and dairy ordiurnal aberration, when of the earth on its axis; amounting whengreatest, in the former case, to 20.4'', and in the latter, to 0.3''.Planetary aberration is that due to the motion of light and themotion of the planet relative to the earth.",
+        "A small periodical change of position in the stars and otherheavenly bodies, due to the combined effect of the motion of lightand the motion of the observer; called annual aberration, when theobserver's motion is that of the earth in its orbit, and dairy ordiurnal aberration, when of the earth on its axis; amounting when greatest, in the former case, to 20.4'', and in the latter, to 0.3''. Planetary aberration is that due to the motion of light and themotion of the planet relative to the earth.",
     "ABERRATIONAL": "Characterized by aberration.",
     "ABERUNCATE": "To weed out. [Obs.] Bailey.",
     "ABERUNCATOR": "A weeding machine.",
     "ABET":
-        "To contribute, as an assistant or instigator, to the commissionof an offense.",
+        "To contribute, as an assistant or instigator, to the commission of an offense.",
     "ABETMENT": "The act of abetting; as, an abetment of treason, crime, etc.",
-    "ABETTAL": "Abetment. [R.]",
+    "ABETTAL": "See Abetment . [R.]",
     "ABEVACUATION": "A partial evacuation. Mayne.",
     "ABEYANCE": "Expectancy; condition of being undetermined.",
-    "ABEYANCY": "Abeyance. [R.] Hawthorne.",
+    "ABEYANCY": "Abeyance . [R.] Hawthorne.",
     "ABEYANT": "Being in a state of abeyance.",
     "ABGEORDNETENHAUS": "See Legislature, Austria, Prussia.",
     "ABHAL": "The berries of a species of cypress in the East Indies.",
     "ABHOMINABLE": "Abominable.",
-    "ABHOMINAL": "Inhuman. [Obs.] Fuller.",
+    "ABHOMINAL": "Inhuman.\n[Obs.] Fuller.",
     "ABHOR":
         "To protest against; to reject solemnly. [Obs.]I utterly abhor, yea, from my soul Refuse you for my judge. Shak.",
     "ABHORRENCE":
@@ -194,133 +194,133 @@ class CategoryA {
     "ABHORRER": "One who abhors. Hume.",
     "ABHORRIBLE": "Detestable. [R.]",
     "ABIB":
-        "The first month of the Jewish ecclesiastical year,corresponding nearly to our April. After the Babylonish captivitythis month was called Nisan. Kitto.",
+        "The first month of the Jewish ecclesiastical year,corresponding nearly to our April. After the Babylonish captivity, this month was called Nisan. Kitto.",
     "ABIDANCE":
-        "The state of abiding; abode; continuance; compliance (with).The Christians had no longer abidance in the holy hill of Palestine.Fuller.A judicious abidance by rules. Helps.",
+        "The state of abiding; abode; continuance; compliance (with).The Christians had no longer abidance in the holy hill of Palestine.\nA judicious abidance by rules. Helps.",
     "ABIDE":
-        "To stand the consequences of; to answer for; to suffer for.Dearly I abide that boast so vain. Milton.",
-    "ABIDING": "Continuing; lasting.",
-    "ABIDINGLY": "Permanently. Carlyle.",
+        "To stand the consequences of; to answer for; to suffer for.\nExmaple: \nDearly I abide that boast so vain.",
+    "ABIDING": "Continuing or lasting.",
+    "ABIDINGLY": "Permanently.",
     "ABIES":
-        "A genus of coniferous trees, properly called Fir, as the balsamfir and the silver fir. The spruces are sometimes also referred tothis genus.",
+        "A genus of coniferous trees, properly called Fir, as the balsam fir and the silver fir. The spruces are sometimes also referred to this genus.",
     "ABIETENE":
         "A volatile oil distilled from the resin or balsam of the nutpine (Pinus sabiniana) of California.",
     "ABIETIC":
-        "Of or pertaining to the fir tree or its products; as, abieticacid, called also sylvic acid. Watts.",
+        "Of or pertaining to the fir tree or its products; as, abietic acid, called also sylvic acid. Watts.",
     "ABIETINIC": "Of or pertaining to abietin; as, abietinic acid.",
     "ABIETITE":
-        "A substance resembling mannite, found in the needles of thecommon silver fir of Europe (Abies pectinata). Eng. Cyc.",
+        "A substance resembling mannite, found in the needles of the common silver fir of Europe (Abies pectinata). Eng. Cyc.",
     "ABIGAIL":
-        "A lady's waiting-maid. Pepys.Her abigail reported that Mrs. Gutheridge had a set of night curlsfor sleeping in. Leslie.",
-    "ABILIMENT": "Habiliment. [Obs.]",
+        "A lady's waiting-maid.\nExample: \nHer abigail reported that Mrs. Gutheridge had a set of night curls for sleeping in Leslie.",
+    "ABILIMENT": "See Habiliment. [Obs.]",
     "ABILITY":
-        "The quality or state of being able; power to perform, whetherphysical, moral, intellectual, conventional, or legal; capacity;skill or competence in doing; sufficiency of strength, skill,resources, etc.; -- in the plural, faculty, talent.Then the disciples, every man according to his ability, determined tosend relief unto the brethren. Acts xi. 29.Natural abilities are like natural plants, that need pruning bystudy. Bacon.The public men of England, with much of a peculiar kind of ability.Macaulay.",
+        "The quality or state of being able; power to perform, whether physical, moral, intellectual, conventional, or legal; capacity; skill or competence in doing; sufficiency of strength, skill, resources, etc.; in the plural, faculty, talent. Then the disciples, every man according to his ability, determined to send relief unto the brethren.\nActs 11:29\nNatural abilities are like natural plants, that need pruning by study.The public men of England, with much of a peculiar kind of ability.",
     "ABIOGENESIS":
-        "The supposed origination of living organisms from lifelessmatter; such genesis as does not involve the action of livingparents; spontaneous generation; -- called also abiogeny, and opposedto biogenesis.I shall call the . . . doctrine that living matter may be produced bynot living matter, the hypothesis of abiogenesis. Huxley, 1870.",
+        "The supposed origination of living organisms from lifeless matter; such genesis as does not involve the action of living parents; spontaneous generation;  called also abiogeny, and opposedto biogenesis.I shall call the ... doctrine that living matter may be produced bynot living matter, the hypothesis of abiogenesis. Huxley, 1870.",
     "ABIOGENETIC":
-        "Of or pertaining to abiogenesis. Ab`i*o*ge*net\"ic*al*ly, adv.",
+        "Of or pertaining to abiogenesis.\n\"Ab-i-o-ge-net-ic-al-ly\", adverb.",
     "ABIOGENIST":
-        "One who believes that life can be produced independently ofantecedent. Huxley.",
+        "One who believes that life can be produced independently of antecedent.",
     "ABIOGENOUS": "Produced by spontaneous generation.",
     "ABIOGENY": "Same as Abiogenesis.",
     "ABIOLOGICAL": "Pertaining to the study of inanimate things.",
     "ABIRRITANT": "A medicine that diminishes irritation.",
     "ABIRRITATE": "To diminish the sensibility of; to debilitate.",
     "ABIRRITATION":
-        "A pathological condition opposite to that of irritation;debility; want of strength; asthenia.",
+        "A pathological condition opposite to that of irritation; debility; want of strength; asthenia.",
     "ABIRRITATIVE": "Characterized by abirritation or debility.",
     "ABIT": "3d sing. pres. of Abide. [Obs.] Chaucer.",
     "ABJECT":
-        "To cast off or down; hence, to abase; to degrade; to lower; todebase. [Obs.] Donne.",
-    "ABJECTEDNESS": "A very abject or low condition; abjectness. [R.] Boyle.",
+        "To cast off or down; hence, to abase; to degrade; to lower; to debase.",
+    "ABJECTEDNESS": "A very abject or low condition; abjectness.",
     "ABJECTLY": "Meanly; servilely.",
     "ABJECTNESS":
-        "The state of being abject; abasement; meanness; servility.Grew.",
-    "ABJUDGE": "To take away by judicial decision. [R.]",
+        "The state of being abject; abasement; meanness; servility.",
+    "ABJUDGE": "To take away by judicial decision",
     "ABJUDICATE":
-        "To reject by judicial sentence; also, to abjudge. [Obs.] Ash.",
-    "ABJUDICATION": "Rejection by judicial sentence. [R.] Knowles.",
-    "ABJUGATE": "To unyoke. [Obs.] Bailey.",
+        "To reject by judicial sentence; also, to abjudge.",
+    "ABJUDICATION": "Rejection by judicial sentence.",
+    "ABJUGATE": "To unyoke.",
     "ABJUNCTIVE":
-        "Exceptional. [R.]It is this power which leads on from the accidental and abjunctive tothe universal. I. Taylor.",
+        "Exceptional. It is this power which leads on from the accidental and abjunctive to the universal. I. Taylor.",
     "ABJURATORY": "Containing abjuration.",
-    "ABJURE": "To renounce on oath. Bp. Burnet.",
-    "ABJUREMENT": "Renunciation. [R.]",
+    "ABJURE": "To renounce on oath.",
+    "ABJUREMENT": "Renunciation.",
     "ABJURER": "One who abjures.",
-    "ABLACTATE": "To wean. [R.] Bailey.",
+    "ABLACTATE": "To wean.",
     "ABLACTATION":
-        "The process of grafting now called inarching, or grafting byapproach.",
-    "ABLAQUEATE": "To lay bare, as the roots of a tree. [Obs.] Bailey.",
+        "The process of grafting now called in arching, or grafting by approach.",
+    "ABLAQUEATE": "To lay bare, as the roots of a tree.",
     "ABLAQUEATION":
-        "The act or process of laying bare the roots of trees to exposethem to the air and water. [Obs.] Evelyn.",
+        "The act or process of laying bare the roots of trees to exposethem to the air and water.",
     "ABLASTEMIC": "Non-germinal.",
     "ABLATION": "Extirpation. Dunglison.",
-    "ABLATITIOUS": "Diminishing; as, an ablatitious force. Sir J. Herschel.",
+    "ABLATITIOUS": "Diminishing; as, an ablatitious force.",
     "ABLATIVE":
-        "Applied to one of the cases of the noun in Latin and some otherlanguages, -- the fundamental meaning of the case being removal,separation, or taking away.",
+        "Applied to one of the cases of the noun in Latin and some otherlanguages, -- the fundamental meaning of the case being removal, separation, or taking away.",
     "ABLAUT":
-        "The substitution of one root vowel for another, thus indicatinga corresponding modification of use or meaning; vowel permutation;as, get, gat, got; sing, song; hang, hung. Earle.",
+        "The substitution of one root vowel for another, thus indicating a corresponding modification of use or meaning; vowel permutation; as, get, gat, got; sing, song; hang, hung. Earle.",
     "ABLE":
-        "Legally qualified; possessed of legal competence; as, able toinherit or devise property.",
+        "Legally qualified; possessed of legal competence; as, able to inherit or devise property.",
     "ABLE-BODIED":
-        "Having a sound, strong body; physically competent; robust.\"Able-bodied vagrant.\" Froude.-- A`ble-bod\"ied*ness, n..",
-    "ABLE-MINDED": "Having much intellectual power.-- A`ble-mind\"ed*ness, n.",
-    "ABLEGATE": "To send abroad. [Obs.] Bailey.",
-    "ABLEGATION": "The act of sending abroad. [Obs.] Jer. Taylor.",
-    "ABLENESS": "Ability of body or mind; force; vigor. [Obs. or R.]",
-    "ABLEPSY": "Blindness. [R.] Urquhart.",
-    "ABLER": "comp. of Able.-- A\"blest, a.,",
-    "ABLIGATE": "To tie up so as to hinder from. [Obs.]",
-    "ABLIGURITION": "Prodigal expense for food. [Obs.] Bailey.",
-    "ABLINS": "Perhaps. [Scot.]",
+        "Having a sound, strong body; physically competent; robust.",
+    "ABLE-MINDED": "Having much intellectual power.",
+    "ABLEGATE": "To send abroad..",
+    "ABLEGATION": "The act of sending abroad.",
+    "ABLENESS": "Ability of body or mind; force; See vigor.",
+    "ABLEPSY": "Blindness.",
+    "ABLER": "comp. of Able.",
+    "ABLIGATE": "To tie up so as to hinder from.",
+    "ABLIGURITION": "Prodigal expense for food.",
+    "ABLINS": "See Perhaps.",
     "ABLOOM": "In or into bloom; in a blooming state. Masson.",
-    "ABLUDE": "To be unlike; to differ. [Obs.] Bp. Hall.",
-    "ABLUENT": "Washing away; carrying off impurities; detergent.-- n. (Med.)",
+    "ABLUDE": "To be unlike; to differ.",
+    "ABLUENT": "Washing away; carrying off impurities; detergent.",
     "ABLUSH": "Blushing; ruddy.",
     "ABLUTION":
-        "A small quantity of wine and water, which is used to wash thepriest's thumb and index finger after the communion, and which then,as perhaps containing portions of the consecrated elements, is drunkby the priest.",
+        "A small quantity of wine and water, which is used to wash the priest's thumb and index finger after the communion, and which then,as perhaps containing portions of the consecrated elements, is drunkby the priest.",
     "ABLUTIONARY": "Pertaining to ablution.",
-    "ABLUVION": "That which is washed off. [R.] Dwight.",
+    "ABLUVION": "That which is washed off.",
     "ABLY":
-        "In an able manner; with great ability; as, ably done, planned,said.",
-    "ABNEGATE": "To deny and reject; to abjure. Sir E. Sandys. Farrar.",
+        "In an able manner; with great ability; as, ably done or planned or said.",
+    "ABNEGATE": "To deny and reject; to abjure.",
     "ABNEGATION":
-        "a denial; a renunciation.With abnegation of God, of his honor, and of religion, they mayretain the friendship of the court. Knox.",
-    "ABNEGATIVE": "Denying; renouncing; negative. [R.] Clarke.",
-    "ABNEGATOR": "One who abnegates, denies, or rejects anything. [R.]",
+        "a denial; a renunciation. With abnegation of God, of his honor, and of religion, they mayretain the friendship of the court.",
+    "ABNEGATIVE": "Denying; renouncing; negative.",
+    "ABNEGATOR": "One who abnegates, denies, or rejects anything.",
     "ABNET": "The girdle of a Jewish priest or officer.",
-    "ABNODATE": "To clear (tress) from knots. [R.] Blount.",
-    "ABNODATION": "The act of cutting away the knots of trees. [R.] Crabb.",
+    "ABNODATE": "To clear (tress) from knots.",
+    "ABNODATION": "The act of cutting away the knots of trees.",
     "ABNORMAL":
-        "Not conformed to rule or system; deviating from the type;anomalous; irregular. \"That deviating from the type; anomalous;irregular. \" Froude.",
+        "Not conformed to rule or system; deviating from the type; anomalous; irregular. \"That deviating from the type; anomalous; irregular. \" Froude.",
     "ABNORMALLY": "In an abnormal manner; irregularly. Darwin.",
     "ABNORMITY":
-        "Departure from the ordinary type; irregularity; monstrosity.\"An abnormity . . . like a calf born with two heads.\" Mrs. Whitney.",
+        "Departure from the ordinary type; irregularity; monstrosity.\"An abnormity ...like a calf born with two heads.\".",
     "ABNORMOUS":
-        "Abnormal; irregular. Hallam.A character of a more abnormous cast than his equally suspectedcoadjutor. State Trials.",
+        "Abnormal; irregular. Hallam. A character of a more abnormous cast than his equally suspected coadjutor. State Trials.",
     "ABOARD":
-        "On board; into or within a ship or boat; hence, into or withina railway car.",
-    "ABODANCE": "An omen; a portending. [Obs.]",
-    "ABODE": "of Abide.",
+        "On board; into or within a ship or boat; hence, into or within a railway car.",
+    "ABODANCE": "An omen; a portending.",
+    "ABODE": " of Abide .",
     "ABODEMENT":
-        "A foreboding; an omen. [Obs.] \"Abodements must not now affrightus.\" Shak.",
-    "ABODING": "A foreboding. [Obs.]",
+        "A foreboding; an omen.\"Abodements must not now affrightus.\"",
+    "ABODING": "A foreboding.",
     "ABOLISHABLE": "Capable of being abolished.",
     "ABOLISHER": "One who abolishes.",
     "ABOLISHMENT": "The act of abolishing; abolition; destruction. Hooker.",
     "ABOLITION":
-        "The act of abolishing, or the state of being abolished; anannulling; abrogation; utter destruction; as, the abolition ofslavery or the slave trade; the abolition of laws, decrees,ordinances, customs, taxes, debts, etc.",
-    "ABOLITIONISM": "The principles or measures of abolitionists. Wilberforce.",
+        "The act of abolishing, or the state of being abolished; anannulling; abrogation; utter destruction; as, the abolition ofslavery or the slave trade; the abolition of laws, decrees, ordinances, customs, taxes, debts, etc.",
+    "ABOLITIONISM": "The principles or measures of abolitionists.",
     "ABOLITIONIST":
-        "A person who favors the abolition of any institution,especially negro slavery.",
+        "A person who favors the abolition of any institution, especially negro slavery.",
     "ABOLITIONIZE":
-        "To imbue with the principles of abolitionism. [R.] Bartlett.",
-    "ABOMA": "A large South American serpent (Boa aboma).",
+        "To imbue with the principles of abolitionism.",
+    "ABOMA": "A large South American serpent.",
     "ABOMINABLENESS":
-        "The quality or state of being abominable; odiousness. Bentley.",
+        "The quality or state of being abominable; odiousness.",
     "ABOMINABLY": "In an abominable manner; very odiously; detestably.",
     "ABOMINATE":
-        "To turn from as ill-omened; to hate in the highest degree, asif with religious dread; loathe; as, to abominate all impiety.",
+        "To turn from as ill-omened; to hate in the highest degree, as if with religious dread; loathe; as, to abominate all impiety.",
     "ABOON":
         "and adv. Above. [Scot. & Prov. Eng.]Aboon the pass of Bally-Brough. Sir W. Scott.The ceiling fair that rose aboon. J. R. Drake.",
     "ABORAL": "Situated opposite to, or away from, the mouth.",

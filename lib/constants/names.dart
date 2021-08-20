@@ -7,11 +7,14 @@ class LocalSave {
   static final String wordName = "wordName";
   static final String wordDefinition = "wordDefinition";
   static final String isFavWord = "isFavWord";
+  static final String day = "day";
+  static final String date = "date";
 
   static final String favouritesDiction = "favourites_diction";
   static final String favouritesReader = "favourites_reader";
   static final String recentDiction = "recent_diction";
   static final String recentReader = "recent_reader";
+  static final String word_of_the_day = "word_of_the_day";
 
   static final String note = "noteTable";
   static final String noteID = "noteID";

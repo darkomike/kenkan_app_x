@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:kenkan_app_x/constants/names.dart';
 import 'package:kenkan_app_x/db/diction_db/database.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
 import 'package:kenkan_app_x/main.dart';
@@ -10,12 +12,21 @@ class DictionaryController extends GetxController {
 //instance variables
   var favWORDs = [].obs;
   var recentWORDs = [].obs;
-  var wordForTheDay =
-      DictionFunctions.wordOfTheDayModel(prefs.getString("wordForTheDay")).obs;
+  var wordsOfTheDay = [].obs;
+  var wordForTheDay = WordModel(
+          wordName: "CABALIST",
+          wordDefinition:
+              "One versed in the cabala, or the mysteries of Jewishtraditions. \"Studious cabalists.\" Swift.",
+          isFav: 0,
+          day: "${DateFormat(DateFormat.WEEKDAY).format(DateTime.now())}",
+          date:
+              "${DateFormat(DateFormat.YEAR_MONTH_DAY).format(DateTime.now())}")
+      .obs;
 
 //getters
   get getFavWORDs => favWORDs.reversed.toList();
   get getHistory => recentWORDs.reversed.toList();
+  get getWordsOfTheDay => wordsOfTheDay.reversed.toList();
 
 //setters
   setFavWORDs() async {
@@ -26,10 +37,16 @@ class DictionaryController extends GetxController {
     this.recentWORDs.value = await AppDatabase.db.getAllRecentWORDs();
   }
 
-//methods
-  void updateWordForDay() {
+  setWordsOfTheDay() async {
+    this.wordsOfTheDay.value = await AppDatabase.db.getAllWORDSOfTheDay();
+  }
 
-     int wordCategory = DictionFunctions.generateRandom(1, 27);
+//methods
+  void updateWordForDay() async {
+    DateTime now = DateTime.now();
+    String day = DateFormat(DateFormat.WEEKDAY).format(now);
+    String date = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
+    int wordCategory = DictionFunctions.generateRandom(1, 27);
     List<String> dictions =
         DictionFunctions.getRandomWordCategory(wordCategory);
 
@@ -38,10 +55,35 @@ class DictionaryController extends GetxController {
         DictionFunctions.generateRandom(1, dictionsTotal + 1);
     String choosenWord = dictions.elementAt(wordSelectedIndex);
     print(choosenWord);
-    prefs.setString("wordForTheDay",choosenWord);
-    
-    wordForTheDay.value =
-        DictionFunctions.wordOfTheDayModel(prefs.getString("wordForTheDay"));
+    WordModel wordModel =
+        DictionFunctions.wordOfTheDayModel(choosenWord, date, day);
+            print("$wordModel");
+
+    addWordOfTheDay(wordModel);
+    setWordsOfTheDay();
+    print("$getWordsOfTheDay");
+    if (!getWordsOfTheDay.isBlank) {
+      wordForTheDay.value = getWordsOfTheDay[0];
+    }
+
+    // wordForTheDay.value =
+    //     DictionFunctions.wordOfTheDayModel();
+  }
+
+  Future addWordOfTheDay(WordModel wordModel) async {
+    bool check = false;
+
+    favWORDs.forEach((element) {
+      if (element.wordName == wordModel.wordName) {
+        check = true;
+      }
+    });
+
+    if (check == false) {
+      await AppDatabase.db.addWordOfTheDay(wordModel);
+      setWordsOfTheDay();
+      print(wordsOfTheDay);
+    }
   }
 
   Future addFavWORD(WordModel wordModel) async {

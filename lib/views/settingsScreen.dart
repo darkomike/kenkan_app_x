@@ -52,6 +52,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+        Color color = Theme.of(context).iconTheme.color!;
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -96,8 +98,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         max: 1.0,
                         min: 0.0,
                         divisions: 10,
-                        activeColor: primaryColor,
-                        inactiveColor: accentColor,
+                        activeColor: sliderColor,
+                        inactiveColor: sliderColor!.withOpacity(0.5),
                       )),
                   Padding(
                     padding: const EdgeInsets.only(left: 18.0),
@@ -119,14 +121,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _isLightTheme!
                         ? Icons.nightlight_outlined
                         : Icons.light_mode,
-                    color: primaryColor,
+                    color: color,
                     size: 30,
                   ),
                   title: Text(_isLightTheme! ? "Dark Theme" : "Light Theme",
                       style: Theme.of(context).textTheme.headline3),
                   trailing: Switch(
-                    activeColor: primaryColor,
-                    inactiveThumbColor: primaryColor,
+                    activeColor: sliderColor,
+                    inactiveThumbColor: sliderColor!.withOpacity(0.5),
                     onChanged: (value) {
                       prefs.setBool("isDarkModeOn", value);
                       appStateController.changeAppTheme(value);
@@ -145,7 +147,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ListTile(
                 leading: Icon(
                   Icons.perm_device_information_rounded,
-                  color: primaryColor,
+                  color:color,
                   size: 30,
                 ),
                 title: Text("About App",
@@ -170,10 +172,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ListTile(
                 leading: Icon(
                   Icons.info_outline,
-                  color: primaryColor,
+                  color: color,
                   size: 30,
                 ),
-                title: Text("App Info",
+                title: Text("App Guide",
                     style: Theme.of(context).textTheme.headline3),
                 // leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color,),
                 onTap: () {

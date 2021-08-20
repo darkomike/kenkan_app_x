@@ -28,6 +28,8 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
   @override
   Widget build(BuildContext context) {
+        Color color = Theme.of(context).iconTheme.color!;
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -36,7 +38,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
           elevation: 0.0,
           title: Text(
             "Help & Feedback",
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         drawer: AppDrawer(),
@@ -49,7 +51,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
               ListTile(
                 leading: Icon(
                   Icons.email_rounded,
-                  color: primaryColor,
+                  color: color,
                   size: Theme.of(context).iconTheme.size,
                 ),
                 title: Text("Email Us",
@@ -65,7 +67,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
               ListTile(
                 leading: Icon(
                   Icons.call,
-                  color: primaryColor,
+                  color: color,
                   size: Theme.of(context).iconTheme.size,
                 ),
                 title: Text("Phone Us",
@@ -81,7 +83,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
               ListTile(
                 leading: Icon(
                   Icons.sms,
-                  color: primaryColor,
+                  color: color,
                   size: Theme.of(context).iconTheme.size,
                 ),
                 title: Text("SMS",

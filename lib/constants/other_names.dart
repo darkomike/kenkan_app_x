@@ -1,17 +1,11 @@
-
 class AssetNames {
   static final String welcomeIconName = "assets/icons/welcome_icon.svg";
   static final String welcomeNotesIconName = "assets/icons/notes_taking.svg";
   static final String welcomeDictionaryIconName = "assets/icons/fav_files.svg";
   static final String welcomeReaderIconName = "assets/icons/logo.svg";
-  
+
   static final String defaultNoteIconName = 'assets/icons/notes_taking.svg';
-  static final String loadingFilesIconName =  'assets/icons/loading_files.svg';
-
-
-
-
-  
+  static final String loadingFilesIconName = 'assets/icons/loading_files.svg';
 }
 
 class LinkNames {
@@ -26,7 +20,7 @@ class LinkNames {
 
 // You looked past my sin , my guilt , my shame and poured your love, You looked beyond me.
 
-class BodyNames{
+class BodyNames {
   static final String feedbackMessageTitle = "Feedback about KenKan";
   static final String feedbackMessageBody =
       "If you have questions, suggestions or required troubleshooting, "
@@ -34,14 +28,12 @@ class BodyNames{
 }
 
 class DbConstants {
- static final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
- static final textType = 'TEXT NOT NULL';
- static final booleanType = 'BOOLEAN NOT NULL';
- static final integerType = 'INTEGER NOT NULL';
-
+  static final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+  static final textType = 'TEXT NOT NULL';
+  static final booleanType = 'BOOLEAN NOT NULL';
+  static final integerType = 'INTEGER NOT NULL';
 }
 
-class NumberConstants{
-  static final int snackBarDurationInMilliseconds = 1100;
-
+class NumberConstants {
+  static final int snackBarDurationInMilliseconds = 3000;
 }

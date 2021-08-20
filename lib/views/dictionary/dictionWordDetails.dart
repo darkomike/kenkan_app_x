@@ -41,6 +41,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
 
   TtsState ttsState = TtsState.stopped;
 
+
   get isPlaying => ttsState == TtsState.playing;
   get isStopped => ttsState == TtsState.stopped;
   get isContinued => ttsState == TtsState.continued;
@@ -63,8 +64,8 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
   initTts() {
     flutterTts = FlutterTts();
 
-    // flutterTts.setSpeechRate(prefs.getDouble("ReaderSpeechRate")!);
-    // debugPrint("From shared prefs ${prefs.getDouble("ReaderSpeechRate")}");
+    flutterTts.setSpeechRate(prefs.getDouble("ReaderSpeechRate")!);
+    debugPrint("From shared prefs ${prefs.getDouble("ReaderSpeechRate")}");
 
     if (isAndroid) {
       _getDefaultEngine();
@@ -239,147 +240,153 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
             Expanded(
               flex: 1,
               child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _speak(widget.wordModel.wordName);
-                    },
-                    child: Chip(
-                      avatar: Icon(
-                        Icons.volume_down_outlined,
-                        color: Theme.of(context).iconTheme.color,
-                        size: 29,
-                      ),
-                      backgroundColor: Theme.of(context).backgroundColor,
-                      elevation: 0,
-                      deleteButtonTooltipMessage:
-                          "Pronounce ${widget.wordModel.wordName}",
-                      label: Text(
-                          "${DictionFunctions.capitalise(widget.wordModel.wordName)}",
-                          style: TextStyle(color: Colors.red, fontSize: 20)),
-                    ),
-                  ),
-                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).backgroundColor,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => DictionSearch()));
-                            },
-                            icon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                            tooltip: "Search Word",
-                          )),
-                      SizedBox(
-                        width: 10,
+                      GestureDetector(
+                        onTap: () {
+                          _speak(widget.wordModel.wordName);
+                        },
+                        child: Chip(
+                          avatar: Icon(
+                            Icons.volume_down_outlined,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 29,
+                          ),
+                          backgroundColor:
+                              Theme.of(context).backgroundColor,
+                          elevation: 0,
+                          deleteButtonTooltipMessage:
+                              "Pronounce ${widget.wordModel.wordName}",
+                          label: Text(
+                              "${DictionFunctions.capitalise(widget.wordModel.wordName)}",
+                              style: TextStyle(
+                                  color: Colors.red, fontSize: 20)),
+                        ),
                       ),
-                      AnimatedContainer(
-                        alignment: Alignment.center,
-                        height: 40,
-                        width: 40,
-                        duration: Duration(),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).backgroundColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: widget.wordModel.isFav == 1
-                            ? IconButton(
-                                onPressed: () async {
-                                  setState(() {
-                                    widget.wordModel.isFav = 0;
-                                  });
-                                  await dictionaryController.removeFavWORD(
-                                      widget.wordModel,
-                                      widget.wordModel.wordName);
-
-                                  showFavAdded(context,
-                                      "${DictionFunctions.capitalise(widget.wordModel.wordName)} is removed from favourites");
-
-                                  print(
-                                      "${widget.wordModel.wordName} is removed from favourites");
+                      Row(
+                        children: [
+                          Container(
+                              alignment: Alignment.center,
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).backgroundColor,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => DictionSearch()));
                                 },
                                 icon: Icon(
-                                  Icons.favorite,
+                                  Icons.search,
                                   color: Theme.of(context).iconTheme.color,
                                 ),
-                                tooltip: "Remove from Favourites",
-                              )
-                            : IconButton(
-                                onPressed: () async {
-                                  setState(() {
-                                    widget.wordModel.isFav = 1;
-                                  });
-                                  dictionaryController
-                                      .addFavWORD(widget.wordModel);
+                                tooltip: "Search Word",
+                              )),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          AnimatedContainer(
+                            alignment: Alignment.center,
+                            height: 40,
+                            width: 40,
+                            duration: Duration(),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).backgroundColor,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: widget.wordModel.isFav == 1
+                                ? IconButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        widget.wordModel.isFav = 0;
+                                      });
+                                      await dictionaryController
+                                          .removeFavWORD(widget.wordModel,
+                                              widget.wordModel.wordName);
 
-                                  showFavAdded(context,
-                                      "${DictionFunctions.capitalise(widget.wordModel.wordName)} is added to favourites");
+                                      showFavAdded(context,
+                                          "${DictionFunctions.capitalise(widget.wordModel.wordName)} is removed from favourites");
 
-                                  print(
-                                      "${widget.wordModel} is added to favourite");
-                                },
-                                icon: Icon(
-                                  Icons.favorite_border_outlined,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                                tooltip: "Add to Favourites",
-                              ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      AnimatedContainer(
-                          alignment: Alignment.center,
-                          height: isPlayingIconOn ? 40 : 42,
-                          width: isPlayingIconOn ? 40 : 42,
-                          duration: Duration(milliseconds: 50),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).backgroundColor,
-                              borderRadius: isPlayingIconOn
-                                  ? BorderRadius.circular(20)
-                                  : BorderRadius.circular(10)),
-                          child: isPlayingIconOn
-                              ? IconButton(
-                                  tooltip: "Read word meaning",
-                                  onPressed: () {
-                                    _speak(widget.wordModel.wordName +
-                                        ", Definition, " +
-                                        widget.wordModel.wordDefinition);
-                                    setState(() {
-                                      isPlayingIconOn = false;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.play_circle,
-                                    color: Colors.green,
-                                  ))
-                              : IconButton(
-                                  onPressed: () {
-                                    _stop();
-                                    setState(() {
-                                      isPlayingIconOn = true;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.stop,
-                                    color: Colors.red,
-                                  ))),
+                                      print(
+                                          "${widget.wordModel.wordName} is removed from favourites");
+                                    },
+                                    icon: Icon(
+                                      Icons.favorite,
+                                      color:
+                                          Theme.of(context).iconTheme.color,
+                                    ),
+                                    tooltip: "Remove from Favourites",
+                                  )
+                                : IconButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        widget.wordModel.isFav = 1;
+                                      });
+                                      dictionaryController
+                                          .addFavWORD(widget.wordModel);
+
+                                      showFavAdded(context,
+                                          "${DictionFunctions.capitalise(widget.wordModel.wordName)} is added to favourites");
+
+                                      print(
+                                          "${widget.wordModel} is added to favourite");
+                                    },
+                                    icon: Icon(
+                                      Icons.favorite_border_outlined,
+                                      color:
+                                          Theme.of(context).iconTheme.color,
+                                    ),
+                                    tooltip: "Add to Favourites",
+                                  ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          AnimatedContainer(
+                              alignment: Alignment.center,
+                              height: isPlayingIconOn ? 40 : 42,
+                              width: isPlayingIconOn ? 40 : 42,
+                              duration: Duration(milliseconds: 50),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).backgroundColor,
+                                  borderRadius: isPlayingIconOn
+                                      ? BorderRadius.circular(20)
+                                      : BorderRadius.circular(10)),
+                              child: isPlayingIconOn
+                                  ? IconButton(
+                                      tooltip: "Read word meaning",
+                                      onPressed: () {
+                                        _speak(widget.wordModel.wordName +
+                                            ", Definition, " +
+                                            widget
+                                                .wordModel.wordDefinition);
+                                        setState(() {
+                                          isPlayingIconOn = false;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.play_circle,
+                                        color: Colors.green,
+                                      ))
+                                  : IconButton(
+                                      onPressed: () {
+                                        _stop();
+                                        setState(() {
+                                          isPlayingIconOn = true;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.stop,
+                                        color: Colors.red,
+                                      ))),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              )),
+                  )),
             ),
             SizedBox(
               height: 2,
@@ -429,7 +436,9 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
               margin: EdgeInsets.all(3),
               child: GestureDetector(
                   onTap: () {
-                    WordModel? model = DictionFunctions.wordOfTheDayModel(DictionFunctions.transformStringWithOperators(text.trim()));
+                    WordModel? model = DictionFunctions.wordOfTheDayModel(
+                        DictionFunctions.transformStringWithOperators(
+                            text.trim()), '','');
                     if (model.wordName == "wordName") {
                       showDialog(
                           // barrierColor: Theme.of(context).backgroundColor,
@@ -443,7 +452,8 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: " \" $text\", ",
+                                        text:
+                                            " \"${text.replaceAll(RegExp(r"[^\w\s]+"), '')}\", ",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline3,
@@ -470,7 +480,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                                                 .toGoogle +
                                             DictionFunctions
                                                 .transformStringForGoogleSearch(
-                                                    model.wordName));
+                                                    text));
                                       },
                                       child: Text("TRY GOOGLE SEARCH"))
                                 ],
@@ -489,7 +499,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                   },
                   child: Text(
                     text.trim(),
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.headline2,
                   )),
             ))
         .toList();

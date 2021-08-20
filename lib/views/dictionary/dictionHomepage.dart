@@ -67,7 +67,7 @@ class _DictionHomePageState extends State<DictionHomePage>
     _formattedDate = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
 
     _animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: Duration(milliseconds: 1000));
 
     _animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
         parent: _animationController!, curve: Curves.easeInOutQuint));
@@ -299,7 +299,7 @@ class _DictionHomePageState extends State<DictionHomePage>
                                       ),
                                       Spacer(),
                                       Text(
-                                        "$_formattedDay",
+                                        "${dictionaryController.wordForTheDay.value.day}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline3,
@@ -310,7 +310,7 @@ class _DictionHomePageState extends State<DictionHomePage>
                                         indent: 90,
                                       ),
                                       Text(
-                                        "$_formattedDate",
+                                        "${dictionaryController.wordForTheDay.value.date!}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline3,

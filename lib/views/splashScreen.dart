@@ -35,36 +35,40 @@ class _SplashScreenState extends State<SplashScreen> {
     Widget svgNotesIcon = SvgPicture.asset(
       AssetNames.loadingFilesIconName,
       semanticsLabel: "Loading Icon",
-      height: height / 3.5,
+      height: height / 4.5,
     );
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: svgNotesIcon,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Loading Documents...",
-            style: Theme.of(context).textTheme.headline3,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 50),
-            child: LinearProgressIndicator(
-              color: accentColor,
-              semanticsLabel: "Loading Documents...",
-              backgroundColor: Theme.of(context).iconTheme.color,
+      body: Container(
+        // padding: EdgeInsets.symmetric(horizontal: 30),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            svgNotesIcon,
+            SizedBox(
+              height: 1,
             ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 50),
+              child: CircularProgressIndicator(
+                color: accentColor,
+                semanticsLabel: "Loading Documents...",
+                backgroundColor: Theme.of(context).iconTheme.color,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Loading Documents...",
+              style: Theme.of(context).textTheme.headline3,
+            ),
+            
+            
+          ],
+        ),
       ),
     );
   }

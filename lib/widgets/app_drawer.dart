@@ -1,24 +1,24 @@
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:kenkan_app_x/api/pdf_api.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/models/fileModel.dart';
 import 'package:kenkan_app_x/reader_homepage.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionHomepage.dart';
 import 'package:kenkan_app_x/views/helpAndFeedback.dart';
 import 'package:kenkan_app_x/views/notes/notesHomepage.dart';
+import 'package:kenkan_app_x/views/reader/SyncFusionPDFViewer.dart';
 import 'package:kenkan_app_x/views/reader/favouritesScreen.dart';
 import 'package:kenkan_app_x/views/settingsScreen.dart';
 import 'package:path/path.dart';
 
-
-
 class AppDrawer extends StatelessWidget {
-  
-   AppDrawer({ Key? key }) : super(key: key);
+  AppDrawer({Key? key}) : super(key: key);
 
   String? _formattedDate;
 
@@ -28,20 +28,16 @@ class AppDrawer extends StatelessWidget {
 
   Future<void>? _launched;
 
-  
- 
   @override
   Widget build(BuildContext context) {
-    
-
     String assetName = 'assets/icons/logo.svg';
     Widget svgNotesIcon = SvgPicture.asset(
       assetName,
       semanticsLabel: "Loading Icon",
-      height: height / 5,
+      height: height / 8,
     );
 
-    Color color = primaryColor;
+    Color color = Theme.of(context).iconTheme.color!;
 
     return Drawer(
       child: Container(
@@ -49,29 +45,29 @@ class AppDrawer extends StatelessWidget {
         width: width,
         child: ListView(
           children: [
-            Container(
-              // margin: EdgeInsets.all(0.1),
-              decoration: BoxDecoration(color: accentColor),
+            Obx(() => Container(
+                  // margin: EdgeInsets.all(0.1),
+                  decoration: BoxDecoration(
+                      color: appStateController.isDarkModeOn.value!
+                          ? darkColor
+                          : Colors.white),
 
-              child: Stack(
-                children: [
-                  Positioned(left: 0, right: 0, child: svgNotesIcon),
-                  Positioned(
-                    child: Text(
-                      "Kenkan",
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "BalooTammudu2"),
-                    ),
-                    bottom: 30,
-                    right: width / 3.3,
-                  )
-                ],
-              ),
-              height: height * 0.27,
-              width: width,
-            ),
+                  child: Stack(
+                    children: [
+                      Positioned(left: 0, right: 0, child: svgNotesIcon),
+                      Positioned(
+                        left: 120,
+                        child: Text(
+                          "Kenkan",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        bottom: 5,
+                      )
+                    ],
+                  ),
+                  height: height * 0.17,
+                  width: width,
+                )),
             SizedBox(
               height: 5,
             ),
@@ -79,13 +75,11 @@ class AppDrawer extends StatelessWidget {
               leading: SvgPicture.asset("assets/icons/read_book.svg",
                   height: 20, color: color),
               onTap: () {
-               
-                
                 Navigator.pushReplacement((context),
                     MaterialPageRoute(builder: (_) => ReaderHomepage()));
               },
               title: Text("Reading Now",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.headline2),
             ),
             SizedBox(
               height: 5,
@@ -97,7 +91,7 @@ class AppDrawer extends StatelessWidget {
                 size: Theme.of(context).iconTheme.size,
               ),
               title: Text("Open Document",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 showDialog(
                     context: context,
@@ -132,8 +126,16 @@ class AppDrawer extends StatelessWidget {
                                   isFavFile: 0,
                                   fileType: 'PDF',
                                   timeOpened: _fileOpenedAt.toString());
+
                               Navigator.pop(context);
                               openPDF(context, file);
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          SyncPDFViewer(file: file)));
+                              readerController.addToRecentFile(fileModel);
                             },
                             child: Text(
                               "PDF Files",
@@ -155,7 +157,7 @@ class AppDrawer extends StatelessWidget {
                 size: Theme.of(context).iconTheme.size,
               ),
               title: Text("Favourites",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),
                     MaterialPageRoute(builder: (_) => FavouritesScreen()));
@@ -171,7 +173,7 @@ class AppDrawer extends StatelessWidget {
                 size: Theme.of(context).iconTheme.size,
               ),
               title: Text("Dictionary",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),
                     MaterialPageRoute(builder: (_) {
@@ -183,7 +185,7 @@ class AppDrawer extends StatelessWidget {
               leading: SvgPicture.asset("assets/icons/notes.svg",
                   height: 20, color: color),
               title:
-                  Text("Notes", style: Theme.of(context).textTheme.headline3),
+                  Text("Notes", style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),
                     MaterialPageRoute(builder: (_) => NotesHomepage()));
@@ -199,7 +201,7 @@ class AppDrawer extends StatelessWidget {
                 size: Theme.of(context).iconTheme.size,
               ),
               title: Text("Settings",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),
                     MaterialPageRoute(builder: (_) => SettingsScreen()));
@@ -212,12 +214,10 @@ class AppDrawer extends StatelessWidget {
                   size: Theme.of(context).iconTheme.size,
                 ),
                 title: Text("Help & Feedback",
-                    style: Theme.of(context).textTheme.headline3),
+                    style: Theme.of(context).textTheme.headline2),
                 onTap: () {
-
                   Navigator.pushReplacement((context),
                       MaterialPageRoute(builder: (_) => HelpAndFeedback()));
-
                 }),
             Divider(
               height: 10,
@@ -230,7 +230,7 @@ class AppDrawer extends StatelessWidget {
               ),
               title: Text(
                 "Exit App",
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.headline2,
               ),
               onTap: () {
                 showDialog(
