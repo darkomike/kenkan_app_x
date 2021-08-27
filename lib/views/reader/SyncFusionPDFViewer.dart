@@ -522,13 +522,13 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                     },
                     controller: _pdfViewerController,
                     enableDoubleTapZooming: true,
+                    
                     enableTextSelection: true,
                     canShowPaginationDialog: true,
                     searchTextHighlightColor: primaryColor,
                     onDocumentLoadFailed:
                         (PdfDocumentLoadFailedDetails details) {
                       //TODO: On document failed func
-
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (_) => ReaderHomepage()));
                       showDialog(
@@ -556,6 +556,9 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                     canShowScrollStatus: true,
                     enableDocumentLinkAnnotation: true,
                     pageSpacing: 3,
+                    onDocumentLoaded: (details){
+                        
+                    },
                   ),
                 ),
               ),

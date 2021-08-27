@@ -163,7 +163,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
 
   @override
   Widget build(BuildContext context) {
-    WordModel wordModel = widget.wordModel;
+  
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -396,6 +396,9 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
               child: Container(
                 margin: EdgeInsets.only(bottom: 5),
                 child: ListView(
+                  addRepaintBoundaries: false,
+                  
+                  addAutomaticKeepAlives: false,
                   shrinkWrap: true,
                   children: [
                     Container(
@@ -499,7 +502,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                   },
                   child: Text(
                     text.trim(),
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context).textTheme.headline3,
                   )),
             ))
         .toList();

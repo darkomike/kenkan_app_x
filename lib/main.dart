@@ -7,33 +7,57 @@ import 'package:kenkan_app_x/controllers/dictionary_controller.dart';
 import 'package:kenkan_app_x/controllers/notes_controller.dart';
 import 'package:kenkan_app_x/controllers/pdf_view_controller.dart';
 import 'package:kenkan_app_x/controllers/reader_controller.dart';
+import 'package:kenkan_app_x/db/diction_db/database.dart';
 import 'package:kenkan_app_x/helpers/app_theme.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
 import 'package:kenkan_app_x/reader_homepage.dart';
 import 'package:kenkan_app_x/views/guideScreen.dart';
 import 'package:kenkan_app_x/views/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workmanager/workmanager.dart';
 import 'constants/names.dart';
+import 'models/wordModel.dart';
 
 late SharedPreferences prefs;
 
-const wordOfTheDayTask = "wordOfTheDayTask";
-const wordOfTheDayTaskID = "1";
+// const wordOfTheDayTask1 = "wordOfTheDayTask1";
+// const wordOfTheDayTaskID1 = "1";
 
-void callbackDispatcher() {
-  Workmanager().executeTask((taskName, inputData) async {
-    Get.put(DictionaryController());
+// const wordOfTheDayTask2 = "wordOfTheDayTask2";
+// const wordOfTheDayTaskID2 = "2";
 
-    switch (taskName) {
-      case wordOfTheDayTask:
-        dictionaryController.updateWordForDay();
-        break;
-    }
+// void updateWordForTheDay() {
+//   Get.put(DictionaryController());
+//   DateTime now = DateTime.now();
+//   String day = DateFormat(DateFormat.WEEKDAY).format(now);
+//   String date = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
+//   int wordCategory = DictionFunctions.generateRandom(1, 27);
+//   List<String> dictions = DictionFunctions.getRandomWordCategory(wordCategory);
 
-    return Future.value(true);
-  });
-}
+//   int dictionsTotal = dictions.length;
+//   int wordSelectedIndex = DictionFunctions.generateRandom(1, dictionsTotal + 1);
+//   String choosenWord = dictions.elementAt(wordSelectedIndex);
+//   print(choosenWord);
+//   WordModel wordModel =
+//       DictionFunctions.wordOfTheDayModel(choosenWord, date, day);
+//   print("$wordModel has been added to the Words For The Day table");
+// }
+
+// void callbackDispatcher() {
+//   Workmanager().executeTask((taskName, inputData) {
+//       Get.put(DictionaryController());
+
+//     switch (taskName) {
+//       case wordOfTheDayTask1:
+//         dictionaryController.updateWordForDay();
+        
+//         break;
+//       case wordOfTheDayTask2:
+//         break;
+//     }
+
+//     return Future.value(true);
+//   });
+// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,16 +74,8 @@ void main() async {
       ? prefs.setBool("isDarkModeOn", false)
       : prefs.setBool("isDarkModeOn", prefs.getBool("isDarkModeOn")!);
 
-  DateTime now = DateTime.now();
-  String formattedDay = DateFormat(DateFormat.WEEKDAY).format(now);
-  String formattedDate = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
-
-  if (dictionaryController.wordsOfTheDay.isEmpty) {
-    dictionaryController.addWordOfTheDay(DictionFunctions.wordOfTheDayModel(
-        "Inspiration", formattedDate, formattedDay));
-    dictionaryController.setWordsOfTheDay();
-  }
-
+ 
+ 
   //Check if the periodic process is already running for initial App setup
   prefs.getBool("isPeriodicPressedOn") == null
       ? prefs.setBool("isPeriodicPressedOn", false)
@@ -77,10 +93,7 @@ void main() async {
       : prefs.setDouble(
           "ReaderSpeechRate", prefs.getDouble("ReaderSpeechRate")!);
 
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
-  await Workmanager().registerOneOffTask(wordOfTheDayTaskID, wordOfTheDayTask);
-  // await Workmanager().registerPeriodicTask(wordOfTheDayTaskID, wordOfTheDayTask);
-  // await Workmanager().registerOneOffTask(wordOfTheDayTaskID, wordOfTheDayTask);
+  
   runApp(MyApp());
 }
 
@@ -105,11 +118,10 @@ class LightAndDarkTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-          appStateController.isDarkModeOn.value = prefs.getBool("isDarkModeOn");
 
     return Obx(() {
       return MaterialApp(
-        title: 'KenKan',
+        title: 'KenKan X',
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         darkTheme: AppTheme.darkTheme,

@@ -697,7 +697,7 @@ class CategoryA {
     "ACCEPTILATION":
         "Gratuitous discharge; a release from debt or obligation withoutpayment; free remission.",
     "ACCEPTION":
-        "Acceptation; the received meaning. [Obs.]Here the word \"baron\" is not to be taken in that restrictive sense towhich the modern acception hath confined it. Fuller.Acception of persons or faces (Eccl.), favoritism; partiality. [Obs.]Wyclif.",
+        "Acceptation; the received meaning. [Obs.]Here the word \"baron\" is not to be taken in that restrictive sense to which the modern acception hath confined it. Fuller.Acception of persons or faces (Eccl.), favoritism; partiality. [Obs.]Wyclif.",
     "ACCEPTOR": "One who accepts; specifically (Law & Com.),",
     "ACCESSARILY": "In the manner of an accessary.",
     "ACCESSARINESS": "The state of being accessary.",
@@ -718,7 +718,7 @@ class CategoryA {
     "ACCESSORY":
         "Accompanying as a subordinate; aiding in a secondary way;additional; connected as an incident or subordinate to a principal;contributing or contributory; said of persons and things, and, whenof persons, usually in a bad sense; as, he was accessory to the riot;accessory sounds in music.",
     "ACCIACCATURA":
-        "A short grace note, one semitone below the note to which it isprefixed; -- used especially in organ music. Now used as equivalentto the short appoggiatura.",
+        "A short grace note, one semitone below the note to which it is prefixed; -- used especially in organ music. Now used as equivalentto the short appoggiatura.",
     "ACCIDENT":
         "A property attached to a word, but not essential to it, asgender, number, case.",
     "ACCIDENTAL":
@@ -735,7 +735,7 @@ class CategoryA {
     "ACCIPITER":
         "A genus of rapacious birds; one of the Accipitres or Raptores.",
     "ACCIPITRAL":
-        "Pertaining to, or of the nature of, a falcon or hawk; hawklike.Lowell.",
+        "Pertaining to, or of the nature of, a falcon or hawk; hawklike. Lowell.",
     "ACCIPITRES":
         "The order that includes rapacious birds. They have a hookedbill, and sharp, strongly curved talons. There are three families,represented by the vultures, the falcons or hawks, and the owls.",
     "ACCIPITRINE": "Like or belonging to the Accipitres; raptorial; hawklike.",
@@ -753,7 +753,7 @@ class CategoryA {
         "To habituate to a climate not native; to acclimatize. J. H.Newman.",
     "ACCLIMATEMENT": "Acclimation. [R.]",
     "ACCLIMATION":
-        "The process of becoming, or the state of being, acclimated, orhabituated to a new climate; acclimatization.",
+        "The process of becoming, or the state of being, acclimated, or habituated to a new climate; acclimatization.",
     "ACCLIMATIZABLE": "Capable of being acclimatized.",
     "ACCLIMATIZATION":
         "The act of acclimatizing; the process of inuring to a newclimate, or the state of being so inured. Darwin.",
@@ -764,7 +764,7 @@ class CategoryA {
     "ACCLIVE": "Acclivous. [Obs.]",
     "ACCLIVITOUS": "Acclivous. I. Taylor.",
     "ACCLIVITY":
-        "A slope or inclination of the earth, as the side of a hill,considered as ascending, in opposition to declivity, or descending;an upward slope; ascent.",
+        "A slope or inclination of the earth, as the side of a hill, considered as ascending, in opposition to declivity, or descending;an upward slope; ascent.",
     "ACCLIVOUS":
         "Sloping upward; rising as a hillside; -- opposed to declivous.",
     "ACCLOY":
@@ -788,7 +788,7 @@ class CategoryA {
     "ACCOMPANABLE": "Sociable. [Obs.] Sir P. Sidney.",
     "ACCOMPANIER": "He who, or that which, accompanies. Lamb.",
     "ACCOMPANIMENT":
-        "That which accompanies; something that attends as acircumstance, or which is added to give greater completeness to theprincipal thing, or by way of ornament, or for the sake of symmetry.Specifically: (Mus.)",
+        "That which accompanies; something that attends as a circumstance, or which is added to give greater completeness to the principal thing, or by way of ornament, or for the sake of symmetry.",
     "ACCOMPANIST":
         "The performer in music who takes the accompanying part. Busby.",
     "ACCOMPANY": "To perform an accompanying part or parts in a composition.",
@@ -845,11 +845,11 @@ class CategoryA {
     "ACCREMENTITION":
         "The process of generation by development of blastema, orfission of cells, in which the new formation is in all respect likethe individual from which it proceeds.",
     "ACCRESCENCE":
-        "Continuous growth; an accretion. [R.]The silent accrescence of belief from the unwatched depositions of ageneral, never contradicted hearsy. Coleridge.",
+        "Continuous growth; an accretion. [R.] The silent accrescence of belief from the unwatched depositions of ageneral, never contradicted hearsy. Coleridge.",
     "ACCRESCENT": "Growing larger after flowering. Gray.",
     "ACCRETE": "To make adhere; to add. Earle.",
     "ACCRETIVE":
-        "Relating to accretion; increasing, or adding to, by growth.Glanvill.",
+        "Relating to accretion; increasing, or adding to, by growth. Glanvill.",
     "ACCRIMINATE":
         "To accuse of a crime. [Obs.] -- Ac*crim`i*na\"tion, n. [Obs.]",
     "ACCROACHMENT": "An encroachment; usurpation. [Obs.] Bailey.",
@@ -857,18 +857,18 @@ class CategoryA {
     "ACCRUE": "Something that accrues; advantage accruing. [Obs.]",
     "ACCRUER": "The act of accruing; accretion; as, title by accruer.",
     "ACCRUMENT":
-        "The process of accruing, or that which has accrued; increase.Jer. Taylor.",
+        "The process of accruing, or that which has accrued; increase. Jer. Taylor.",
     "ACCUBATION":
         "The act or posture of reclining on a couch, as practiced by theancients at meals.",
     "ACCUMB": "To recline, as at table. [Obs.] Bailey.",
     "ACCUMBENCY": "The state of being accumbent or reclining. [R.]",
     "ACCUMBENT":
-        "Lying against anything, as one part of a leaf against anotherleaf. Gray.Accumbent cotyledons have their edges placed against the caulicle.Eaton.",
+        "Lying against anything, as one part of a leaf against another leaf. Gray. Accumbent cotyledons have their edges placed against the caulicle.Eaton.",
     "ACCUMBER": "To encumber. [Obs.] Chaucer.",
     "ACCUMULATE":
-        "To heap up in a mass; to pile up; to collect or bring together;to amass; as, to accumulate a sum of money.",
+        "To heap up in a mass; to pile up; to collect or bring together; to amass; as, to accumulate a sum of money.",
     "ACCUMULATION":
-        "The concurrence of several titles to the same proof.Accumulation of energy or power, the storing of energy by means ofweights lifted or masses put in motion; electricity stored.-- An accumulation of degrees (Eng. Univ.), the taking of severaltogether, or at smaller intervals than usual or than is allowed bythe rules.",
+        "The concurrence of several titles to the same proof. Accumulation of energy or power, the storing of energy by means of weights lifted or masses put in motion; electricity stored.-- An accumulation of degrees (Eng. Univ.), the taking of several together, or at smaller intervals than usual or than is allowed bythe rules.",
     "ACCUMULATIVE":
         "Characterized by accumulation; serving to collect or amass;cumulative; additional.-- Ac*cu\"mu*la*tive*ly, adv.-- Ac*cu\"mu*la*tive*ness, n.",
     "ACCUMULATOR":
@@ -878,16 +878,16 @@ class CategoryA {
     "ACCURATELY":
         "In an accurate manner; exactly; precisely; without error ordefect.",
     "ACCURATENESS":
-        "The state or quality of being accurate; accuracy; exactness;nicety; precision.",
+        "The state or quality of being accurate; accuracy; exactness; nicety; precision.",
     "ACCURSE":
-        "To devote to destruction; to imprecate misery or evil upon; tocurse; to execrate; to anathematize.And the city shall be accursed. Josh. vi. 17.Thro' you, my life will be accurst. Tennyson.",
+        "To devote to destruction; to imprecate misery or evil upon; to curse; to execrate; to anathematize. And the city shall be accursed. Josh. vi. 17.Thro' you, my life will be accurst. Tennyson.",
     "ACCUSABLE":
         "Liable to be accused or censured; chargeable with a crime orfault; blamable; -- with of.",
     "ACCUSAL": "Accusation. [R.] Byron.",
     "ACCUSANT": "An accuser. Bp. Hall.",
     "ACCUSATIVAL": "Pertaining to the accusative case.",
     "ACCUSATIVE":
-        "Applied to the case (as the fourth case of Latin and Greeknouns) which expresses the immediate object on which the action orinfluence of a transitive verb terminates, or the immediate object ofmotion or tendency to, expressed by a preposition. It corresponds tothe objective case in English.",
+        "Applied to the case (as the fourth case of Latin and Greeknouns) which expresses the immediate object on which the action or influence of a transitive verb terminates, or the immediate object ofmotion or tendency to, expressed by a preposition. It corresponds tothe objective case in English.",
     "ACCUSATORIAL": "Accusatory.",
     "ACCUSATORIALLY": "By way accusation.",
     "ACCUSATORY":
@@ -906,7 +906,7 @@ class CategoryA {
     "ACCUSTOMARILY": "Customarily. [Obs.]",
     "ACCUSTOMARY": "Usual; customary. [Archaic] Featley.",
     "ACCUSTOMEDNESS":
-        "Habituation.Accustomedness to sin hardens the heart. Bp. Pearce.",
+        "Habituation. Accustomedness to sin hardens the heart. Bp. Pearce.",
     "ACELDAMA":
         "The potter's field, said to have lain south of Jerusalem,purchased with the bribe which Judas took for betraying his Master,and therefore called the field of blood. Fig.: A field of bloodshed.The system of warfare . . . which had already converted immensetracts into one universal aceldama. De Quincey.",
     "ACENTRIC": "Not centered; without a center.",
@@ -941,13 +941,13 @@ class CategoryA {
     "ACETABLE": "An acetabulum; or about one eighth of a pint. [Obs.] Holland.",
     "ACETABULAR": "Cup-shaped; saucer-shaped; acetabuliform.",
     "ACETABULIFERA":
-        "The division of Cephalopoda in which the arms are furnishedwith cup-shaped suckers, as the cuttlefishes, squids, and octopus;the Dibranchiata. See Cephalopoda.",
+        "The division of Cephalopoda in which the arms are furnished with cup-shaped suckers, as the cuttlefishes, squids, and octopus; the Dibranchiata. See Cephalopoda.",
     "ACETABULIFEROUS":
         "Furnished with fleshy cups for adhering to bodies, ascuttlefish, etc.",
     "ACETABULIFORM":
         "Shaped like a shallow; saucer-shaped; as, an acetabuliformcalyx. Gray.",
     "ACETABULUM":
-        "A vinegar cup; socket of the hip bone; a measure of about oneeighth of a pint, etc.",
+        "A vinegar cup; socket of the hip bone; a measure of about one eighth of a pint, etc.",
     "ACETAL":
         "A limpid, colorless, inflammable liquid from the slow oxidationof alcohol under the influence of platinum black.",
     "ACETALDEHYDE": "Acetic aldehyde. See Aldehyde.",
@@ -958,10 +958,10 @@ class CategoryA {
     "ACETARIOUS": "Used in salads; as, acetarious plants.",
     "ACETARY": "An acid pulp in certain fruits, as the pear. Grew.",
     "ACETATE":
-        "A salt formed by the union of acetic acid with a base orpositive radical; as, acetate of lead, acetate of potash.",
+        "A salt formed by the union of acetic acid with a base or positive radical; as, acetate of lead, acetate of potash.",
     "ACETATED": "Combined with acetic acid.",
     "ACETIFICATION":
-        "The act of making acetous or sour; the process of converting,or of becoming converted, into vinegar.",
+        "The act of making acetous or sour; the process of converting, or of becoming converted, into vinegar.",
     "ACETIFIER": "An apparatus for hastening acetification. Knight.",
     "ACETIFY": "To convert into acid or vinegar.",
     "ACETIMETER":
@@ -991,13 +991,13 @@ class CategoryA {
         "A genus of land snails, often large, common in the warm partsof America and Africa.",
     "ACHATOUR": "Purveyor; acater. [Obs.] Chaucer.",
     "ACHE":
-        "Continued pain, as distinguished from sudden twinges, orspasmodic pain. \"Such an ache in my bones.\" Shak.",
+        "Continued pain, as distinguished from sudden twinges, or spasmodic pain. \"Such an ache in my bones.\" Shak.",
     "ACHEAN": "See Achæan, Achaian.",
     "ACHENIAL": "Pertaining to an achene.",
     "ACHERON":
         "A river in the Nether World or infernal regions; also, theinfernal regions themselves. By some of the English poets it wassupposed to be a flaming lake or gulf. Shak.",
     "ACHERONTIC":
-        "Of or pertaining to Acheron; infernal; hence, dismal, gloomy;moribund.",
+        "Of or pertaining to Acheron; infernal; hence, dismal, gloomy; moribund.",
     "ACHIEVABLE": "Capable of being achieved. Barrow.",
     "ACHIEVANCE": "Achievement. [Obs.] Sir T. Elyot.",
     "ACHIEVEMENT":
@@ -1032,13 +1032,13 @@ class CategoryA {
     "ACHYLOUS": "Without chyle.",
     "ACHYMOUS": "Without chyme.",
     "ACICULA":
-        "One of the needlelike or bristlelike spines or prickles of someanimals and plants; also, a needlelike crystal.",
+        "One of the needlelike or bristlelike spines or prickles of some animals and plants; also, a needlelike crystal.",
     "ACICULAR":
-        "Needle-shaped; slender like a needle or bristle, as some leavesor crystals; also, having sharp points like needless. A*cic\"u*lar*ly,adv.",
+        "Needle-shaped; slender like a needle or bristle, as some leavesor crystals; also, having sharp points like needless.",
     "ACICULIFORM": "Needle-shaped; acicular.",
     "ACICULITE": "Needle ore. Brande & C.",
     "ACID":
-        "One of a class of compounds, generally but not alwaysdistinguished by their sour taste, solubility in water, and reddeningof vegetable blue or violet colors. They are also characterized bythe power of destroying the distinctive properties of alkalies orbases, combining with them to form salts, at the same time losingtheir own peculiar properties. They all contain hydrogen, united witha more negative element or radical, either alone, or more generallywith oxygen, and take their names from this negative element orradical. Those which contain no oxygen are sometimes called hydracidsin distinction from the others which are called oxygen acids oroxacids.",
+        "One of a class of compounds, generally but not always distinguished by their sour taste, solubility in water, and reddening of vegetable blue or violet colors. They are also characterized by the power of destroying the distinctive properties of alkalies or bases, combining with them to form salts, at the same time losing their own peculiar properties. They all contain hydrogen, united with a more negative element or radical, either alone, or more generally with oxygen, and take their names from this negative element or radical. Those which contain no oxygen are sometimes called hydracidsin distinction from the others which are called oxygen acids or oxacids.",
     "ACID PROCESS":
         "That variety of either the Bessemer or the open-hearth processin which the converter or hearth is lined with acid, that is, highlysiliceous, material. Opposed to basic process.",
     "ACIDIC":
@@ -1058,9 +1058,9 @@ class CategoryA {
     "ACIDLY": "Sourly; tartly.",
     "ACIDNESS": "Acidity; sourness.",
     "ACIDULATE":
-        "To make sour or acid in a moderate degree; to sour somewhat.Arbuthnot.",
+        "To make sour or acid in a moderate degree; to sour somewhat. Arbuthnot.",
     "ACIDULENT":
-        "Having an acid quality; sour; acidulous. \"With anxious,acidulent face.\" Carlyle.",
+        "Having an acid quality; sour; acidulous. \"With anxious, acidulent face.\" Carlyle.",
     "ACIDULOUS":
         "Slightly sour; sub-acid; sourish; as, an acidulous tincture. E.Burke. Acidulous mineral waters, such as contain carbonic anhydride.",
     "ACIERAGE":
@@ -1083,20 +1083,19 @@ class CategoryA {
     "ACKNOWLEDGEDLY": "Confessedly.",
     "ACKNOWLEDGER": "One who acknowledges.",
     "ACLINIC":
-        "Without inclination or dipping; -- said the magnetic needlebalances itself horizontally, having no dip. The aclinic line is alsotermed the magnetic equator. Prof. August.",
+        "Without inclination or dipping; -- said the magnetic needlebalances itself horizontally, having no dip. The aclinic line is also termed the magnetic equator. Prof. August.",
     "ACME": "The crisis or height of a disease.",
     "ACNE":
         "A pustular affection of the skin, due to changes in thesebaceous glands.",
     "ACNODAL": "Pertaining to acnodes.",
     "ACNODE":
-        "An isolated point not upon a curve, but whose coördinatessatisfy the equation of the curve so that it is considered asbelonging to the curve.",
+        "An isolated point not upon a curve, but whose coördinates satisfy the equation of the curve so that it is considered as belonging to the curve.",
     "ACOCK": "In a cocked or turned up fashion.",
-    "ACOLD": "Cold. [Obs.] \"Poor Tom's acold.\" Shak.",
     "ACOLOGIC": "Pertaining to acology.",
     "ACOLOGY": "Materia medica; the science of remedies.",
     "ACOLOTHIST": "See Acolythist.",
     "ACOLYCTINE":
-        "An organic base, in the form of a white powder, obtained fromAconitum lycoctonum. Eng. Cyc.",
+        "An organic base, in the form of a white powder, obtained from Aconitum lycoctonum. Eng. Cyc.",
     "ACOLYTE":
         "One who has received the highest of the four minor orders inthe Catholic church, being ordained to carry the wine and water andthe lights at the Mass.",
     "ACOLYTH": "Same as Acolyte.",
@@ -1108,31 +1107,31 @@ class CategoryA {
     "ACONITIC": "Of or pertaining to aconite.",
     "ACONITINE": "An intensely poisonous alkaloid, extracted from aconite.",
     "ACONITUM":
-        "The poisonous herb aconite; also, an extract from it.Strong As aconitum or rash gunpowder. Shak.",
+        "The poisonous herb aconite; also, an extract from it. Strong As aconitum or rash gunpowder.",
     "ACONTIA":
-        "Threadlike defensive organs, composed largely of nettling cells(cnidæ), thrown out of the mouth or special pores of certain Actiniæwhen irritated.",
+        "Threadlike defensive organs, composed largely of nettling cells(cnidæ), thrown out of the mouth or special pores of certain Actiniæ when irritated.",
     "ACONTIAS":
-        "Anciently, a snake, called dart snake; now, one of a genus ofreptiles closely allied to the lizards.",
+        "Anciently, a snake, called dart snake; now, one of a genus of reptiles closely allied to the lizards.",
     "ACOPIC": "Relieving weariness; restorative.",
     "ACORN":
-        "A cone-shaped piece of wood on the point of the spindle abovethe vane, on the mast-head.",
+        "A cone-shaped piece of wood on the point of the spindle above the vane, on the mast-head.",
     "ACORN CUP": "The involucre or cup in which the acorn is fixed.",
     "ACORN-SHELL":
         "One of the sessile cirripeds; a barnacle of the genus Balanus.See Barnacle.",
     "ACOSMISM":
         "A denial of the existence of the universe as distinct from God.",
     "ACOSMIST":
-        "One who denies the existence of the universe, or of a universeas distinct from God. G. H. Lewes.",
+        "One who denies the existence of the universe, or of a universe as distinct from God.",
     "ACOTYLEDON":
-        "A plant which has no cotyledons, as the dodder and allflowerless plants.",
+        "A plant which has no cotyledons, as the dodder and all flowerless plants.",
     "ACOTYLEDONOUS":
-        "Having no seed lobes, as the dodder; also applied to plantswhich have no true seeds, as ferns, mosses, etc.",
+        "Having no seed lobes, as the dodder; also applied to plants which have no true seeds, as ferns, mosses, etc.",
     "ACOUCHY": "A small species of agouti (Dasyprocta acouchy).",
     "ACOUMETER":
-        "An instrument for measuring the acuteness of the sense ofhearing. Itard.",
+        "An instrument for measuring the acuteness of the sense of hearing.",
     "ACOUMETRY": "The measuring of the power or extent of hearing.",
     "ACOUSTIC":
-        "Pertaining to the sense of hearing, the organs of hearing, orthe science of sounds; auditory. Acoustic duct, the auditory duct, orexternal passage of the ear.-- Acoustic telegraph, a telegraph making audible signals; atelephone.-- Acoustic vessels, brazen tubes or vessels, shaped like a bell,used in ancient theaters to propel the voices of the actors, so as torender them audible to a great distance.",
+        "Pertaining to the sense of hearing, the organs of hearing, orthe science of sounds; auditory. Acoustic duct, the auditory duct, orexternal passage of the ear. Acoustic telegraph, a telegraph making audible signals; atelephone.-- Acoustic vessels, brazen tubes or vessels, shaped like a bell, used in ancient theaters to propel the voices of the actors, so as torender them audible to a great distance.",
     "ACOUSTICAL": "Of or pertaining to acoustics.",
     "ACOUSTICALLY": "In relation to sound or to hearing. Tyndall.",
     "ACOUSTICIAN": "One versed in acoustics. Tyndall.",
@@ -1147,23 +1146,23 @@ class CategoryA {
     "ACQUAINTEDNESS":
         "State of being acquainted; degree of acquaintance. [R.] Boyle.",
     "ACQUEST":
-        "Property acquired by purchase, gift, or otherwise than byinheritance. Bouvier.",
+        "Property acquired by purchase, gift, or otherwise than by inheritance.",
     "ACQUIESCENCY": "The quality of being acquiescent; acquiescence.",
     "ACQUIESCENT":
-        "Resting satisfied or submissive; disposed tacitly to submit;assentive; as, an acquiescent policy.",
+        "Resting satisfied or submissive; disposed tacitly to submit; assentive; as, an acquiescent policy.",
     "ACQUIESCENTLY": "In an acquiescent manner.",
     "ACQUIET":
-        "To quiet. [Obs.]Acquiet his mind from stirring you against your own peace. Sir A.Sherley.",
+        "To quiet. Acquiet his mind from stirring you against your own peace.",
     "ACQUIRABILITY":
-        "The quality of being acquirable; attainableness. [R.] Paley.",
+        "The quality of being acquirable; attainableness.",
     "ACQUIRABLE": "Capable of being acquired.",
     "ACQUIRE":
-        "To gain, usually by one's own exertions; to get as one's own;as, to acquire a title, riches, knowledge, skill, good or bad habits.No virtue is acquired in an instant, but step by step. Barrow.Descent is the title whereby a man, on the death of his ancestor,acquires his estate, by right of representation, as his heir at law.Blackstone.",
+        "To gain, usually by one's own exertions; to get as one's own; as, to acquire a title, riches, knowledge, skill, good or bad habits. No virtue is acquired in an instant, but step by step. Barrow. Descent is the title whereby a man, on the death of his ancestor, acquires his estate, by right of representation, as his heir at law.Blackstone.",
     "ACQUIREMENT":
-        "The act of acquiring, or that which is acquired; attainment.\"Rules for the acquirement of a taste.\" Addison.His acquirements by industry were . . . enriched and enlarged by manyexcellent endowments of nature. Hayward.",
+        "The act of acquiring, or that which is acquired; attainment.\"Rules for the acquirement of a taste.\" Addison. His acquirements by industry were enriched and enlarged by many excellent endowments of nature.",
     "ACQUIRER": "A person who acquires.",
-    "ACQUIRY": "Acquirement. [Obs.] Barrow.",
-    "ACQUISITE": "Acquired. [Obs.] Burton.",
+    "ACQUIRY": "Acquirement.  Barrow.",
+    "ACQUISITE": "Acquired.",
     "ACQUISITIVELY": "In the way of acquisition.",
     "ACQUISITIVENESS":
         "The faculty to which the phrenologists attribute the desire ofacquiring and possessing. Combe.",
@@ -1172,8 +1171,8 @@ class CategoryA {
     "ACQUIT": "Acquitted; set free; rid of. [Archaic] Shak.",
     "ACQUITMENT": "Acquittal. [Obs.] Milton.",
     "ACQUITTAL":
-        "A setting free, or deliverance from the charge of an offense,by verdict of a jury or sentence of a court. Bouvier.",
-    "ACQUITTANCE": "To acquit. [Obs.] Shak.",
+        "A setting free, or deliverance from the charge of an offense, by verdict of a jury or sentence of a court.",
+    "ACQUITTANCE": "To acquit.",
     "ACQUITTER": "One who acquits or releases.",
     "ACRANIA": "Partial or total absence of the skull.",
     "ACRANIAL": "Wanting a skull.",
@@ -1182,13 +1181,13 @@ class CategoryA {
     "ACREABLE": "Of an acre; per acre; as, the acreable produce.",
     "ACREAGE": "Acres collectively; as, the acreage of a farm or a country.",
     "ACRED":
-        "Possessing acres or landed property; -- used in composition;as, large-acred men.",
+        "Possessing acres or landed property; -- used in composition; as, large-acred men.",
     "ACRID":
-        "The quality of being acrid or pungent; irritant bitterness;acrimony; as, the acridity of a plant, of a speech.",
+        "The quality of being acrid or pungent; irritant bitterness; acrimony; as, the acridity of a plant, of a speech.",
     "ACRIDLY": "In an acid manner.",
     "ACRIMONIOUSLY": "In an acrimonious manner.",
     "ACRIMONIOUSNESS": "The quality of being acrimonious; asperity; acrimony.",
-    "ACRIMONY": "Undecided character of a disease. [Obs.]",
+    "ACRIMONY": "Undecided character of a disease.",
     "ACRITA":
         "The lowest groups of animals, in which no nervous system hasbeen observed.",
     "ACRITAN":
@@ -1308,9 +1307,9 @@ class CategoryA {
     "ACTIVATE": "To make active. [Obs.]",
     "ACTIVELY": "In an active signification; as, a word used actively.",
     "ACTIVENESS":
-        "The quality of being active; nimbleness; quickness of motion;activity.",
+        "The quality of being active; nimbleness; quickness of motion; activity.",
     "ACTIVITY":
-        "The state or quality of being active; nimbleness; agility;vigorous action or operation; energy; active force; as, an increasingvariety of human activities. \"The activity of toil.\" Palfrey.",
+        "The state or quality of being active; nimbleness; agility; vigorous action or operation; energy; active force; as, an increasing variety of human activities.",
     "ACTLESS": "Without action or spirit. [R.]",
     "ACTON":
         "A stuffed jacket worn under the mail, or (later) a jacketplated with mail. [Spelled also hacqueton.] [Obs.] Halliwell. Sir W.Scott.",

@@ -41,50 +41,50 @@ class DictionaryController extends GetxController {
     this.wordsOfTheDay.value = await AppDatabase.db.getAllWORDSOfTheDay();
   }
 
-//methods
-  void updateWordForDay() async {
-    DateTime now = DateTime.now();
-    String day = DateFormat(DateFormat.WEEKDAY).format(now);
-    String date = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
-    int wordCategory = DictionFunctions.generateRandom(1, 27);
-    List<String> dictions =
-        DictionFunctions.getRandomWordCategory(wordCategory);
+// //methods
+//   void updateWordForDay()  {
+//     DateTime now = DateTime.now();
+//     String day = DateFormat(DateFormat.WEEKDAY).format(now);
+//     String date = DateFormat(DateFormat.YEAR_MONTH_DAY).format(now);
+//     int wordCategory = DictionFunctions.generateRandom(1, 27);
+//     List<String> dictions =
+//         DictionFunctions.getRandomWordCategory(wordCategory);
 
-    int dictionsTotal = dictions.length;
-    int wordSelectedIndex =
-        DictionFunctions.generateRandom(1, dictionsTotal + 1);
-    String choosenWord = dictions.elementAt(wordSelectedIndex);
-    print(choosenWord);
-    WordModel wordModel =
-        DictionFunctions.wordOfTheDayModel(choosenWord, date, day);
-            print("$wordModel");
+//     int dictionsTotal = dictions.length;
+//     int wordSelectedIndex =
+//         DictionFunctions.generateRandom(1, dictionsTotal + 1);
+//     String choosenWord = dictions.elementAt(wordSelectedIndex);
+//     print(choosenWord);
+//     WordModel wordModel =
+//         DictionFunctions.wordOfTheDayModel(choosenWord, date, day);
+//             print("New Word Of The Day Created and Added to the Word Of the day table: $wordModel");
 
-    addWordOfTheDay(wordModel);
-    setWordsOfTheDay();
-    print("$getWordsOfTheDay");
-    if (!getWordsOfTheDay.isBlank) {
-      wordForTheDay.value = getWordsOfTheDay[0];
-    }
+//     addWordOfTheDay(wordModel);
+//     setWordsOfTheDay();
+//     print("$getWordsOfTheDay");
+//     if (!getWordsOfTheDay.isEmpty) {
+//       wordForTheDay = getWordsOfTheDay[0];
+//     }
 
-    // wordForTheDay.value =
-    //     DictionFunctions.wordOfTheDayModel();
-  }
+//     // wordForTheDay.value =
+//     //     DictionFunctions.wordOfTheDayModel();
+//   }
 
-  Future addWordOfTheDay(WordModel wordModel) async {
-    bool check = false;
+  // Future addWordOfTheDay(WordModel wordModel) async {
+  //   bool check = false;
 
-    favWORDs.forEach((element) {
-      if (element.wordName == wordModel.wordName) {
-        check = true;
-      }
-    });
+  //   favWORDs.forEach((element) {
+  //     if (element.wordName == wordModel.wordName) {
+  //       check = true;
+  //     }
+  //   });
 
-    if (check == false) {
-      await AppDatabase.db.addWordOfTheDay(wordModel);
-      setWordsOfTheDay();
-      print(wordsOfTheDay);
-    }
-  }
+  //   if (check == false) {
+  //      AppDatabase.db.addWordOfTheDay(wordModel);
+  //     setWordsOfTheDay();
+  //     print(wordsOfTheDay);
+  //   }
+  // }
 
   Future addFavWORD(WordModel wordModel) async {
     bool check = false;

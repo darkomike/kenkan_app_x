@@ -56,7 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
+      child:Obx (() =>  Scaffold(
         drawer: AppDrawer(),
         appBar: AppBar(
           backgroundColor: Theme.of(context).backgroundColor,
@@ -126,7 +126,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   title: Text(_isLightTheme! ? "Dark Theme" : "Light Theme",
                       style: Theme.of(context).textTheme.headline3),
-                  trailing: Switch(
+                  trailing:  Switch(
                     activeColor: sliderColor,
                     inactiveThumbColor: sliderColor!.withOpacity(0.5),
                     onChanged: (value) {
@@ -169,20 +169,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               // Divider(
               //   height: 5,
               // ),
-              ListTile(
-                leading: Icon(
-                  Icons.info_outline,
-                  color: color,
-                  size: 30,
-                ),
-                title: Text("App Guide",
-                    style: Theme.of(context).textTheme.headline3),
-                // leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color,),
-                onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => GuideScreen()));
-                },
-              ),
+              // ListTile(
+              //   leading: Icon(
+              //     Icons.info_outline,
+              //     color: color,
+              //     size: 30,
+              //   ),
+              //   title: Text("App Guide",
+              //       style: Theme.of(context).textTheme.headline3),
+              //   // leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color,),
+              //   onTap: () {
+              //     // Navigator.push(context,
+              //     //     MaterialPageRoute(builder: (_) => GuideScreen()));
+              //   },
+              // ),
               // Divider(
               //   height: 5,
               // ),
@@ -230,7 +230,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }
