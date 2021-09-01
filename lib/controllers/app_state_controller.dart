@@ -6,7 +6,8 @@ import '../main.dart';
 class AppStateController extends GetxController {
   static AppStateController instance = Get.find();
 
-  var isDarkModeOn = prefs.getBool("isDarkModeOn").obs;
+  var isDarkModeOn = false.obs;
+  // var isDarkModeOn = prefs.getBool("isDarkModeOn").obs;
   var speechSpeed = prefs.getDouble("ReaderSpeechRate").obs;
 
   var showAppBar = false.obs;
@@ -28,23 +29,6 @@ class AppStateController extends GetxController {
     speechSpeed.value = prefs.getDouble("ReaderSpeechRate")!;
   }
 
-  // @override
-  // void onInit() {
-  //   // called immediately after the widget is allocated memory
-
-  //   super.onInit();
-  // }
-
-  //  @override
-  // void onReady() {
-  //   // called after the widget is rendered on screen
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {
-  //   // called just before the Controller is deleted from memory
-  //   super.onClose();
-  // }
+ 
 
 }

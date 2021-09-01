@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/names.dart';
@@ -40,7 +41,6 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
   bool isCurrentLanguageInstalled = false;
 
   TtsState ttsState = TtsState.stopped;
-
 
   get isPlaying => ttsState == TtsState.playing;
   get isStopped => ttsState == TtsState.stopped;
@@ -163,7 +163,6 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -230,7 +229,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
         title: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
-              "${DictionFunctions.capitalise(widget.wordModel.wordName)}",
+              "${DictionFunctions.capitalise(widget.wordModel.wordName!)}",
               style: Theme.of(context).textTheme.caption,
             )),
       ),
@@ -254,15 +253,14 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                             color: Theme.of(context).iconTheme.color,
                             size: 29,
                           ),
-                          backgroundColor:
-                              Theme.of(context).backgroundColor,
+                          backgroundColor: Theme.of(context).backgroundColor,
                           elevation: 0,
                           deleteButtonTooltipMessage:
                               "Pronounce ${widget.wordModel.wordName}",
                           label: Text(
-                              "${DictionFunctions.capitalise(widget.wordModel.wordName)}",
-                              style: TextStyle(
-                                  color: Colors.red, fontSize: 20)),
+                              "${DictionFunctions.capitalise(widget.wordModel.wordName!)}",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 20)),
                         ),
                       ),
                       Row(
@@ -290,7 +288,7 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                           SizedBox(
                             width: 10,
                           ),
-                          AnimatedContainer(
+                        Obx(() =>  AnimatedContainer(
                             alignment: Alignment.center,
                             height: 40,
                             width: 40,
@@ -298,51 +296,54 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                             decoration: BoxDecoration(
                                 color: Theme.of(context).backgroundColor,
                                 borderRadius: BorderRadius.circular(20)),
-                            child: widget.wordModel.isFav == 1
+                            child: !dictionaryController
+                                        .isFavWord(widget.wordModel.wordID!) == true
+                                    
                                 ? IconButton(
                                     onPressed: () async {
-                                      setState(() {
-                                        widget.wordModel.isFav = 0;
-                                      });
-                                      await dictionaryController
-                                          .removeFavWORD(widget.wordModel,
-                                              widget.wordModel.wordName);
+                                    dictionaryController
+                                          .addWORD(widget.wordModel);
+                                       dictionaryController
+                                          .addFavWORD(widget.wordModel.wordID!);
+                                          setState(() {
+                                            
+                                          });
+                                       
 
                                       showFavAdded(context,
-                                          "${DictionFunctions.capitalise(widget.wordModel.wordName)} is removed from favourites");
+                                          "${DictionFunctions.capitalise(widget.wordModel.wordName!)} is added to favourites");
+
+                                      print(
+                                          "${widget.wordModel.wordName} is added to favourites");
+                                    },
+                                    icon: Icon(
+                                      Icons.favorite_border_outlined,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                    tooltip: "Add to Favourites",
+                                  )
+                                : IconButton(
+                                    onPressed: ()  {
+                                      setState(() {
+                                        
+                                      });
+                                       dictionaryController.removeFavWORD(
+                                          
+                                          widget.wordModel.wordID!);
+
+                                      showFavAdded(context,
+                                          "${DictionFunctions.capitalise(widget.wordModel.wordName!)} is removed from favourites");
 
                                       print(
                                           "${widget.wordModel.wordName} is removed from favourites");
                                     },
                                     icon: Icon(
                                       Icons.favorite,
-                                      color:
-                                          Theme.of(context).iconTheme.color,
+                                      color: Theme.of(context).iconTheme.color,
                                     ),
                                     tooltip: "Remove from Favourites",
-                                  )
-                                : IconButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        widget.wordModel.isFav = 1;
-                                      });
-                                      dictionaryController
-                                          .addFavWORD(widget.wordModel);
-
-                                      showFavAdded(context,
-                                          "${DictionFunctions.capitalise(widget.wordModel.wordName)} is added to favourites");
-
-                                      print(
-                                          "${widget.wordModel} is added to favourite");
-                                    },
-                                    icon: Icon(
-                                      Icons.favorite_border_outlined,
-                                      color:
-                                          Theme.of(context).iconTheme.color,
-                                    ),
-                                    tooltip: "Add to Favourites",
                                   ),
-                          ),
+                          )),
                           SizedBox(
                             width: 10,
                           ),
@@ -360,10 +361,9 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                                   ? IconButton(
                                       tooltip: "Read word meaning",
                                       onPressed: () {
-                                        _speak(widget.wordModel.wordName +
+                                        _speak(widget.wordModel.wordName! +
                                             ", Definition, " +
-                                            widget
-                                                .wordModel.wordDefinition);
+                                            widget.wordModel.wordDefinition!);
                                         setState(() {
                                           isPlayingIconOn = false;
                                         });
@@ -397,7 +397,6 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                 margin: EdgeInsets.only(bottom: 5),
                 child: ListView(
                   addRepaintBoundaries: false,
-                  
                   addAutomaticKeepAlives: false,
                   shrinkWrap: true,
                   children: [
@@ -426,9 +425,11 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
 
   void showFavAdded(BuildContext context, String? message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Theme.of(context).backgroundColor,
+
       duration: Duration(
           milliseconds: NumberConstants.snackBarDurationInMilliseconds),
-      content: Text(message!),
+      content: Text(message!, style: Theme.of(context).textTheme.headline2,),
     ));
   }
 
@@ -441,7 +442,9 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                   onTap: () {
                     WordModel? model = DictionFunctions.wordOfTheDayModel(
                         DictionFunctions.transformStringWithOperators(
-                            text.trim()), '','');
+                            text.trim()),
+                        '',
+                        '');
                     if (model.wordName == "wordName") {
                       showDialog(
                           // barrierColor: Theme.of(context).backgroundColor,
@@ -489,11 +492,10 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
                                 ],
                               ));
                     } else {
-                      dictionaryController.addWordToHistory(model);
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (_) => DictionWordDetails(wordModel: model)));
+
+                      dictionaryController.addWORD(model);
+                      dictionaryController.addWordToHistory(model.wordID!);
+                      
 
                       setState(() {
                         widget.wordModel = model;

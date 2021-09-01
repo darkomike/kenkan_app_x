@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kenkan_app_x/constants/names.dart';
 import 'package:kenkan_app_x/db/diction_db/database.dart';
-import 'package:kenkan_app_x/helpers/diction_functions.dart';
-import 'package:kenkan_app_x/main.dart';
+
 import 'package:kenkan_app_x/models/wordModel.dart';
 
 class DictionaryController extends GetxController {
@@ -13,13 +11,14 @@ class DictionaryController extends GetxController {
   var favWORDs = [].obs;
   var recentWORDs = [].obs;
   var wordsOfTheDay = [].obs;
+  var words = [].obs;
   var wordForTheDay = WordModel(
           wordName: "CABALIST",
           wordDefinition:
               "One versed in the cabala, or the mysteries of Jewishtraditions. \"Studious cabalists.\" Swift.",
-          isFav: 0,
-          day: "${DateFormat(DateFormat.WEEKDAY).format(DateTime.now())}",
-          date:
+          wordID: "cabalist_id",
+          wordDay: "${DateFormat(DateFormat.WEEKDAY).format(DateTime.now())}",
+          wordDate:
               "${DateFormat(DateFormat.YEAR_MONTH_DAY).format(DateTime.now())}")
       .obs;
 
@@ -27,18 +26,22 @@ class DictionaryController extends GetxController {
   get getFavWORDs => favWORDs.reversed.toList();
   get getHistory => recentWORDs.reversed.toList();
   get getWordsOfTheDay => wordsOfTheDay.reversed.toList();
+  get getWords => words.reversed.toList();
 
 //setters
   setFavWORDs() async {
-    this.favWORDs.value = await AppDatabase.db.getAllFavWORDs();
+    this.favWORDs.value = await AppDatabase.db.getFavWORDs();
   }
 
   setRecentWORDs() async {
-    this.recentWORDs.value = await AppDatabase.db.getAllRecentWORDs();
+    this.recentWORDs.value = await AppDatabase.db.getRecentWORDs();
   }
 
   setWordsOfTheDay() async {
-    this.wordsOfTheDay.value = await AppDatabase.db.getAllWORDSOfTheDay();
+    this.wordsOfTheDay.value = await AppDatabase.db.getWOTD();
+  }
+  setWords() async {
+    this.words.value = await AppDatabase.db.getAllWORDs();
   }
 
 // //methods
@@ -86,36 +89,56 @@ class DictionaryController extends GetxController {
   //   }
   // }
 
-  Future addFavWORD(WordModel wordModel) async {
+   addWORD(WordModel wordModel) async {
     bool check = false;
+      setFavWORDs();
 
     favWORDs.forEach((element) {
-      if (element.wordName == wordModel.wordName) {
+      if (element.wordID == wordModel.wordID) {
         check = true;
       }
     });
 
     if (check == false) {
-      await AppDatabase.db.addFavWORD(wordModel);
+     await  AppDatabase.db.addWord(wordModel);
+      print(words);
+    }
+          setFavWORDs();
+
+  }
+
+  Future addFavWORD(String wordID) async {
+    bool check = false;
+
+    favWORDs.forEach((element) {
+      if (element.wordID == wordID) {
+        check = true;
+      }
+    });
+
+    if (check == false) {
+      await AppDatabase.db.addFavWORD(wordID);
       setFavWORDs();
       print(favWORDs);
     }
   }
 
-  Future<int> isFavWord(WordModel wordModel) async {
+  bool isFavWord(String? wordID)  {
     setFavWORDs();
-    int check = 0;
+    bool check = false;
 
     favWORDs.forEach((element) {
-      if (element.wordName == wordModel.wordName) {
-        check = 1;
+      if (element.wordID == wordID) {
+        check = true;
       }
     });
+              setFavWORDs();
+
 
     return check;
   }
 
-  Future removeFavWORD(WordModel wordModel, String wordToRemove) async {
+  Future removeFavWORD(String wordToRemove) async {
     await AppDatabase.db.removeFavWORDAt(wordToRemove);
     setFavWORDs();
   }
@@ -125,18 +148,18 @@ class DictionaryController extends GetxController {
     setFavWORDs();
   }
 
-  Future addWordToHistory(WordModel wordModel) async {
+  Future addWordToHistory(String wordID) async {
     bool check = false;
 
     recentWORDs.forEach((element) {
-      if (element.wordName == wordModel.wordName) {
+      if (element.wordID == wordID) {
         check = true;
       }
     });
 
     if (check == false) {
       // history.add(wordModel);
-      await AppDatabase.db.addRecentWORDToDB(wordModel);
+      await AppDatabase.db.addRecentWORD(wordID);
       setRecentWORDs();
     }
   }

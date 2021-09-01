@@ -1,28 +1,30 @@
 import 'package:kenkan_app_x/constants/names.dart';
 
 class WordModel {
-  String wordName = '';
-  String wordDefinition = '';
-  int isFav = 0;
-  String? day = '';
-  String? date = '';
+  String? wordName = '';
+  String? wordID = '';
+  String? wordDefinition = '';
+  String? wordDay = '';
+  String? wordDate = '';
 
 
   WordModel(
-      {required this.wordName,
+      {
+      required this.wordName,
       required this.wordDefinition,
-       this.day,
-       this.date,
-      required this.isFav});
+      required this.wordID,
+       this.wordDay,
+       this.wordDate,
+    });
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data[LocalSave.wordName] = this.wordName;
     data[LocalSave.wordDefinition] = this.wordDefinition;
-    data[LocalSave.day] = this.day;
-    data[LocalSave.date] = this.date;
-    data[LocalSave.isFavWord] = this.isFav;
+    data[LocalSave.wordDay] = this.wordDay;
+    data[LocalSave.wordDate] = this.wordDate;
+    data[LocalSave.wordID] = this.wordID;
 
     return data;
   }
@@ -30,9 +32,9 @@ class WordModel {
   WordModel.fromMap(Map<String, dynamic> map) {
     wordDefinition = map[LocalSave.wordDefinition];
     wordName = map[LocalSave.wordName];
-    isFav = map[LocalSave.isFavWord];
-    day = map[LocalSave.day];
-    date = map[LocalSave.date];
+    wordDay = map[LocalSave.wordDate];
+    wordDate = map[LocalSave.wordDate];
+    wordID = map[LocalSave.wordID];
 
   }
 }

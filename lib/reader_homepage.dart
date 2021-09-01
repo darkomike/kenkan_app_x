@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -50,7 +51,82 @@ class _ReaderHomepageState extends State<ReaderHomepage>
       height: height / 4,
     );
 
+    readerController.setRecentFiles();
+
     return Obx(() => Scaffold(
+          floatingActionButton: Visibility(
+            visible: readerController.getRecentFiles.length > 0 ? true : false,
+            child: FloatingActionButton.extended(
+              backgroundColor: primaryColor,
+              tooltip: "Open Document",
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return SimpleDialog(
+                        backgroundColor: Theme.of(context).backgroundColor,
+                        title: Text(
+                          "Select Files",
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
+                        children: [
+                          SimpleDialogOption(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 20),
+                            onPressed: () async {
+                              final file = await PDFApi.pickPDF('');
+
+                              DateTime now = DateTime.now();
+                              _formattedDate =
+                                  DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+                                      .format(now);
+                              _formattedTime =
+                                  DateFormat(DateFormat.HOUR_MINUTE)
+                                      .format(now);
+                              _fileOpenedAt = "$_formattedDate $_formattedTime";
+
+                              String fileName = basename(file.path);
+                              Random random = new Random();
+                              String fileID = random.nextInt(100000).toString();
+                              FileModel fileModel = FileModel(
+                                  filePath: file.path,
+                                  fileName: fileName,
+                                  fileType: 'PDF',
+                                  fileID: fileID,
+                                  file: file,
+                                  fileTimeOpened: _fileOpenedAt.toString());
+                              await readerController.addFile(fileModel);
+
+                              await readerController.addToRecentFile(
+                                  fileModel.fileID, fileModel.fileName);
+
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => SyncPDFViewer(
+                                            file: file,
+                                            fileModel: fileModel,
+                                          )));
+                            },
+                            child: Text(
+                              "PDF Files",
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                          )
+                        ],
+                      );
+                    });
+              },
+              label: Text(
+                "Open File",
+                style: TextStyle(color: Colors.white),
+              ),
+              isExtended: true,
+              icon: Icon(
+                Icons.open_in_new,
+                color: Colors.white,
+              ),
+            ),
+          ),
           drawer: AppDrawer(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).backgroundColor,
@@ -75,7 +151,7 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                             leading: Icon(Icons.clear_all,
                                 color: Theme.of(context).iconTheme.color),
                             title: Text("Clear List",
-                                style: Theme.of(context).textTheme.headline3),
+                                style: Theme.of(context).textTheme.headline2),
                           ),
                           value: 1,
                         ),
@@ -105,20 +181,21 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                   direction * _animation!.value * width, 0, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  if (await readerController
-                                          .isFavFile(fileModel) ==
-                                      1) {
-                                    fileModel.isFavFile = 1;
-                                  } else {
-                                    fileModel.isFavFile = 0;
-                                  }
+                                  if (readerController
+                                          .isFavFile(fileModel.fileID) ==
+                                      true) {
+                                  } else {}
                                   print(fileModel.filePath);
 
                                   File file = File(fileModel.filePath);
-                                  print(file);
-                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                      builder: (context) =>
-                                          SyncPDFViewer(file: file)));
+                                  // File file = File(fileModel.file);
+                                  print("File: ${file.exists()}");
+                                  Navigator.of(context)
+                                      .pushReplacement(MaterialPageRoute(
+                                          builder: (context) => SyncPDFViewer(
+                                                file: file,
+                                                fileModel: fileModel,
+                                              )));
                                 },
                                 focusColor: primaryColor,
                                 excludeFromSemantics: true,
@@ -157,8 +234,8 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                 .headline3,
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          subtitle:
-                                              Text("${fileModel.timeOpened}"),
+                                          subtitle: Text(
+                                              "${fileModel.fileTimeOpened}"),
                                         ),
                                         Divider(
                                           color: Theme.of(context).dividerColor,
@@ -168,39 +245,46 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
+                                              MainAxisAlignment.start,
                                           children: [
-                                            fileModel.isFavFile == 1
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            readerController
+                                                    .isFavFile(fileModel.fileID)
                                                 ? IconButton(
                                                     tooltip:
                                                         "Removing from Favourites",
                                                     icon: Icon(Icons.star),
                                                     onPressed: () {
+                                                      setState(() {});
                                                       readerController
                                                           .removeFavFileAt(
-                                                              fileModel
-                                                                  .fileName);
+                                                              fileModel.fileID);
                                                       readerController
                                                           .setFavFiles();
-                                                      setState(() {
-                                                        fileModel.isFavFile = 0;
-                                                      });
 
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
                                                               SnackBar(
+                                                        backgroundColor: Theme
+                                                                .of(context)
+                                                            .backgroundColor,
                                                         duration: Duration(
                                                             milliseconds:
                                                                 NumberConstants
                                                                     .snackBarDurationInMilliseconds),
                                                         content: Text(
-                                                            "Removed ${fileModel.fileName.replaceAll(".pdf", "")} from Favourites"),
+                                                          "Removed ${fileModel.fileName.replaceAll(".pdf", "")} from Favourites",
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .headline2,
+                                                        ),
                                                       ));
                                                     },
-                                                    color: Theme.of(context)
-                                                        .iconTheme
-                                                        .color,
+                                                    color: Colors.blue[700],
                                                   )
                                                 : IconButton(
                                                     tooltip:
@@ -208,12 +292,12 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                     icon: Icon(Icons
                                                         .star_border_outlined),
                                                     onPressed: () {
-                                                      setState(() {
-                                                        fileModel.isFavFile = 1;
-                                                      });
+                                                      setState(() {});
                                                       readerController
                                                           .addToFavFile(
-                                                              fileModel);
+                                                              fileModel.fileID,
+                                                              fileModel
+                                                                  .fileName);
                                                       readerController
                                                           .setFavFiles();
 
@@ -221,22 +305,32 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                               context)
                                                           .showSnackBar(
                                                               SnackBar(
+                                                        backgroundColor: Theme
+                                                                .of(context)
+                                                            .backgroundColor,
                                                         duration: Duration(
                                                             milliseconds:
                                                                 NumberConstants
                                                                     .snackBarDurationInMilliseconds),
                                                         content: Text(
-                                                            "Saved ${fileModel.fileName.replaceAll(".pdf", " ")} to Favourites"),
+                                                          "Saved ${fileModel.fileName.replaceAll(".pdf", " ")} to Favourites",
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .headline2,
+                                                        ),
                                                       ));
                                                     },
-                                                    color: Theme.of(context)
-                                                        .iconTheme
-                                                        .color,
+                                                    color: Colors.blue[700],
                                                   ),
+                                                    SizedBox(
+                                              width: 20,
+                                            ),
                                             IconButton(
                                                 tooltip:
                                                     "Remove from reading now",
-                                                icon: Icon(Icons.delete_outline_outlined),
+                                                icon: Icon(Icons
+                                                    .delete_outline_outlined),
                                                 onPressed: () {
                                                   readerController
                                                       .removeRecentFileAt(
@@ -246,13 +340,18 @@ class _ReaderHomepageState extends State<ReaderHomepage>
 
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .backgroundColor,
                                                     content: Text(
-                                                        "Removed ${fileModel.fileName}"),
+                                                      "Removed ${fileModel.fileName}",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline2,
+                                                    ),
                                                   ));
                                                 },
-                                                color: Theme.of(context)
-                                                    .iconTheme
-                                                    .color),
+                                                color: Colors.red),
                                           ],
                                         )
                                       ],
@@ -321,16 +420,26 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                               _fileOpenedAt = "$_formattedDate $_formattedTime";
 
                               String fileName = basename(file.path);
-
+                              Random random = new Random();
+                              String fileID = random.nextInt(100000).toString();
                               FileModel fileModel = FileModel(
                                   filePath: file.path,
                                   fileName: fileName,
-                                  isFavFile: 0,
+                                  fileID: fileID,
+                                  file: file,
                                   fileType: 'PDF',
-                                  timeOpened: _fileOpenedAt.toString());
-                              readerController.addToRecentFile(fileModel);
+                                  fileTimeOpened: _fileOpenedAt!); 
 
-                              openPDF(context, file);
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(
+                                      builder: (context) => SyncPDFViewer(
+                                            file: file,
+                                            fileModel: fileModel,
+                                          )));
+
+                              readerController.addFile(fileModel);
+                              readerController.addToRecentFile(
+                                  fileModel.fileID, fileModel.fileName);
                             },
                             child: Text(
                               "PDF Files",
@@ -355,9 +464,9 @@ class _ReaderHomepageState extends State<ReaderHomepage>
     );
   }
 
-  void openPDF(BuildContext context, File file) {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SyncPDFViewer(file: file)));
-    // Navigator.pop(context);
-  }
+  // void openPDF(BuildContext context, File file) {
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => SyncPDFViewer(file: file)));
+  //   // Navigator.pop(context);
+  // }
 }

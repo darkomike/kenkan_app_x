@@ -33,85 +33,135 @@ class AppDatabase {
   }
 
   _createDB(Database db, int version) async {
-    String CREATE_WORD_OF_THE_DAY_TABLE =
-        " CREATE TABLE IF NOT EXISTS ${LocalSave.word_of_the_day} ("
-        " ${LocalSave.wordName} ${DbConstants.textType},"
-        "${LocalSave.wordDefinition} ${DbConstants.textType},"
-        "${LocalSave.isFavWord} ${DbConstants.booleanType},"
-        "${LocalSave.day} ${DbConstants.textType},"
-        "${LocalSave.date} ${DbConstants.textType}"
+    String CREATE_FILES_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.filesTable} ("
+        " ${LocalSave.file} ${DbConstants.blobType},"
+        "${LocalSave.fileID}  ${DbConstants.textType} PRIMARY KEY,"
+        "${LocalSave.fileName} ${DbConstants.textType},"
+        "${LocalSave.filePath} ${DbConstants.textType},"
+        "${LocalSave.fileTimeOpened} ${DbConstants.textType},"
+        "${LocalSave.fileType} ${DbConstants.textType}"
         ")";
 
-    String CREATE_FAV_WORD_TABLE =
-        " CREATE TABLE IF NOT EXISTS ${LocalSave.favouritesDiction} ("
-        " ${LocalSave.wordName} ${DbConstants.textType},"
-        "${LocalSave.wordDefinition} ${DbConstants.textType},"
-        "${LocalSave.isFavWord} ${DbConstants.booleanType}"
+    String CREATE_FAV_FILES_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.fileFavouriteTable} ("
+        " ${LocalSave.fileID} ${DbConstants.textType},"
+        " CONSTRAINT fk_files ,"
+        " FOREIGN KEY (${LocalSave.fileID}) "
+        " REFERENCES ${LocalSave.filesTable} (${LocalSave.fileID}) "
         ")";
 
-    String CREATE_RECENT_WORD_TABLE =
-        " CREATE TABLE IF NOT EXISTS ${LocalSave.recentDiction} ("
-        " ${LocalSave.wordName} ${DbConstants.textType},"
-        "${LocalSave.wordDefinition} ${DbConstants.textType},"
-        "${LocalSave.isFavWord} ${DbConstants.booleanType}"
+    String CREATE_RECENT_FILES_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.fileRecentTable} ("
+        " ${LocalSave.fileID} ${DbConstants.textType},"
+        " CONSTRAINT fk_files, "
+        " FOREIGN KEY (${LocalSave.fileID}) "
+        " REFERENCES ${LocalSave.filesTable} (${LocalSave.fileID}) "
         ")";
 
-    String CREATE_NOTE_TABLE = " CREATE TABLE IF NOT EXISTS ${LocalSave.note} ("
-        " ${LocalSave.noteID} ${DbConstants.idType},"
+    String CREATE_WORDS_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.wordsTable} ("
+        "${LocalSave.wordID}  ${DbConstants.textType} PRIMARY KEY,"
+        "${LocalSave.wordName} ${DbConstants.textType},"
+        "${LocalSave.wordDefinition} ${DbConstants.textType},"
+        "${LocalSave.wordDate} ${DbConstants.textType},"
+        "${LocalSave.wordDay} ${DbConstants.textType}"
+        ")";
+
+    String CREATE_RECENT_WORDS_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.wordRecentTable} ("
+        " ${LocalSave.wordID} ${DbConstants.textType},"
+        " CONSTRAINT fk_words ,"
+        " FOREIGN KEY (${LocalSave.wordID}) "
+        " REFERENCES ${LocalSave.wordsTable} (${LocalSave.wordID}) "
+        ")";
+    String CREATE_FAV_WORDS_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.wordFavouriteTable} ("
+        " ${LocalSave.wordID} ${DbConstants.textType},"
+        " CONSTRAINT fk_words ,"
+        " FOREIGN KEY (${LocalSave.wordID}) "
+        " REFERENCES ${LocalSave.wordsTable} (${LocalSave.wordID}) "
+        ")";
+    String CREATE_WORDS_OF_THE_DAY_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.wordsOfTheDayTable} ("
+        " ${LocalSave.wordID} ${DbConstants.textType},"
+        " CONSTRAINT fk_words, "
+        " FOREIGN KEY (${LocalSave.wordID}) "
+        " REFERENCES ${LocalSave.wordsTable} (${LocalSave.wordID}) "
+        ")";
+
+    String CREATE_NOTES_TABLE =
+        " CREATE TABLE IF NOT EXISTS ${LocalSave.noteTable} ("
+        "${LocalSave.noteID}  ${DbConstants.textType} ,"
         "${LocalSave.noteTitle} ${DbConstants.textType},"
         "${LocalSave.noteBody} ${DbConstants.textType},"
-        "${LocalSave.createdNoteAt} ${DbConstants.textType}"
+        "${LocalSave.noteTimeCreated} ${DbConstants.textType},"
+        "${LocalSave.noteFileID} ${DbConstants.textType},"
+        " CONSTRAINT fk_notes, "
+        " FOREIGN KEY (${LocalSave.noteFileID}) "
+        " REFERENCES ${LocalSave.filesTable} (${LocalSave.fileID}) "
         ")";
-    String CREATE_FAV_READER_TABLE =
-        " CREATE TABLE IF NOT EXISTS ${LocalSave.favouritesReader} ("
-        " ${LocalSave.fileID} ${DbConstants.idType},"
-        "${LocalSave.fileName} ${DbConstants.textType},"
-        "${LocalSave.filePath} ${DbConstants.textType},"
-        "${LocalSave.fileType} ${DbConstants.textType},"
-        "${LocalSave.isFavFile} ${DbConstants.booleanType},"
-        "${LocalSave.timeOpened} ${DbConstants.textType}"
-        ")";
-    String CREATE_RECENT_READER_TABLE =
-        " CREATE TABLE IF NOT EXISTS ${LocalSave.recentReader} ("
-        " ${LocalSave.fileID} ${DbConstants.idType},"
-        "${LocalSave.fileName} ${DbConstants.textType},"
-        "${LocalSave.filePath} ${DbConstants.textType},"
-        "${LocalSave.fileType} ${DbConstants.textType},"
-        "${LocalSave.isFavFile} ${DbConstants.booleanType},"
-        "${LocalSave.timeOpened} ${DbConstants.booleanType}"
-        ")";
-    await db.execute(CREATE_NOTE_TABLE);
-    await db.execute(CREATE_FAV_READER_TABLE);
-    await db.execute(CREATE_RECENT_READER_TABLE);
-    await db.execute(CREATE_FAV_WORD_TABLE);
-    await db.execute(CREATE_RECENT_WORD_TABLE);
-    await db.execute(CREATE_WORD_OF_THE_DAY_TABLE);
+
+    await db.execute(CREATE_FILES_TABLE);
+    await db.execute(CREATE_FAV_FILES_TABLE);
+    await db.execute(CREATE_RECENT_FILES_TABLE);
+
+    await db.execute(CREATE_WORDS_TABLE);
+    await db.execute(CREATE_WORDS_OF_THE_DAY_TABLE);
+    await db.execute(CREATE_FAV_WORDS_TABLE);
+    await db.execute(CREATE_RECENT_WORDS_TABLE);
+
+    await db.execute(CREATE_NOTES_TABLE);
   }
 
-  ///NOTES DATABASE FUNCTIONS
+  /// NOTES DATABASE FUNCTIONS
+  ///
+
+  Future<List<NoteModel>> selectNoteWithFileID(String noteFileID) async {
+    Database db = await database;
+
+    String query = " SELECT  * "
+        " FROM ${LocalSave.noteTable} "
+        " WHERE ${LocalSave.noteFileID} = $noteFileID ";
+
+    // String query = " SELECT  * "
+    //     " FROM ${LocalSave.noteTable} ";
+    // // " WHERE ${LocalSave.noteFileID} = $noteFileID ";
+    var noteRec = await db.rawQuery(query);
+    print("Single Note Record: $noteRec");
+
+    List<NoteModel> list = noteRec.isNotEmpty
+        ? noteRec.map((m) => NoteModel.fromMap(m)).toList()
+        : [];
+
+    return list;
+  }
+
   Future addNote(NoteModel noteModel) async {
     Database db = await database;
 
     return await db.rawInsert(
-        "INSERT INTO ${LocalSave.note} ( ${LocalSave.noteID} ,  ${LocalSave.noteTitle},${LocalSave.noteBody},${LocalSave.createdNoteAt})"
-        "VALUES (?, ?, ? , ?)",
+        "INSERT INTO ${LocalSave.noteTable} ( ${LocalSave.noteID} ,  ${LocalSave.noteTitle},${LocalSave.noteBody},${LocalSave.noteTimeCreated}, ${LocalSave.noteFileID})"
+        " VALUES (?, ?, ? , ?, ?)",
         [
           noteModel.noteID,
           noteModel.noteTitle,
           noteModel.noteBody,
-          noteModel.createdNoteAt
+          noteModel.noteTimeCreated,
+          noteModel.noteFileID
         ]);
 
-    // await db.insert(LocalSave.note, noteModel.toMap());
+    // await db.insert(LocalSave.noteTable, noteModel.toMap());
   }
 
   Future<List<NoteModel>> getAllNotes() async {
     Database db = await database;
 
-    var favRecs = await db.query("${LocalSave.note}");
+    var noteRecs = await db.query("${LocalSave.noteTable}",
+        orderBy: "${LocalSave.noteTimeCreated}");
 
-    List<NoteModel> list = favRecs.isNotEmpty
-        ? favRecs.map((m) => NoteModel.fromMap(m)).toList()
+    List<NoteModel> list = noteRecs.isNotEmpty
+        ? noteRecs.map((m) => NoteModel.fromMap(m)).toList()
         : [];
 
     return list;
@@ -120,213 +170,301 @@ class AppDatabase {
   Future deleteNote(int noteId) async {
     Database db = await database;
 
-    await db.delete("${LocalSave.note}",
+    await db.delete("${LocalSave.noteTable}",
         where: "${LocalSave.noteID}", whereArgs: [noteId]);
   }
 
   Future removeNotes() async {
     Database db = await database;
 
-    return await db.delete("${LocalSave.note}");
+    return await db.delete("${LocalSave.noteTable}");
   }
 
-  Future<int> removeNoteAt(int? noteID) async {
+  Future<int> removeNoteAt(String noteID) async {
     Database db = await database;
-    return await db.delete("${LocalSave.note}",
+    return await db.delete("${LocalSave.noteTable}",
         where: "${LocalSave.noteID} = ?", whereArgs: [noteID]);
   }
 
-  Future updateNoteAt(NoteModel noteModel, int? noteID) async {
+  Future updateNoteAt(NoteModel noteModel, String? noteID) async {
     Database db = await database;
 
     await db.rawUpdate(
-        "UPDATE ${LocalSave.note} "
+        "UPDATE ${LocalSave.noteTable} "
         " SET ${LocalSave.noteID} = ?,"
         " ${LocalSave.noteTitle} = ?,"
         " ${LocalSave.noteBody} = ?,"
-        " ${LocalSave.createdNoteAt} = ?"
+        " ${LocalSave.noteTimeCreated} = ?,"
+        " ${LocalSave.noteFileID} = ?"
         " WHERE ${LocalSave.noteID} = ?",
         [
           noteModel.noteID,
           noteModel.noteTitle,
           noteModel.noteBody,
-          noteModel.createdNoteAt,
+          noteModel.noteTimeCreated,
+          noteModel.noteFileID,
           noteID
         ]);
   }
 
   /// READER FILES DATABASE FUNCTIONS
-  Future addFileToRecent(FileModel fileModel) async {
+
+  Future addFileToFiles(FileModel fileModel) async {
     Database db = await database;
 
-    return await db.rawInsert(
-        "INSERT INTO ${LocalSave.recentReader} (${LocalSave.fileName},${LocalSave.filePath},${LocalSave.isFavFile},${LocalSave.fileType},${LocalSave.timeOpened})"
-        "VALUES (?, ?, ? , ?, ?)",
+    return db.rawInsert(
+        "INSERT INTO ${LocalSave.filesTable} (${LocalSave.fileID}, ${LocalSave.fileName}, ${LocalSave.filePath}, ${LocalSave.fileType}, ${LocalSave.fileTimeOpened})"
+        "VALUES (?, ?, ? , ?,  ?)",
         [
+          fileModel.fileID,
           fileModel.fileName,
           fileModel.filePath,
-          fileModel.isFavFile,
           fileModel.fileType,
-          fileModel.timeOpened
+          fileModel.fileTimeOpened
         ]);
 
-    // await db.insert(LocalSave.note, noteModel.toMap());
+    // await db.insert(LocalSave.noteTable, noteModel.toMap());
   }
 
-  Future addFileToFav(FileModel fileModel) async {
+  Future addFileToFavTable(String fileID) async {
     Database db = await database;
 
     await db.rawInsert(
-        "INSERT INTO ${LocalSave.favouritesReader} ( ${LocalSave.fileName},${LocalSave.filePath},${LocalSave.fileType},${LocalSave.isFavFile},${LocalSave.timeOpened})"
-        "VALUES (?, ?, ?, ?, ?)",
-        [
-          fileModel.fileName,
-          fileModel.filePath,
-          fileModel.fileType,
-          fileModel.isFavFile,
-          fileModel.timeOpened
-        ]);
+        "INSERT INTO ${LocalSave.fileFavouriteTable} ( ${LocalSave.fileID})"
+        "VALUES (?)",
+        [fileID]);
   }
 
-  Future<List<FileModel>> getAllRecentFiles() async {
+  Future addFileToRecentTable(String fileID) async {
     Database db = await database;
 
-    var recentFileRecs = await db.query("${LocalSave.recentReader}");
-
-    List<FileModel> list = recentFileRecs.isNotEmpty
-        ? recentFileRecs.map((m) => FileModel.fromMap(m)).toList()
-        : [];
-
-    return list;
+    await db.rawInsert(
+        "INSERT INTO ${LocalSave.fileRecentTable} ( ${LocalSave.fileID})"
+        "VALUES (?)",
+        [fileID]);
   }
 
   Future<List<FileModel>> getAllFavFiles() async {
     Database db = await database;
+    String query =
+        "SELECT ${LocalSave.filesTable}.${LocalSave.file}, ${LocalSave.filesTable}.${LocalSave.fileID},${LocalSave.filesTable}.${LocalSave.fileName}, ${LocalSave.filesTable}.${LocalSave.filePath},${LocalSave.filesTable}.${LocalSave.fileType},${LocalSave.filesTable}.${LocalSave.fileTimeOpened} "
+        "FROM ${LocalSave.filesTable}, ${LocalSave.fileFavouriteTable} "
+        "WHERE ${LocalSave.filesTable}.${LocalSave.fileID} = ${LocalSave.fileFavouriteTable}.${LocalSave.fileID} "
+        " ORDER BY ${LocalSave.fileTimeOpened}";
 
-    var favFileRecs = await db.query("${LocalSave.favouritesReader}");
+    var favFileRecs = await db.rawQuery(query);
+
+    print("Favourite Files Records: " + favFileRecs.toString());
 
     List<FileModel> list = favFileRecs.isNotEmpty
-        ? favFileRecs.map((m) => FileModel.fromMap(m)).toList()
+        ? favFileRecs.map((e) => FileModel.fromMap(e)).toList()
         : [];
 
     return list;
   }
 
-  Future<int> removeRecentFileAt(int? fileID) async {
+  Future<List<FileModel>> getAllRecentFiles() async {
     Database db = await database;
-    return await db.delete("${LocalSave.recentReader}",
+    String query =
+        "SELECT DISTINCT ${LocalSave.filesTable}.${LocalSave.file}, ${LocalSave.filesTable}.${LocalSave.fileID},${LocalSave.filesTable}.${LocalSave.fileName}, ${LocalSave.filesTable}.${LocalSave.filePath},${LocalSave.filesTable}.${LocalSave.fileType},${LocalSave.filesTable}.${LocalSave.fileTimeOpened} "
+        "FROM ${LocalSave.filesTable}, ${LocalSave.fileRecentTable} "
+        "WHERE ${LocalSave.filesTable}.${LocalSave.fileID} = ${LocalSave.fileRecentTable}.${LocalSave.fileID} "
+        " ORDER BY ${LocalSave.fileTimeOpened}";
+
+    var recentFileRecs = await db.rawQuery(query);
+    print("Recent Files Records: " + recentFileRecs.toString());
+
+    List<FileModel> list = recentFileRecs.isNotEmpty
+        ? recentFileRecs.map((e) => FileModel.fromMap(e)).toList()
+        : [];
+
+    return list;
+  }
+
+  Future<List<FileModel>> getAllFiles() async {
+    Database db = await database;
+
+    var filesRecs = await db.query("${LocalSave.filesTable}");
+
+    print("Files Records: " + filesRecs.toString());
+
+    List<FileModel> list = filesRecs.isNotEmpty
+        ? filesRecs.map((m) => FileModel.fromMap(m)).toList()
+        : [];
+
+    return list;
+  }
+
+  Future removeRecentFileAt(String fileID) async {
+    Database db = await database;
+    return await db.delete("${LocalSave.fileRecentTable}",
         where: "${LocalSave.fileID} = ?", whereArgs: [fileID]);
   }
 
   Future<int> removeAllRecentFiles() async {
     Database db = await database;
 
-    return await db.delete("${LocalSave.recentReader}");
+    return await db.delete("${LocalSave.fileRecentTable}");
   }
 
-  Future<int> removeFavFileAt(String? fileName) async {
+  Future<int> removeFavFileAt(String fileID) async {
     Database db = await database;
-    return await db.delete("${LocalSave.favouritesReader}",
-        where: "${LocalSave.fileName} = ?", whereArgs: [fileName]);
+    return await db.delete("${LocalSave.fileFavouriteTable}",
+        where: "${LocalSave.fileID} = ?", whereArgs: [fileID]);
   }
 
   Future<int> removeAllFavFiles() async {
     Database db = await database;
 
-    return await db.delete("${LocalSave.favouritesReader}");
+    return await db.delete("${LocalSave.fileFavouriteTable}");
   }
 
   ///DICTIONARY DATABASE FUNCTIONS
-  Future addFavWORD(WordModel wordModel) async {
+  /// GET RECORDS
+
+  Future<List<WordModel>> getAllWORDs() async {
     Database db = await database;
 
-    return await db.rawInsert(
-        "INSERT INTO ${LocalSave.favouritesDiction} (wordName, wordDefinition, isFavWord)"
-        "VALUES (?, ?, ?)",
-        [wordModel.wordName, wordModel.wordDefinition, wordModel.isFav]);
-  }
+    var wordRecs = await db.query("${LocalSave.wordsTable}");
 
-  Future<List<WordModel>> getAllFavWORDs() async {
-    Database db = await database;
-
-    var favRecs = await db.query("${LocalSave.favouritesDiction}");
-
-    List<WordModel> list = favRecs.isNotEmpty
-        ? favRecs.map((m) => WordModel.fromMap(m)).toList()
+    List<WordModel> list = wordRecs.isNotEmpty
+        ? wordRecs.map((m) => WordModel.fromMap(m)).toList()
         : [];
 
     return list;
   }
 
-  Future<int> removeFavWORDAt(String word) async {
+  Future<List<WordModel>> getFavWORDs() async {
     Database db = await database;
-    return await db.delete("${LocalSave.favouritesDiction}",
-        where: "${LocalSave.wordName} = ?", whereArgs: [word]);
+
+    String query =
+        "SELECT DISTINCT ${LocalSave.wordsTable}.${LocalSave.wordID}, ${LocalSave.wordsTable}.${LocalSave.wordName},${LocalSave.wordsTable}.${LocalSave.wordDefinition}, ${LocalSave.wordsTable}.${LocalSave.wordDay},${LocalSave.wordsTable}.${LocalSave.wordDate} "
+        "FROM ${LocalSave.wordsTable}, ${LocalSave.wordFavouriteTable} "
+        "WHERE ${LocalSave.wordsTable}.${LocalSave.wordID} = ${LocalSave.wordFavouriteTable}.${LocalSave.wordID}";
+
+    var favWordsRecs = await db.rawQuery(query);
+
+    List<WordModel> list = favWordsRecs.isNotEmpty
+        ? favWordsRecs.map((m) => WordModel.fromMap(m)).toList()
+        : [];
+
+    return list;
+  }
+
+  Future<List<WordModel>> getRecentWORDs() async {
+    Database db = await database;
+
+    String query =
+        "SELECT DISTINCT ${LocalSave.wordsTable}.${LocalSave.wordID}, ${LocalSave.wordsTable}.${LocalSave.wordName},${LocalSave.wordsTable}.${LocalSave.wordDefinition}, ${LocalSave.wordsTable}.${LocalSave.wordDay},${LocalSave.wordsTable}.${LocalSave.wordDate} "
+        "FROM ${LocalSave.wordsTable}, ${LocalSave.wordRecentTable} "
+        "WHERE ${LocalSave.wordsTable}.${LocalSave.wordID} = ${LocalSave.wordRecentTable}.${LocalSave.wordID}";
+
+    var recentWordsRecs = await db.rawQuery(query);
+
+    List<WordModel> list = recentWordsRecs.isNotEmpty
+        ? recentWordsRecs.map((m) => WordModel.fromMap(m)).toList()
+        : [];
+
+    return list;
+  }
+
+  Future<List<WordModel>> getWOTD() async {
+    Database db = await database;
+
+    String query =
+        "SELECT DISTINCT ${LocalSave.wordsTable}.${LocalSave.wordID}, ${LocalSave.wordsTable}.${LocalSave.wordName},${LocalSave.wordsTable}.${LocalSave.wordDefinition}, ${LocalSave.wordsTable}.${LocalSave.wordDay},${LocalSave.wordsTable}.${LocalSave.wordDate} "
+        "FROM ${LocalSave.wordsTable}, ${LocalSave.wordsOfTheDayTable} "
+        "WHERE ${LocalSave.wordsTable}.${LocalSave.wordID} = ${LocalSave.wordsOfTheDayTable}.${LocalSave.wordID}";
+
+    var wftdRecs = await db.rawQuery(query);
+
+    List<WordModel> list = wftdRecs.isNotEmpty
+        ? wftdRecs.map((m) => WordModel.fromMap(m)).toList()
+        : [];
+
+    return list;
+  }
+
+  /// INSERT RECORDS
+  Future addWord(WordModel wordModel) async {
+    Database db = await database;
+
+    return await db.rawInsert(
+        "INSERT INTO ${LocalSave.wordsTable} (wordName, wordDefinition, ${LocalSave.wordID},${LocalSave.wordDate},${LocalSave.wordDay})"
+        "VALUES (?, ?, ?, ?, ?)",
+        [
+          wordModel.wordName,
+          wordModel.wordDefinition,
+          wordModel.wordID,
+          wordModel.wordDate,
+          wordModel.wordDay
+        ]);
+  }
+
+  Future addFavWORD(String wordID) async {
+    Database db = await database;
+
+    return await db.rawInsert(
+        "INSERT INTO ${LocalSave.wordFavouriteTable} (${LocalSave.wordID})"
+        "VALUES (?)",
+        [wordID]);
+  }
+
+  Future addRecentWORD(String wordID) async {
+    Database db = await database;
+
+    return await db.rawInsert(
+        "INSERT INTO ${LocalSave.wordRecentTable} (${LocalSave.wordID})"
+        "VALUES (?)",
+        [wordID]);
+  }
+
+  Future addWordOfTheDay(String wordID) async {
+    Database db = await database;
+
+    return await db.rawInsert(
+        "INSERT INTO ${LocalSave.wordsOfTheDayTable} (${LocalSave.wordID})"
+        "VALUES (?)",
+        [
+          wordID,
+        ]);
+  }
+
+  /// DELETE RECORDS
+
+  Future<int> removeFavWORDAt(String wordID) async {
+    Database db = await database;
+    return await db.delete("${LocalSave.wordFavouriteTable}",
+        where: "${LocalSave.wordID} = ?", whereArgs: [wordID]);
   }
 
   Future<int> removeAllFavWORDs() async {
     Database db = await database;
 
-    return await db.delete("${LocalSave.favouritesDiction}");
-  }
-
-  //History
-  //-----------------------------------------------------------------------------
-  Future<List<WordModel>> getAllRecentWORDs() async {
-    Database db = await database;
-
-    var recentRecs = await db.query("${LocalSave.recentDiction}");
-
-    List<WordModel> list = recentRecs.isNotEmpty
-        ? recentRecs.map((m) => WordModel.fromMap(m)).toList()
-        : [];
-
-    return list;
-  }
-
-  Future addRecentWORDToDB(WordModel wordModel) async {
-    Database db = await database;
-
-    return await db.rawInsert(
-        "INSERT INTO ${LocalSave.recentDiction} (wordName, wordDefinition, isFavWord)"
-        "VALUES (?, ?, ?)",
-        [wordModel.wordName, wordModel.wordDefinition, wordModel.isFav]);
+    return await db.delete("${LocalSave.wordFavouriteTable}");
   }
 
   Future<int> removeRecentWORDAt(String word) async {
     Database db = await database;
-    return await db.delete("${LocalSave.recentDiction}",
-        where: "${LocalSave.wordName} = ?", whereArgs: [word]);
+    return await db.delete("${LocalSave.wordRecentTable}",
+        where: "${LocalSave.wordID} = ?", whereArgs: [word]);
   }
 
   Future<int> removeAllRecentWORDs() async {
     Database db = await database;
 
-    return await db.delete("${LocalSave.recentDiction}");
+    return await db.delete("${LocalSave.wordRecentTable}");
   }
 
-// ------------------------------------------------------------------------------------------------------
+  Future<int> removeWFTDAt(String word) async {
+    Database db = await database;
+    return await db.delete("${LocalSave.wordsOfTheDayTable}",
+        where: "${LocalSave.wordID} = ?", whereArgs: [word]);
+  }
 
-  Future addWordOfTheDay(WordModel wordModel) async {
+  Future<int> removeAllWFTD() async {
     Database db = await database;
 
-    return await db.rawInsert(
-        "INSERT INTO ${LocalSave.word_of_the_day} (wordName, wordDefinition, isFavWord, day, date)"
-        "VALUES (?, ?, ?, ?, ?)",
-        [wordModel.wordName, wordModel.wordDefinition, wordModel.isFav, wordModel.day, wordModel.date]);
+    return await db.delete("${LocalSave.wordsOfTheDayTable}");
   }
-
-  Future<List<WordModel>> getAllWORDSOfTheDay() async {
-    Database db = await database;
-
-    var wordsOfTheDay = await db.query("${LocalSave.word_of_the_day}");
-
-    List<WordModel> list = wordsOfTheDay.isNotEmpty
-        ? wordsOfTheDay.map((m) => WordModel.fromMap(m)).toList()
-        : [];
-
-    return list;
-  }
-
-
 }

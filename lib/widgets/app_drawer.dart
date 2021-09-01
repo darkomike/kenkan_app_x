@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:get/get.dart';
 import 'package:kenkan_app_x/api/pdf_api.dart';
 
@@ -48,7 +49,7 @@ class AppDrawer extends StatelessWidget {
             Obx(() => Container(
                   // margin: EdgeInsets.all(0.1),
                   decoration: BoxDecoration(
-                      color: appStateController.isDarkModeOn.value!
+                      color: appStateController.isDarkModeOn.value
                           ? darkColor
                           : Colors.white),
 
@@ -56,9 +57,9 @@ class AppDrawer extends StatelessWidget {
                     children: [
                       Positioned(left: 0, right: 0, child: svgNotesIcon),
                       Positioned(
-                        left: 120,
+                        left: 110,
                         child: Text(
-                          "Kenkan",
+                          "Kenkan X",
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         bottom: 5,
@@ -119,13 +120,15 @@ class AppDrawer extends StatelessWidget {
                               _fileOpenedAt = "$_formattedDate $_formattedTime";
 
                               String fileName = basename(file.path);
-
+  Random random = new Random();
+                               String fileID = random.nextInt(100000).toString();
                               FileModel fileModel = FileModel(
                                   filePath: file.path,
                                   fileName: fileName,
-                                  isFavFile: 0,
+                                  fileID: fileID,
                                   fileType: 'PDF',
-                                  timeOpened: _fileOpenedAt.toString());
+                                  file: file.readAsBytesSync(),
+                                  fileTimeOpened: _fileOpenedAt.toString());
 
                               Navigator.pop(context);
                               openPDF(context, file);
@@ -134,8 +137,10 @@ class AppDrawer extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
-                                          SyncPDFViewer(file: file)));
-                              readerController.addToRecentFile(fileModel);
+                                          SyncPDFViewer(file: file, fileModel: fileModel,)));
+                                          
+                              readerController.addFile(fileModel);
+                              readerController.addToRecentFile(fileModel.fileID, fileModel.fileName);
                             },
                             child: Text(
                               "PDF Files",

@@ -55,7 +55,7 @@ class ReaderFunctions {
     map.forEach((key, value) {
       if (word.toUpperCase().compareTo(key) == 0) {
         WordModel wordModel =
-            new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+        new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
         var wordObject = wordModel.toMap();
 
         wordList.add(wordObject);
@@ -63,7 +63,7 @@ class ReaderFunctions {
       if (num < LocalSave.numOfSearchItems) {
         if (word.toUpperCase().compareTo(key) == -1) {
           WordModel wordModel =
-              new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+          new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
           var wordObject = wordModel.toMap();
 
           wordList.add(wordObject);
@@ -74,17 +74,17 @@ class ReaderFunctions {
 
     return wordList;
   }
-
 // ----------------------------------------------------------------------------------------------------------
 
-  static WordModel searchOne(String word, Map<String, dynamic> map) {
+  static WordModel searchOne(String word, Map<String, dynamic> map, [String? date, String? day]) {
     late WordModel wordModelToReturn =
-        new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
+
 
     map.forEach((key, value) {
       if (word.toUpperCase().compareTo(key) == 0) {
         WordModel wordModel =
-            new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+        new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
         wordModelToReturn = wordModel;
       }
     });
@@ -96,9 +96,9 @@ class ReaderFunctions {
 
   static WordModel randomSearch(String word) {
     late WordModel wordModelToReturn =
-        new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
 
-    wordModelToReturn = wordOfTheDayModel(word);
+    wordModelToReturn = ReaderFunctions.wordOfTheDayModel(word);
 
     return wordModelToReturn;
   }
@@ -408,8 +408,8 @@ class ReaderFunctions {
 
 
    static WordModel? search(String? value) {
-    WordModel wordSearched = new WordModel(
-        wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    WordModel wordSearched =
+    new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
 
     switch (value!.toUpperCase()[0].trim()) {
       case "A":
@@ -518,8 +518,9 @@ class ReaderFunctions {
         break;
 
       default:
-        wordSearched = new WordModel(
-            wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+        wordSearched =
+        new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
+
         break;
     }
 

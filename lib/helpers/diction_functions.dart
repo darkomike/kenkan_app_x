@@ -29,7 +29,6 @@ import 'package:kenkan_app_x/db/diction_db/y.dart';
 import 'package:kenkan_app_x/db/diction_db/z.dart';
 import 'package:kenkan_app_x/helpers/reader_functions.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DictionFunctions {
   static String display(String word, Map<String, dynamic> map) {
@@ -53,7 +52,7 @@ class DictionFunctions {
     map.forEach((key, value) {
       if (word.toUpperCase().compareTo(key) == 0) {
         WordModel wordModel =
-            new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+            new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
         var wordObject = wordModel.toMap();
 
         wordList.add(wordObject);
@@ -61,7 +60,7 @@ class DictionFunctions {
       if (num < LocalSave.numOfSearchItems) {
         if (word.toUpperCase().compareTo(key) == -1) {
           WordModel wordModel =
-              new WordModel(wordName: key, wordDefinition: value, isFav: 0);
+          new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
           var wordObject = wordModel.toMap();
 
           wordList.add(wordObject);
@@ -76,13 +75,14 @@ class DictionFunctions {
 // ----------------------------------------------------------------------------------------------------------
 
   static WordModel searchOne(String word, Map<String, dynamic> map, [String? date, String? day]) {
-    late WordModel wordModelToReturn = new WordModel(
-        wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    late WordModel wordModelToReturn =
+    new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
+
 
     map.forEach((key, value) { 
       if (word.toUpperCase().compareTo(key) == 0) {
         WordModel wordModel =
-            new WordModel(wordName: key, wordDefinition: value, isFav: 0, date: date, day: day);
+        new WordModel(wordName: key, wordDefinition: value, wordID: key.toLowerCase() + "_id", wordDate: "", wordDay: "");
         wordModelToReturn = wordModel;
       }
     });
@@ -93,8 +93,8 @@ class DictionFunctions {
 // ------------------------------------------------------------------------------------------------------------
 
   static WordModel randomSearch(String word) {
-    late WordModel wordModelToReturn = new WordModel(
-        wordName: "wordName", wordDefinition: "wordDefinition", isFav: 0);
+    late WordModel wordModelToReturn =
+    new WordModel(wordName: "wordName", wordDefinition: "wordDefinition", wordID: "wordname_id", wordDate: "", wordDay: "");
 
     wordModelToReturn = ReaderFunctions.wordOfTheDayModel(word);
 

@@ -137,9 +137,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       //   _isLightTheme = appStateController.isDarkModeOn.value;
                       //
                       // });
+                      
                     },
                     value: _isLightTheme =
-                        appStateController.isDarkModeOn.value!,
+                        appStateController.isDarkModeOn.value,
                   )),
               // Divider(
               //   height: 5,

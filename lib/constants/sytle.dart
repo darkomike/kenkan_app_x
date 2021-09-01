@@ -4,7 +4,7 @@ import 'package:kenkan_app_x/constants/controllers.dart';
 
 import '../main.dart';
 
-Color primaryColor = Colors.green;
+Color primaryColor = midNightBlueColor!;
 Color? accentColor = Colors.green[300];
 Color? buttonColor = Colors.limeAccent;
 

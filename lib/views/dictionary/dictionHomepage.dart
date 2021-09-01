@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/names.dart';
 import 'package:kenkan_app_x/constants/sytle.dart';
-import 'package:kenkan_app_x/helpers/app_functions.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
 import 'package:kenkan_app_x/main.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
@@ -14,7 +13,6 @@ import 'package:kenkan_app_x/views/dictionary/dictionHistory.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionSearch.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionWordDetails.dart';
 import 'package:kenkan_app_x/widgets/app_drawer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DictionHomePage extends StatefulWidget {
   DictionHomePage({Key? key}) : super(key: key);
@@ -72,7 +70,6 @@ class _DictionHomePageState extends State<DictionHomePage>
     _animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
         parent: _animationController!, curve: Curves.easeInOutQuint));
     _animationController!.forward();
-
 
     super.initState();
   }
@@ -141,14 +138,9 @@ class _DictionHomePageState extends State<DictionHomePage>
                               // LocalSave.prefs!.setString(
                               //     "${Constants.wordForTheDay}",
                               //     randomWordModel!.wordName);
-
-                              if (await dictionaryController
-                                      .isFavWord(randWordModel) ==
-                                  1) {
-                                randomWordModel!.isFav = 1;
-                              } else {
-                                randomWordModel!.isFav = 0;
-                              }
+                              dictionaryController.addWORD(randWordModel); 
+                              dictionaryController.setRecentWORDs();
+                              dictionaryController.setFavWORDs();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -156,7 +148,7 @@ class _DictionHomePageState extends State<DictionHomePage>
                                           wordModel: randomWordModel!)));
 
                               dictionaryController
-                                  .addWordToHistory(randomWordModel!);
+                                  .addWordToHistory(randomWordModel!.wordID!);
                             },
                           ),
                         );
@@ -216,22 +208,15 @@ class _DictionHomePageState extends State<DictionHomePage>
                         return Transform(
                           transform: Matrix4.translationValues(
                               -_animation!.value * height, 0, 0),
-                          child:  GestureDetector(
+                          child: GestureDetector(
                             onTap: () async {
-                              if (await dictionaryController
-                                      .isFavWord(dictionaryController.wordForTheDay.value) ==
-                                  1) {
-                                dictionaryController.wordForTheDay.value.isFav = 1;
-                              } else {
-                                dictionaryController.wordForTheDay.value.isFav = 0;
-                              }
-                              dictionaryController.addWordToHistory(dictionaryController.wordForTheDay.value);
                               print('added to history');
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => DictionWordDetails(
-                                          wordModel: dictionaryController.wordForTheDay.value)));
+                                          wordModel: dictionaryController
+                                              .wordForTheDay.value)));
                             },
                             child: Container(
                               height: height / 2,
@@ -260,12 +245,13 @@ class _DictionHomePageState extends State<DictionHomePage>
                                       Divider(
                                         height: 5,
                                       ),
-                                     Obx(() => Text(
-                                        "${dictionaryController.wordForTheDay.value.wordName}",
-                                        style:
-                                            Theme.of(context).textTheme.caption,
-                                        overflow: TextOverflow.ellipsis,
-                                      )),
+                                      Obx(() => Text(
+                                            "${dictionaryController.wordForTheDay.value.wordName}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .caption,
+                                            overflow: TextOverflow.ellipsis,
+                                          )),
                                       SizedBox(
                                         height: 5,
                                       ),
@@ -286,20 +272,20 @@ class _DictionHomePageState extends State<DictionHomePage>
                                         child: ListView(
                                           shrinkWrap: true,
                                           children: [
-                                          Obx(() => Text(
-                                              "${dictionaryController.wordForTheDay.value.wordDefinition}",
-                                              // overflow: TextOverflow.ellipsis,
+                                            Obx(() => Text(
+                                                  "${dictionaryController.wordForTheDay.value.wordDefinition}",
+                                                  // overflow: TextOverflow.ellipsis,
 
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline5,
-                                            )),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5,
+                                                )),
                                           ],
                                         ),
                                       ),
                                       Spacer(),
                                       Text(
-                                        "${dictionaryController.wordForTheDay.value.day}",
+                                        "${dictionaryController.wordForTheDay.value.wordDay}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline3,
@@ -310,7 +296,7 @@ class _DictionHomePageState extends State<DictionHomePage>
                                         indent: 90,
                                       ),
                                       Text(
-                                        "${dictionaryController.wordForTheDay.value.date!}",
+                                        "${dictionaryController.wordForTheDay.value.wordDate}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline3,

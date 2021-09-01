@@ -82,12 +82,13 @@ class _DictionFavouritesState extends State<DictionFavourites> {
                     : ListView.builder(
                         itemCount: dictionaryController.favWORDs.length,
                         itemBuilder: (context, index) {
-                          WordModel wordModel = dictionaryController.getFavWORDs[index];
+                          WordModel wordModel =
+                              dictionaryController.getFavWORDs[index];
                           return Column(
                             children: [
                               ListTile(
                                 title: Text(
-                                  "${DictionFunctions.capitalise(wordModel.wordName)}",
+                                  "${DictionFunctions.capitalise(wordModel.wordName!)}",
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
                                 trailing: IconButton(
@@ -95,20 +96,26 @@ class _DictionFavouritesState extends State<DictionFavourites> {
                                   color: Colors.red,
                                   onPressed: () {
                                     dictionaryController.removeFavWORD(
-                                        wordModel, wordModel.wordName);
+                                         wordModel.wordID!);
+                                    dictionaryController.setFavWORDs();
+
+                                    setState(() {});
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
+                                                                backgroundColor: Theme.of(context).backgroundColor,
+
                                       duration: Duration(
                                           milliseconds: NumberConstants
                                               .snackBarDurationInMilliseconds),
                                       content: Text(
-                                          "Removed ${wordModel.wordName} from Favourites"),
+                                          "Removed ${wordModel.wordName} from Favourites", style: Theme.of(context).textTheme.headline2,),
                                     ));
                                   },
                                 ),
-                                onTap: () async {
-                                  wordModel.isFav = 1;
-                                  await dictionaryController.addWordToHistory(wordModel);
+                                onTap: ()  {
+                                   dictionaryController.addWORD(wordModel);
+                                   dictionaryController
+                                      .addWordToHistory(wordModel.wordID!);
 
                                   Navigator.push(
                                       context,

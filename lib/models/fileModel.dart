@@ -1,22 +1,25 @@
 
+import 'dart:io';
+
 import 'package:kenkan_app_x/constants/names.dart';
 
 class FileModel {
-  int? fileID ;
+  String fileID = "";
   String filePath = '';
   String fileName = '';
   String fileType = '';
-  String timeOpened = '';
-  int isFavFile = 0;
+  String fileTimeOpened = '';
+  var file;
+  
 
 
   FileModel(
-      { this.fileID,
+      {required this.fileID,
         required this.filePath,
         required this.fileName,
         required this.fileType,
-        required this.isFavFile,
-        required this.timeOpened});
+        required this.file,
+        required this.fileTimeOpened});
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -25,8 +28,8 @@ class FileModel {
     data[LocalSave.fileName] = this.fileName;
     data[LocalSave.filePath] = this.filePath;
     data[LocalSave.fileType] = this.fileType;
-    data[LocalSave.isFavFile] = this.isFavFile;
-    data[LocalSave.timeOpened] = this.timeOpened;
+    data[LocalSave.fileTimeOpened] = this.fileTimeOpened;
+    data[LocalSave.file] = this.file; 
 
     return data;
   }
@@ -36,8 +39,8 @@ class FileModel {
     fileName = map[LocalSave.fileName];
     filePath = map[LocalSave.filePath];
     fileType = map[LocalSave.fileType];
-    isFavFile = map[LocalSave.isFavFile];
-    timeOpened = map[LocalSave.timeOpened];
+    fileTimeOpened = map[LocalSave.fileTimeOpened];
+    file = map[LocalSave.file];
   }
 
 }

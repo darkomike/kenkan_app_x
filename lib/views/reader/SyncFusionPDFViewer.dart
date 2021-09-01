@@ -14,11 +14,12 @@ import 'package:kenkan_app_x/constants/other_names.dart';
 import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/helpers/app_functions.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
+import 'package:kenkan_app_x/models/fileModel.dart';
+import 'package:kenkan_app_x/models/noteModel.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
 import 'package:kenkan_app_x/reader_homepage.dart';
-import 'package:kenkan_app_x/views/dictionary/dictionHomepage.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionWordDetails.dart';
-import 'package:kenkan_app_x/views/notes/notesHomepage.dart';
+import 'package:kenkan_app_x/views/notes/noteDetails.dart';
 import 'package:kenkan_app_x/widgets/app_drawer.dart';
 import 'package:path/path.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -27,11 +28,13 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../main.dart';
 
 class SyncPDFViewer extends StatefulWidget {
-  final File file;
+  final File? file;
+  final FileModel fileModel;
 
   const SyncPDFViewer({
     Key? key,
     required this.file,
+    required this.fileModel,
   }) : super(key: key);
 
   @override
@@ -169,6 +172,7 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
   @override
   void initState() {
     _pdfViewerController = PdfViewerController();
+    print("File ID: ${widget.fileModel.fileID}");
     super.initState();
     initTts();
   }
@@ -207,11 +211,13 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                               ClipboardData(text: details.selectedText));
                           _pdfViewerController!.clearSelection();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                  backgroundColor: Theme.of(context).backgroundColor,
+
                             duration: Duration(
                                 milliseconds: NumberConstants
                                     .snackBarDurationInMilliseconds),
                             content: Text(
-                                "\"${details.selectedText}\" is copied to clipboard"),
+                                "\"${details.selectedText}\" is copied to clipboard", style: Theme.of(context).textTheme.headline2,),
                           ));
                         },
                         child: Container(
@@ -239,7 +245,9 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                               DictionFunctions.wordOfTheDayModel(
                                   DictionFunctions.transformStringWithOperators(
                                           details.selectedText!)
-                                      .trim(), '', '');
+                                      .trim(),
+                                  '',
+                                  '');
 
                           print(wordModel.wordName);
 
@@ -294,7 +302,9 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                                     ));
                             _pdfViewerController!.clearSelection();
                           } else {
-                            dictionaryController.addWordToHistory(wordModel);
+                            dictionaryController.addWORD(wordModel);
+                            dictionaryController
+                                .addWordToHistory(wordModel.wordID!);
                             dictionaryController.setRecentWORDs();
                             Navigator.push(
                                 context,
@@ -372,7 +382,7 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final name = basename(widget.file.path);
+    final name = basename(widget.file!.path);
 
     return Obx(() => Scaffold(
           extendBodyBehindAppBar: appStateController.showAppBar.value,
@@ -380,120 +390,145 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
           key: scaffoldKey,
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).backgroundColor,
-          drawer:AppDrawer(),
-          appBar:  AppBar(
-                  backgroundColor: Theme.of(context).backgroundColor,
-                  elevation: 0.0,
-                  title: isBookTitleOn
-                      ? Text(
-                          "${name.replaceAll(".pdf", " ")}",
-                          style: Theme.of(context).textTheme.headline3,
-                        )
-                      : TextField(
-                          controller: _controllerFindInDoc,
-                          autofocus: true,
-                          cursorColor: Theme.of(context).iconTheme.color,
-                          style: Theme.of(context).textTheme.headline3,
-                          decoration: InputDecoration(
-                              hintText: "Find word in document...",
-                              hintStyle: Theme.of(context).textTheme.headline2,
-                              border: InputBorder.none),
-                          onChanged: (value) async {
-                            _pdfTextSearchResult =
-                                await _pdfViewerController!.searchText(
-                              value.trim(),
-                            );
-                          },
-                          onSubmitted: (value) async {
-                            _pdfTextSearchResult = await _pdfViewerController!
-                                .searchText(value.trim());
-                          },
-                          textInputAction: TextInputAction.search,
-                        ),
-                  actions: isBookTitleOn
-                      ? [
-                          PopupMenuButton(
-                              onSelected: (value) {
-                                switch (value) {
-                                  case 1:
-                                    _pdfViewerKey.currentState
-                                        ?.openBookmarkView();
-                                    break;
+          drawer: AppDrawer(),
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).backgroundColor,
+            elevation: 0.0,
+            title: isBookTitleOn
+                ? Text(
+                    "${name.replaceAll(".pdf", " ")}",
+                    style: Theme.of(context).textTheme.headline3,
+                  )
+                : TextField(
+                    controller: _controllerFindInDoc,
+                    autofocus: true,
+                    cursorColor: Theme.of(context).iconTheme.color,
+                    style: Theme.of(context).textTheme.headline3,
+                    decoration: InputDecoration(
+                        hintText: "Find word in document...",
+                        hintStyle: Theme.of(context).textTheme.headline2,
+                        border: InputBorder.none),
+                    onChanged: (value) async {
+                      _pdfTextSearchResult =
+                          await _pdfViewerController!.searchText(
+                        value.trim(),
+                      );
+                    },
+                    onSubmitted: (value) async {
+                      _pdfTextSearchResult =
+                          await _pdfViewerController!.searchText(value.trim());
+                    },
+                    textInputAction: TextInputAction.search,
+                  ),
+            actions: isBookTitleOn
+                ? [
+                    PopupMenuButton(
+                        onSelected: (value) async {
+                          switch (value) {
+                            case 1:
+                              _pdfViewerKey.currentState?.openBookmarkView();
+                              break;
 
-                                  case 2:
-                                    setState(() {
-                                      isBookTitleOn = false;
-                                    });
-                                    break;
-                                }
-                              },
-                              color: Theme.of(context).backgroundColor,
-                              itemBuilder: (context) => <PopupMenuEntry>[
-                                    PopupMenuItem(
-                                        value: 1,
-                                        child: ListTile(
-                                          leading: Icon(Icons.bookmark,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color),
-                                          title: Text(
-                                            "Bookmark",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2,
-                                          ),
-                                        )),
-                                    PopupMenuItem(
-                                        value: 2,
-                                        child: ListTile(
-                                          leading: Icon(Icons.find_in_page,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color),
-                                          title: Text(
-                                            "Find",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2,
-                                          ),
-                                        )),
-                                  ]),
-                        ]
-                      : [
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _pdfTextSearchResult?.previousInstance();
-                                });
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios,
-                                size: 15,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                _pdfTextSearchResult?.nextInstance();
+                            case 2:
+                              setState(() {
+                                isBookTitleOn = false;
+                              });
+                              break;
+                            case 3:
+                              NoteModel noteModel = await notesController
+                                  .getNoteWithNoteID(widget.fileModel.fileID);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => NoteDetails(
+                                            isAdd: noteModel.noteTitle ==
+                                                        "newNote" ||
+                                                    noteModel.noteBody == 
+                                                        "newBody"
+                                                ? true
+                                                : false,
+                                            noteModel: noteModel,
+                                            noteFileID: 
+                                                widget.fileModel.fileID,
+                                          )));
+                              break;
+                          }
+                        },
+                        color: Theme.of(context).backgroundColor,
+                        itemBuilder: (context) => <PopupMenuEntry>[
+                              PopupMenuItem(
+                                  value: 1,
+                                  child: ListTile(
+                                    leading: Icon(Icons.bookmark,
+                                        color:
+                                            Theme.of(context).iconTheme.color),
+                                    title: Text(
+                                      "Bookmark",
+                                      style:
+                                          Theme.of(context).textTheme.headline2,
+                                    ),
+                                  )),
+                              PopupMenuItem(
+                                  value: 2,
+                                  child: ListTile(
+                                    leading: Icon(Icons.find_in_page,
+                                        color:
+                                            Theme.of(context).iconTheme.color),
+                                    title: Text(
+                                      "Find",
+                                      style:
+                                          Theme.of(context).textTheme.headline2,
+                                    ),
+                                  )),
+                              PopupMenuItem(
+                                  value: 3,
+                                  child: ListTile(
+                                    leading: Icon(Icons.note,
+                                        color:
+                                            Theme.of(context).iconTheme.color),
+                                    title: Text(
+                                      "Note",
+                                      style:
+                                          Theme.of(context).textTheme.headline2,
+                                    ),
+                                  )),
+                            ]),
+                  ]
+                : [
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _pdfTextSearchResult?.previousInstance();
+                          });
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          size: 15,
+                        )),
+                    IconButton(
+                        onPressed: () {
+                          _pdfTextSearchResult?.nextInstance();
 
-                                setState(() {});
-                              },
-                              icon: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isBookTitleOn = true;
-                                  _controllerFindInDoc.clear();
-                                  _pdfTextSearchResult?.clear();
-                                });
-                              },
-                              icon: Icon(
-                                Icons.clear,
-                                size: 15,
-                              ))
-                        ],
-                ),
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isBookTitleOn = true;
+                            _controllerFindInDoc.clear();
+                            _pdfTextSearchResult?.clear();
+                          });
+                        },
+                        icon: Icon(
+                          Icons.clear,
+                          size: 15,
+                        ))
+                  ],
+          ),
           body: Stack(
             children: [
               Container(
@@ -506,7 +541,7 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
 
                       ),
                   child: SfPdfViewer.file(
-                    widget.file,
+                    widget.file!,
                     key: _pdfViewerKey,
                     canShowScrollHead: true,
                     onTextSelectionChanged:
@@ -522,7 +557,6 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                     },
                     controller: _pdfViewerController,
                     enableDoubleTapZooming: true,
-                    
                     enableTextSelection: true,
                     canShowPaginationDialog: true,
                     searchTextHighlightColor: primaryColor,
@@ -543,10 +577,6 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                                 actions: [
                                   TextButton(
                                       onPressed: () {
-                                        readerController.removeRecentFileAt(
-                                            readerController
-                                                .recentFiles.length);
-                                        readerController.setRecentFiles();
                                         Navigator.pop(context);
                                       },
                                       child: Text("OK"))
@@ -556,9 +586,7 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                     canShowScrollStatus: true,
                     enableDocumentLinkAnnotation: true,
                     pageSpacing: 3,
-                    onDocumentLoaded: (details){
-                        
-                    },
+                    onDocumentLoaded: (details) {},
                   ),
                 ),
               ),
@@ -572,7 +600,6 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                           color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: IconButton(
-                        
                         icon: Icon(
                           Icons.stop,
                           color: Colors.red,
@@ -580,7 +607,6 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                         onPressed: () {
                           _stop();
                         },
-                        
                       ),
                     ),
                   )),

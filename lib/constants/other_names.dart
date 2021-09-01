@@ -28,12 +28,10 @@ class BodyNames {
 }
 
 class DbConstants {
-  static final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
   static final textType = 'TEXT NOT NULL';
-  static final booleanType = 'BOOLEAN NOT NULL';
-  static final integerType = 'INTEGER NOT NULL';
+  static final blobType = 'BLOB';
 }
 
 class NumberConstants {
-  static final int snackBarDurationInMilliseconds = 3000;
+  static final int snackBarDurationInMilliseconds = 1000;
 }

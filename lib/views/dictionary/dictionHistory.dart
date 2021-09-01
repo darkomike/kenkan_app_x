@@ -94,17 +94,14 @@ class _DictionHistoryState extends State<DictionHistory> {
                           return Dismissible(
                             child: ListTile(
                               title: Text(
-                                "${DictionFunctions.capitalise(wordModel.wordName)}",
+                                "${DictionFunctions.capitalise(wordModel.wordName!)}",
                                 style: Theme.of(context).textTheme.headline3,
                               ),
                               onTap: () async {
-                                if (await dictionaryController
-                                        .isFavWord(wordModel) ==
-                                    1) {
-                                  wordModel.isFav = 1;
-                                } else {
-                                  wordModel.isFav = 0;
-                                }
+                                if ( dictionaryController
+                                        .isFavWord(wordModel.wordID!) ==
+                                    true) {
+                                } else {}
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -112,14 +109,14 @@ class _DictionHistoryState extends State<DictionHistory> {
                                             wordModel: wordModel)));
                               },
                             ),
-                            key: Key(wordModel.wordName),
+                            key: Key(wordModel.wordName!),
                             onDismissed: (direction) async {
                               if (direction == DismissDirection.endToStart) {
                                 await dictionaryController.removeHistory(
-                                    wordModel, wordModel.wordName);
+                                    wordModel, wordModel.wordName!);
                               } else {
                                 await dictionaryController
-                                    .addFavWORD(wordModel);
+                                    .addFavWORD(wordModel.wordID!);
                               }
                             },
                             secondaryBackground: slideLeftBackground(),
@@ -135,7 +132,7 @@ class _DictionHistoryState extends State<DictionHistory> {
                                         backgroundColor:
                                             Theme.of(context).backgroundColor,
                                         content: Text(
-                                            "Are you sure you want to delete ${DictionFunctions.capitalise(wordModel.wordName)}?",
+                                            "Are you sure you want to delete ${DictionFunctions.capitalise(wordModel.wordName!)}?",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline3),
@@ -159,14 +156,18 @@ class _DictionHistoryState extends State<DictionHistory> {
                                             onPressed: () {
                                               dictionaryController
                                                   .removeHistory(wordModel,
-                                                      wordModel.wordName);
+                                                      wordModel.wordID!);
+                                              dictionaryController
+                                                  .setRecentWORDs();
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
+                                                                          backgroundColor: Theme.of(context).backgroundColor,
+
                                                 duration: Duration(
                                                     milliseconds: NumberConstants
                                                         .snackBarDurationInMilliseconds),
                                                 content: Text(
-                                                    "\"${wordModel.wordName.capitalize}\" is deleted from recent"),
+                                                    "\"${wordModel.wordName!.capitalize}\" is deleted from recent", style: Theme.of(context).textTheme.headline2,),
                                               ));
                                               Navigator.pop(context);
                                             },
@@ -183,7 +184,7 @@ class _DictionHistoryState extends State<DictionHistory> {
                                         backgroundColor:
                                             Theme.of(context).backgroundColor,
                                         content: Text(
-                                          "Are you sure you want to save ${DictionFunctions.capitalise(wordModel.wordName)}?",
+                                          "Are you sure you want to save ${DictionFunctions.capitalise(wordModel.wordName!)}?",
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline3,
@@ -208,14 +209,15 @@ class _DictionHistoryState extends State<DictionHistory> {
                                             onPressed: () async {
                                               // TODO: Save the item to DB etc..
                                               await dictionaryController
-                                                  .addFavWORD(wordModel);
+                                                  .addFavWORD(
+                                                      wordModel.wordID!);
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
                                                 duration: Duration(
                                                     milliseconds: NumberConstants
                                                         .snackBarDurationInMilliseconds),
                                                 content: Text(
-                                                    "\"${wordModel.wordName.capitalize}\" is saved to favourites"),
+                                                    "\"${wordModel.wordName!.capitalize}\" is saved to favourites"),
                                               ));
                                               Navigator.of(context).pop();
                                             },

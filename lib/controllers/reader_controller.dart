@@ -10,11 +10,13 @@ class ReaderController extends GetxController{
 
    var  recentFiles = [].obs;
   var  favFiles = [].obs;
+  var  files = [].obs;
 
 //getters   
 
   get getFavFiles => favFiles.reversed.toList();
   get getRecentFiles => recentFiles.reversed.toList();
+  get getFiles => files.reversed.toList();
 
 //setters
  setRecentFiles() async {
@@ -24,55 +26,76 @@ class ReaderController extends GetxController{
   setFavFiles() async {
       favFiles.value = await AppDatabase.db.getAllFavFiles();
   }
+  setFiles() async {
+      files.value = await AppDatabase.db.getAllFiles();
+  }
 
-  Future<int> isFavFile(FileModel fileModel) async {
+  bool isFavFile(String fileID)  {
     setFavFiles();
-    int check = 0;
+    bool check = false;
 
     favFiles.forEach((element) {
-      if (element.fileName == fileModel.fileName) {
-        check = 1;
+      if (element.fileID == fileID) {
+        check = true;
       }
     });
 
     return check;
   }
 
-  Future addToRecentFile(FileModel fileModel) async {
+  Future addToRecentFile(String  fileID, String fileName) async {
     bool check = false;
 
     recentFiles.forEach((element) {
-      if (element.fileName == fileModel.fileName) {
+      if (element.fileName == fileName) {
         check = true;
       }
     });
 
     if (check == false) {
-      await AppDatabase.db.addFileToRecent(fileModel);
+      await AppDatabase.db.addFileToRecentTable(fileID);
       setRecentFiles();
       print(recentFiles);
     }
     
   }
 
-  Future addToFavFile(FileModel fileModel) async {
+
+  Future addFile(FileModel fileModel ) async {
     bool check = false;
 
-    favFiles.forEach((element) {
-      if (element.fileName == fileModel.fileName) {
+    recentFiles.forEach((element) {
+      if (element.fileID == fileModel.fileID) {
         check = true;
       }
     });
 
     if (check == false) {
-      await AppDatabase.db.addFileToFav(fileModel);
+      await AppDatabase.db.addFileToFiles(fileModel);
+      setFiles();
+      print(files);
+    }
+
+  }
+
+  Future addToFavFile(String fileID, String fileName) async {
+    bool check = false;
+
+    favFiles.forEach((element) {
+      if (element.fileName == fileName) {
+        check = true;
+      }
+    });
+
+    if (check == false) {
+      await AppDatabase.db.addFileToFavTable(fileID);
       setFavFiles();
       print(favFiles);
     }
   }
 
-  Future removeRecentFileAt(int? fileIDToRemove) async {
-    await AppDatabase.db.removeRecentFileAt(fileIDToRemove);
+  Future removeRecentFileAt(String fileID) async {
+    await AppDatabase.db.removeRecentFileAt(fileID);
     setRecentFiles();
     
   }
@@ -82,8 +105,8 @@ class ReaderController extends GetxController{
     setRecentFiles();
   }
 
-  Future removeFavFileAt(String? fileNameToRemove) async {
-    await AppDatabase.db.removeFavFileAt(fileNameToRemove);
+  Future removeFavFileAt(String? fileID) async {
+    await AppDatabase.db.removeFavFileAt(fileID!);
     setFavFiles();
   }
 

@@ -7,15 +7,11 @@ import 'package:kenkan_app_x/controllers/dictionary_controller.dart';
 import 'package:kenkan_app_x/controllers/notes_controller.dart';
 import 'package:kenkan_app_x/controllers/pdf_view_controller.dart';
 import 'package:kenkan_app_x/controllers/reader_controller.dart';
-import 'package:kenkan_app_x/db/diction_db/database.dart';
 import 'package:kenkan_app_x/helpers/app_theme.dart';
-import 'package:kenkan_app_x/helpers/diction_functions.dart';
-import 'package:kenkan_app_x/reader_homepage.dart';
-import 'package:kenkan_app_x/views/guideScreen.dart';
+
 import 'package:kenkan_app_x/views/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'constants/names.dart';
-import 'models/wordModel.dart';
+
 
 late SharedPreferences prefs;
 
@@ -63,13 +59,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
 
-  Get.put(AppStateController());
-  Get.put(PDFViewerController());
-  Get.put(NotesController());
-  Get.put(ReaderController());
-  Get.put(DictionaryController());
-
-  //Check App Theme for initial App setup
+   //Check App Theme for initial App setup
   prefs.getBool("isDarkModeOn") == null
       ? prefs.setBool("isDarkModeOn", false)
       : prefs.setBool("isDarkModeOn", prefs.getBool("isDarkModeOn")!);
@@ -92,6 +82,14 @@ void main() async {
       ? prefs.setDouble("ReaderSpeechRate", 0.8)
       : prefs.setDouble(
           "ReaderSpeechRate", prefs.getDouble("ReaderSpeechRate")!);
+
+  Get.put(AppStateController());
+  Get.put(PDFViewerController());
+  Get.put(NotesController());
+  Get.put(ReaderController());
+  Get.put(DictionaryController());
+
+ 
 
   
   runApp(MyApp());
@@ -125,7 +123,7 @@ class LightAndDarkTheme extends StatelessWidget {
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         darkTheme: AppTheme.darkTheme,
-        themeMode: appStateController.isDarkModeOn.value!
+        themeMode: appStateController.isDarkModeOn.value
             ? ThemeMode.dark
             : ThemeMode.light,
         home: SplashScreen(),

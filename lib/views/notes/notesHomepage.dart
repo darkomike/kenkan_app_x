@@ -53,6 +53,10 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
       Widget svgNotesIcon = SvgPicture.asset(AssetNames.defaultNoteIconName,
           semanticsLabel: "Loading Icon", height:height/4 ,);
                        String assetNameEditNote = 'assets/images/edit.png';
+                       
+      Widget svgPDFIcon = SvgPicture.asset(AssetNames.defaultNoteIconName,
+          semanticsLabel: "Loading Icon", height:height/4 ,);
+                       String assetNameEditPDFNote = 'assets/images/edit.png';
 
     return  WillPopScope(
 
@@ -60,9 +64,13 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
         child: Obx(()=>  Scaffold(
 
           drawer: AppDrawer(),
+          
+          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          
           backgroundColor: Theme.of(context).backgroundColor,
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          floatingActionButton: FloatingActionButton(
+          floatingActionButtonLocation: readerController.recentFiles.length > 4 ? FloatingActionButtonLocation.centerFloat: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: FloatingActionButton.extended(
+            label: Text("Add Note", style: TextStyle(color: Colors.white),),
             tooltip: "Add Note",
             onPressed: () {
               Navigator.push(
@@ -73,8 +81,10 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
                           )));
             },
             
-            child: Icon(Icons.add),
-            backgroundColor: Colors.green[500],
+            icon: Icon(Icons.add, color: Colors.white),
+            isExtended: true,
+            
+            backgroundColor: primaryColor,
           ),
           appBar: AppBar(
             backgroundColor: Theme.of(context).backgroundColor,
@@ -193,16 +203,17 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
                                     fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                "${noteModel.createdNoteAt}",
+                                "${noteModel.noteTimeCreated}",
                                 style: TextStyle(color: Colors.black),
                               ),
                               onTap: () {
 
                                 print (noteModel.noteID);
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => NoteDetails(
+                                        noteFileID: noteModel.noteFileID,
                                         isAdd: false,
                                         noteModel: noteModel,
                                       ),
