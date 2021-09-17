@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/other_names.dart';
+import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionHomepage.dart';
@@ -102,13 +103,14 @@ class _DictionFavouritesState extends State<DictionFavourites> {
                                     setState(() {});
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
-                                                                backgroundColor: Theme.of(context).backgroundColor,
+                                                                backgroundColor: primaryColor,
 
                                       duration: Duration(
                                           milliseconds: NumberConstants
                                               .snackBarDurationInMilliseconds),
                                       content: Text(
-                                          "Removed ${wordModel.wordName} from Favourites", style: Theme.of(context).textTheme.headline2,),
+                                          "Removed ${wordModel.wordName} from Favourites",                                                                                                                                  style: TextStyle(color: Colors.white),
+                                      ),
                                     ));
                                   },
                                 ),

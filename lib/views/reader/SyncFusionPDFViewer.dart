@@ -211,13 +211,16 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                               ClipboardData(text: details.selectedText));
                           _pdfViewerController!.clearSelection();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                  backgroundColor: Theme.of(context).backgroundColor,
+                            action: SnackBarAction(onPressed: (){
+                              //TODO: 
+                            }, label: "UNDO",),
+                                                  backgroundColor: primaryColor,
 
                             duration: Duration(
                                 milliseconds: NumberConstants
                                     .snackBarDurationInMilliseconds),
                             content: Text(
-                                "\"${details.selectedText}\" is copied to clipboard", style: Theme.of(context).textTheme.headline2,),
+                                "Text copied", style: Theme.of(context).textTheme.headline2,),
                           ));
                         },
                         child: Container(

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/other_names.dart';
+import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/db/diction_db/a.dart';
 import 'package:kenkan_app_x/db/diction_db/b.dart';
 import 'package:kenkan_app_x/db/diction_db/c.dart';
@@ -82,8 +83,8 @@ class _DictionSearchState extends State<DictionSearch>
                       _searchDictionController.text));
             });
           },
-          label: Text("Search"),
-          backgroundColor: Colors.green[800],
+          label: Text("Search", style: TextStyle(color: Colors.white),),
+          backgroundColor: primaryColor,
           icon: svgGoogleIcon,
         ),
         appBar: AppBar(

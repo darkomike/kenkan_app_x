@@ -425,11 +425,12 @@ class _DictionWordDetailsState extends State<DictionWordDetails> {
 
   void showFavAdded(BuildContext context, String? message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: Theme.of(context).backgroundColor,
+                            backgroundColor: primaryColor,
 
       duration: Duration(
           milliseconds: NumberConstants.snackBarDurationInMilliseconds),
-      content: Text(message!, style: Theme.of(context).textTheme.headline2,),
+      content: Text(message!, style: TextStyle(color: Colors.white),
+    ),
     ));
   }
 

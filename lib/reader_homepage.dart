@@ -190,12 +190,11 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                   File file = File(fileModel.filePath);
                                   // File file = File(fileModel.file);
                                   print("File: ${file.exists()}");
-                                  Navigator.of(context)
-                                      .pushReplacement(MaterialPageRoute(
-                                          builder: (context) => SyncPDFViewer(
-                                                file: file,
-                                                fileModel: fileModel,
-                                              )));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SyncPDFViewer(
+                                            file: file,
+                                            fileModel: fileModel,
+                                          )));
                                 },
                                 focusColor: primaryColor,
                                 excludeFromSemantics: true,
@@ -264,25 +263,28 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                       readerController
                                                           .setFavFiles();
 
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        backgroundColor: Theme
-                                                                .of(context)
-                                                            .backgroundColor,
-                                                        duration: Duration(
-                                                            milliseconds:
-                                                                NumberConstants
-                                                                    .snackBarDurationInMilliseconds),
-                                                        content: Text(
-                                                          "Removed ${fileModel.fileName.replaceAll(".pdf", "")} from Favourites",
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .headline2,
-                                                        ),
-                                                      ));
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                          SnackBar(
+                                                              elevation: 2,
+                                                              action:
+                                                                  SnackBarAction(
+                                                                onPressed: () {
+                                                                  //TODO:
+                                                                },
+                                                                label: "UNDO",
+                                                              ),
+                                                              backgroundColor:
+                                                                  primaryColor,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      NumberConstants
+                                                                          .snackBarDurationInMilliseconds),
+                                                              content: Text(
+                                                                "Removed ${fileModel.fileName.replaceAll(".pdf", "")} from Favourites",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              )));
                                                     },
                                                     color: Colors.blue[700],
                                                   )
@@ -305,25 +307,38 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                               context)
                                                           .showSnackBar(
                                                               SnackBar(
-                                                        backgroundColor: Theme
-                                                                .of(context)
-                                                            .backgroundColor,
+                                                        action: SnackBarAction(
+                                                          onPressed: () {
+                                                            // TODO: Remove from fav
+                                                            setState(() {});
+                                                            readerController
+                                                                .removeFavFileAt(
+                                                              fileModel.fileID,
+                                                            );
+                                                            readerController
+                                                                .setFavFiles();
+                                                          },
+                                                          label: "UNDO",
+                                                          textColor:
+                                                              Colors.white,
+                                                        ),
+                                                        backgroundColor:
+                                                            primaryColor,
                                                         duration: Duration(
                                                             milliseconds:
                                                                 NumberConstants
                                                                     .snackBarDurationInMilliseconds),
                                                         content: Text(
                                                           "Saved ${fileModel.fileName.replaceAll(".pdf", " ")} to Favourites",
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .headline2,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                       ));
                                                     },
                                                     color: Colors.blue[700],
                                                   ),
-                                                    SizedBox(
+                                            SizedBox(
                                               width: 20,
                                             ),
                                             IconButton(
@@ -341,13 +356,27 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
                                                     backgroundColor:
-                                                        Theme.of(context)
-                                                            .backgroundColor,
+                                                        primaryColor,
+                                                    action: SnackBarAction(
+                                                      onPressed: () {
+                                                        // TODO: Remove from fav 
+                                                        setState(() {});
+                                                        readerController
+                                                            .addToRecentFile(
+                                                                fileModel
+                                                                    .fileID,
+                                                                fileModel
+                                                                    .fileName);
+                                                        readerController
+                                                            .setRecentFiles();
+                                                      },
+                                                      label: "UNDO",
+                                                      textColor: Colors.white,
+                                                    ),
                                                     content: Text(
                                                       "Removed ${fileModel.fileName}",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline2,
+                                                      style: TextStyle(
+                                                          color: Colors.white),
                                                     ),
                                                   ));
                                                 },
@@ -428,14 +457,13 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                   fileID: fileID,
                                   file: file,
                                   fileType: 'PDF',
-                                  fileTimeOpened: _fileOpenedAt!); 
+                                  fileTimeOpened: _fileOpenedAt!);
 
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(
-                                      builder: (context) => SyncPDFViewer(
-                                            file: file,
-                                            fileModel: fileModel,
-                                          )));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SyncPDFViewer(
+                                        file: file,
+                                        fileModel: fileModel,
+                                      )));
 
                               readerController.addFile(fileModel);
                               readerController.addToRecentFile(

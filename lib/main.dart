@@ -12,7 +12,6 @@ import 'package:kenkan_app_x/helpers/app_theme.dart';
 import 'package:kenkan_app_x/views/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 late SharedPreferences prefs;
 
 // const wordOfTheDayTask1 = "wordOfTheDayTask1";
@@ -45,7 +44,7 @@ late SharedPreferences prefs;
 //     switch (taskName) {
 //       case wordOfTheDayTask1:
 //         dictionaryController.updateWordForDay();
-        
+
 //         break;
 //       case wordOfTheDayTask2:
 //         break;
@@ -59,13 +58,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
 
-   //Check App Theme for initial App setup
+  //Check App Theme for initial App setup
   prefs.getBool("isDarkModeOn") == null
       ? prefs.setBool("isDarkModeOn", false)
       : prefs.setBool("isDarkModeOn", prefs.getBool("isDarkModeOn")!);
 
- 
- 
   //Check if the periodic process is already running for initial App setup
   prefs.getBool("isPeriodicPressedOn") == null
       ? prefs.setBool("isPeriodicPressedOn", false)
@@ -79,7 +76,7 @@ void main() async {
 
   //Check Reader Speed Rate  for initial App Setup
   prefs.getDouble("ReaderSpeechRate") == null
-      ? prefs.setDouble("ReaderSpeechRate", 0.8)
+      ? prefs.setDouble("ReaderSpeechRate", 0.4)
       : prefs.setDouble(
           "ReaderSpeechRate", prefs.getDouble("ReaderSpeechRate")!);
 
@@ -89,9 +86,6 @@ void main() async {
   Get.put(ReaderController());
   Get.put(DictionaryController());
 
- 
-
-  
   runApp(MyApp());
 }
 
@@ -116,7 +110,7 @@ class LightAndDarkTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    readerController.setRecentFiles();
     return Obx(() {
       return MaterialApp(
         title: 'KenKan X',

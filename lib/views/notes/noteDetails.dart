@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
+import 'package:kenkan_app_x/constants/other_names.dart';
 import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/models/noteModel.dart';
 import 'package:kenkan_app_x/views/notes/notesHomepage.dart';
@@ -74,7 +75,7 @@ class _NoteDetailsState extends State<NoteDetails> {
               style:Theme.of(context).textTheme.headline2,
             ),
             elevation: 4,
-            duration: Duration(milliseconds: 2000),
+            duration: Duration(milliseconds: NumberConstants.snackBarDurationInMilliseconds),
           ));
           Navigator.push(
               context,
@@ -109,8 +110,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                           
                           TextButton(
                           onPressed: () {
-                               // Meeting ID - 83609178745
-                              //Passcode - 488546
+                             
                            
                              Navigator.push(       context,
               MaterialPageRoute(
@@ -199,7 +199,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                 },
                 icon: Icon(
                   Icons.done,
-                  color: primaryColor,
+                  color:  appStateController.isDarkModeOn.value ? Colors.white : primaryColor,
                 )),
             SizedBox(
               width: 15,

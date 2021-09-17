@@ -41,13 +41,13 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         return true;
       },
       child: Obx(() => Scaffold(
-        floatingActionButton: Visibility(
-          visible: readerController.getFavFiles.length > 0 ? true : false,
-          child: FloatingActionButton.extended(
-            backgroundColor: primaryColor,
-            tooltip: "Add Favourite File",
-            onPressed: (){
-             showDialog(
+            floatingActionButton: Visibility(
+              visible: readerController.getFavFiles.length > 0 ? true : false,
+              child: FloatingActionButton.extended(
+                backgroundColor: primaryColor,
+                tooltip: "Add Favourite File",
+                onPressed: () {
+                  showDialog(
                       context: context,
                       builder: (context) {
                         return SimpleDialog(
@@ -62,19 +62,21 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                                   vertical: 8, horizontal: 20),
                               onPressed: () async {
                                 final file = await PDFApi.pickPDF('');
-        
+
                                 DateTime now = DateTime.now();
-                                _formattedDate =
-                                    DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
-                                        .format(now);
+                                _formattedDate = DateFormat(
+                                        DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+                                    .format(now);
                                 _formattedTime =
                                     DateFormat(DateFormat.HOUR_MINUTE)
                                         .format(now);
-                                _fileOpenedAt = "$_formattedDate $_formattedTime";
-        
+                                _fileOpenedAt =
+                                    "$_formattedDate $_formattedTime";
+
                                 String fileName = basename(file.path);
-                                  Random random = new Random();
-                                 String fileID = random.nextInt(100000).toString();
+                                Random random = new Random();
+                                String fileID =
+                                    random.nextInt(100000).toString();
                                 FileModel fileModel = FileModel(
                                     filePath: file.path,
                                     fileName: fileName,
@@ -83,14 +85,18 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                                     file: file,
                                     fileTimeOpened: _fileOpenedAt.toString());
                                 await readerController.addFile(fileModel);
-        
-                                await readerController
-                                    .addToFavFile(fileModel.fileID, fileModel.fileName);
-                                await readerController
-                                    .addToRecentFile(fileModel.fileID, fileModel.fileName);
-        
-                             Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => SyncPDFViewer(file: file, fileModel: fileModel,)));
+
+                                await readerController.addToFavFile(
+                                    fileModel.fileID, fileModel.fileName);
+                                await readerController.addToRecentFile(
+                                    fileModel.fileID, fileModel.fileName);
+
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                        builder: (context) => SyncPDFViewer(
+                                              file: file,
+                                              fileModel: fileModel,
+                                            )));
                               },
                               child: Text(
                                 "PDF Files",
@@ -100,8 +106,18 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                           ],
                         );
                       });
-          }, label: Text("Add File", style: TextStyle(color: Colors.white),), isExtended: true, icon: Icon(Icons.add_task, color: Colors.white,),),
-        ),
+                },
+                label: Text(
+                  "Add File",
+                  style: TextStyle(color: Colors.white),
+                ),
+                isExtended: true,
+                icon: Icon(
+                  Icons.add_task,
+                  color: Colors.white,
+                ),
+              ),
+            ),
             drawer: AppDrawer(),
             appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,
@@ -112,7 +128,6 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             body: readerController.favFiles.length == 0
                 ? _noFilesBody(context)
                 : Container(
-                    // margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                     child: ListView.separated(
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
@@ -127,14 +142,17 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                             onTap: () async {
                               print(fileModel.filePath);
 
-                              File file = File(fileModel.filePath);                      
-                                          
+                              File file = File(fileModel.filePath);
 
+                              readerController.addToRecentFile(
+                                  fileModel.fileID, fileModel.fileName);
 
                               print(file);
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      SyncPDFViewer(file:file, fileModel: fileModel,)));
+                                  builder: (context) => SyncPDFViewer(
+                                        file: file,
+                                        fileModel: fileModel,
+                                      )));
                             },
                             focusColor: primaryColor,
                             excludeFromSemantics: true,
@@ -195,16 +213,33 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
-                                                                          backgroundColor: Theme.of(context).backgroundColor,
-
+                                                     action: SnackBarAction(
+                                                      onPressed: () {
+                                                        // TODO: Remove from fav
+                                                        setState(() {});
+                                                        readerController
+                                                            .addToFavFile(
+                                                                fileModel
+                                                                    .fileID,
+                                                                fileModel
+                                                                    .fileName);
+                                                        readerController
+                                                            .setFavFiles(); 
+                                                      },
+                                                      label: "UNDO", 
+                                                      textColor: Colors.white,
+                                                    ),                                               
+                                                backgroundColor: primaryColor,
                                                 duration: Duration(
                                                     milliseconds: NumberConstants
                                                         .snackBarDurationInMilliseconds),
                                                 content: Text(
-                                                    "${fileModel.fileName.replaceAll(".pdf", " ")} removed!", style: Theme.of(context).textTheme.headline2,),
+                                                  "${fileModel.fileName.replaceAll(".pdf", " ")} removed!",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
                                               ));
                                             },
-
                                             color: Colors.red),
                                       ],
                                     )
@@ -273,8 +308,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                               _fileOpenedAt = "$_formattedDate $_formattedTime";
 
                               String fileName = basename(file.path);
-                                Random random = new Random();
-                               String fileID = random.nextInt(100000).toString();
+                              Random random = new Random();
+                              String fileID = random.nextInt(100000).toString();
                               FileModel fileModel = FileModel(
                                   filePath: file.path,
                                   fileName: fileName,
@@ -284,13 +319,17 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                                   fileTimeOpened: _fileOpenedAt.toString());
                               await readerController.addFile(fileModel);
 
-                              await readerController
-                                  .addToFavFile(fileModel.fileID, fileModel.fileName);
-                              await readerController
-                                  .addToRecentFile(fileModel.fileID, fileModel.fileName);
+                              await readerController.addToFavFile(
+                                  fileModel.fileID, fileModel.fileName);
+                              await readerController.addToRecentFile(
+                                  fileModel.fileID, fileModel.fileName);
 
-                           Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SyncPDFViewer(file: file, fileModel: fileModel,)));
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => SyncPDFViewer(
+                                            file: file,
+                                            fileModel: fileModel,
+                                          )));
                             },
                             child: Text(
                               "PDF Files",

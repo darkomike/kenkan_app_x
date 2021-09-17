@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/names.dart';
 import 'package:kenkan_app_x/constants/other_names.dart';
+import 'package:kenkan_app_x/constants/sytle.dart';
 import 'package:kenkan_app_x/helpers/diction_functions.dart';
 import 'package:kenkan_app_x/models/wordModel.dart';
 import 'package:kenkan_app_x/views/dictionary/dictionHomepage.dart';
@@ -213,11 +214,14 @@ class _DictionHistoryState extends State<DictionHistory> {
                                                       wordModel.wordID!);
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
+                                                backgroundColor: primaryColor,
                                                 duration: Duration(
                                                     milliseconds: NumberConstants
                                                         .snackBarDurationInMilliseconds),
                                                 content: Text(
-                                                    "\"${wordModel.wordName!.capitalize}\" is saved to favourites"),
+                                                    "\"${wordModel.wordName!.capitalize}\" is saved to favourites",                                                                                                                                                                                                                                       style: TextStyle(color: Colors.white),
+
+                                                ),
                                               ));
                                               Navigator.of(context).pop();
                                             },

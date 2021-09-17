@@ -244,7 +244,7 @@ class AppDrawer extends StatelessWidget {
                       return SimpleDialog(
                         backgroundColor: Theme.of(context).backgroundColor,
                         title: Text(
-                          "Do you want to exit the app?",
+                          "Do you want to exit app?",
                           style: Theme.of(context).textTheme.headline3,
                         ),
                         children: [

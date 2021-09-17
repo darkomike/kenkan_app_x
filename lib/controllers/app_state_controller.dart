@@ -12,7 +12,8 @@ class AppStateController extends GetxController {
 
   var showAppBar = false.obs;
 
-  void updateAppBarOnScrollUp() {
+  void updateAppBarOnScrollUp()
+  {
     showAppBar.value = false;
   }
 

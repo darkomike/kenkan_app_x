@@ -33,5 +33,5 @@ class DbConstants {
 }
 
 class NumberConstants {
-  static final int snackBarDurationInMilliseconds = 1000;
+  static final int snackBarDurationInMilliseconds = 3000;
 }

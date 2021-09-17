@@ -181,7 +181,7 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
                             child: ListTile(
                               
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3)),
+                                  borderRadius: BorderRadius.circular(10)),
                               tileColor:  accentColor,
                               
                                      leading: Container(
@@ -285,7 +285,7 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
                 color: Colors.white,
               ),
               Text(
-                " Delete",
+                "Delete",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
