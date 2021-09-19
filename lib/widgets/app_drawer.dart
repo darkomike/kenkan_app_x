@@ -291,7 +291,7 @@ class AppDrawer extends StatelessWidget {
                 color: color,
                 size: Theme.of(context).iconTheme.size,
               ),
-              title: Text("Starred Files",
+              title: Text("Faourite Files",
                   style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),

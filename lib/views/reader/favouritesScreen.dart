@@ -152,7 +152,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,
               elevation: 0,
-              title: Text("Starred Files ",
+              title: Text("Faourite Files ",
                   style: Theme.of(context).textTheme.headline6),
             ),
             body: readerController.favFiles.length == 0

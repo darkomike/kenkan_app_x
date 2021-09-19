@@ -374,7 +374,7 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                                 NumberConstants
                                                                     .snackBarDurationInMilliseconds),
                                                         content: Text(
-                                                          "Saved ${fileModel.fileName.replaceAll(".pdf", " ")} to Favourites",
+                                                          "File added to favourites",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white),
@@ -419,7 +419,7 @@ class _ReaderHomepageState extends State<ReaderHomepage>
                                                       textColor: Colors.white,
                                                     ),
                                                     content: Text(
-                                                      "Removed ${fileModel.fileName}",
+                                                      "File removed from recent files",
                                                       style: TextStyle(
                                                           color: Colors.white),
                                                     ),
