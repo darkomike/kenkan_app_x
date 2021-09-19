@@ -15,6 +15,7 @@ import 'package:kenkan_app_x/views/helpAndFeedback.dart';
 import 'package:kenkan_app_x/views/notes/notesHomepage.dart';
 import 'package:kenkan_app_x/views/reader/SyncFusionPDFViewer.dart';
 import 'package:kenkan_app_x/views/reader/favouritesScreen.dart';
+import 'package:kenkan_app_x/views/reader/system_files.dart';
 import 'package:kenkan_app_x/views/settingsScreen.dart';
 import 'package:path/path.dart';
 
@@ -72,96 +73,225 @@ class AppDrawer extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            ListTile(
-              leading: SvgPicture.asset("assets/icons/read_book.svg",
-                  height: 20, color: color),
+               ListTile(
+              leading: Icon(
+                Icons.open_in_new,
+                color: color,
+              ),
               onTap: () {
-                Navigator.pushReplacement((context),
-                    MaterialPageRoute(builder: (_) => ReaderHomepage()));
-              },
-              title: Text("Reading Now",
+                showDialog(context: context, builder: (context) {
+                  return     SimpleDialog(
+                  backgroundColor: Theme.of(context).backgroundColor,
+                  title: Text(
+                    "Select Files",
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  children: [
+                    SimpleDialogOption(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      onPressed: () {
+                        Navigator.push(
+                            (context),
+                            MaterialPageRoute(
+                                builder: (_) => SystemFilesScreen(isFavFile: false,)));
+                      },
+                      child: Text(
+                        "PDF Files",
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                    )
+                  ],
+                );
+
+                });
+                          },
+              title: Text("Open New File",
                   style: Theme.of(context).textTheme.headline2),
             ),
+             SizedBox(
+              height: 5,
+            ),
+            ListTile(
+              leading: SvgPicture.asset("assets/icons/read_book.svg",
+                  height: 16, color: color),
+              onTap: () {
+                if (readerController.getRecentFiles.length == 0) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return SimpleDialog(
+                          backgroundColor: Theme.of(context).backgroundColor,
+                          title: Text(
+                            "Select Files",
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          children: [
+                            SimpleDialogOption(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 20),
+                              onPressed: () async {
+                                final file = await PDFApi.pickPDF('');
+
+                                DateTime now = DateTime.now();
+                                _formattedDate = DateFormat(
+                                        DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+                                    .format(now);
+                                _formattedTime =
+                                    DateFormat(DateFormat.HOUR_MINUTE)
+                                        .format(now);
+                                _fileOpenedAt =
+                                    "$_formattedDate $_formattedTime";
+
+                                String fileName = basename(file.path);
+                                Random random = new Random();
+                                String fileID =
+                                    random.nextInt(100000).toString();
+                                FileModel fileModel = FileModel(
+                                    filePath: file.path,
+                                    fileName: fileName,
+                                    fileID: fileID,
+                                    fileType: 'PDF',
+                                    file: file.readAsBytesSync(),
+                                    fileTimeOpened: _fileOpenedAt.toString());
+
+                                Navigator.pop(context);
+                                openPDF(context, file);
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => SyncPDFViewer(
+                                              file: file,
+                                              fileModel: fileModel,
+                                            )));
+
+                                readerController.addFile(fileModel);
+                                readerController.addToRecentFile(
+                                    fileModel.fileID, fileModel.fileName);
+                              },
+                              child: Text(
+                                "PDF Files",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            )
+                          ],
+                        );
+                      });
+                } else {
+                  FileModel fileModel = readerController.getRecentFiles[0];
+
+                  File file = File(fileModel.filePath);
+                  // File file = File(fileModel.file);
+                  print("File: ${file.exists()}");
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SyncPDFViewer(
+                            file: file,
+                            fileModel: fileModel,
+                          )));
+                }
+              },
+              title:
+                  Text("Viewer", style: Theme.of(context).textTheme.headline2),
+            ),
+
             SizedBox(
               height: 5,
             ),
             ListTile(
               leading: Icon(
-                Icons.open_in_new,
+                Icons.history,
                 color: color,
-                size: Theme.of(context).iconTheme.size,
               ),
-              title: Text("Open Document",
-                  style: Theme.of(context).textTheme.headline2),
               onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return SimpleDialog(
-                        backgroundColor: Theme.of(context).backgroundColor,
-                        title: Text(
-                          "Select Files",
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
-                        children: [
-                          SimpleDialogOption(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 20),
-                            onPressed: () async {
-                              final file = await PDFApi.pickPDF('');
-
-                              DateTime now = DateTime.now();
-                              _formattedDate =
-                                  DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
-                                      .format(now);
-                              _formattedTime =
-                                  DateFormat(DateFormat.HOUR_MINUTE)
-                                      .format(now);
-                              _fileOpenedAt = "$_formattedDate $_formattedTime";
-
-                              String fileName = basename(file.path);
-  Random random = new Random();
-                               String fileID = random.nextInt(100000).toString();
-                              FileModel fileModel = FileModel(
-                                  filePath: file.path,
-                                  fileName: fileName,
-                                  fileID: fileID,
-                                  fileType: 'PDF',
-                                  file: file.readAsBytesSync(),
-                                  fileTimeOpened: _fileOpenedAt.toString());
-
-                              Navigator.pop(context);
-                              openPDF(context, file);
-
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          SyncPDFViewer(file: file, fileModel: fileModel,)));
-                                          
-                              readerController.addFile(fileModel);
-                              readerController.addToRecentFile(fileModel.fileID, fileModel.fileName);
-                            },
-                            child: Text(
-                              "PDF Files",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                          )
-                        ],
-                      );
-                    });
+                Navigator.pushReplacement((context),
+                    MaterialPageRoute(builder: (_) => ReaderHomepage()));
               },
+              title: Text("Recent Files",
+                  style: Theme.of(context).textTheme.headline2),
             ),
             SizedBox(
               height: 5,
             ),
+         
+           
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.open_in_new,
+            //     color: color,
+            //     size: Theme.of(context).iconTheme.size,
+            //   ),
+            //   title: Text("Open Document",
+            //       style: Theme.of(context).textTheme.headline2),
+            //   onTap: () {
+            //     showDialog(
+            //         context: context,
+            //         builder: (context) {
+            //           return SimpleDialog(
+            //             backgroundColor: Theme.of(context).backgroundColor,
+            //             title: Text(
+            //               "Select Files",
+            //               style: Theme.of(context).textTheme.headline3,
+            //             ),
+            //             children: [
+            //               SimpleDialogOption(
+            //                 padding: EdgeInsets.symmetric(
+            //                     vertical: 8, horizontal: 20),
+            //                 onPressed: () async {
+            //                   final file = await PDFApi.pickPDF('');
+
+            //                   DateTime now = DateTime.now();
+            //                   _formattedDate =
+            //                       DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+            //                           .format(now);
+            //                   _formattedTime =
+            //                       DateFormat(DateFormat.HOUR_MINUTE)
+            //                           .format(now);
+            //                   _fileOpenedAt = "$_formattedDate $_formattedTime";
+
+            //                   String fileName = basename(file.path);
+            //                   Random random = new Random();
+            //                    String fileID = random.nextInt(100000).toString();
+            //                   FileModel fileModel = FileModel(
+            //                       filePath: file.path,
+            //                       fileName: fileName,
+            //                       fileID: fileID,
+            //                       fileType: 'PDF',
+            //                       file: file.readAsBytesSync(),
+            //                       fileTimeOpened: _fileOpenedAt.toString());
+
+            //                   Navigator.pop(context);
+            //                   openPDF(context, file);
+
+            //                   Navigator.pushReplacement(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                           builder: (_) =>
+            //                               SyncPDFViewer(file: file, fileModel: fileModel,)));
+
+            //                   readerController.addFile(fileModel);
+            //                   readerController.addToRecentFile(fileModel.fileID, fileModel.fileName);
+            //                 },
+            //                 child: Text(
+            //                   "PDF Files",
+            //                   style: Theme.of(context).textTheme.headline2,
+            //                 ),
+            //               )
+            //             ],
+            //           );
+            //         });
+            //   },
+            // ),
+            // SizedBox(
+            //   height: 5,
+            // ),
             ListTile(
               leading: Icon(
                 Icons.star,
                 color: color,
                 size: Theme.of(context).iconTheme.size,
               ),
-              title: Text("Favourites",
+              title: Text("Starred Files",
                   style: Theme.of(context).textTheme.headline2),
               onTap: () {
                 Navigator.pushReplacement((context),

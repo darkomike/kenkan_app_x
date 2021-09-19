@@ -220,7 +220,7 @@ class _SyncPDFViewerState extends State<SyncPDFViewer> {
                                 milliseconds: NumberConstants
                                     .snackBarDurationInMilliseconds),
                             content: Text(
-                                "Text copied", style: Theme.of(context).textTheme.headline2,),
+                                "Text copied", style: TextStyle(fontSize: 16, color:Colors.white),),
                           ));
                         },
                         child: Container(

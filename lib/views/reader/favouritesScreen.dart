@@ -16,6 +16,7 @@ import 'package:path/path.dart';
 
 import '../../reader_homepage.dart';
 import 'SyncFusionPDFViewer.dart';
+import 'system_files.dart';
 
 class FavouritesScreen extends StatefulWidget {
   const FavouritesScreen({Key? key}) : super(key: key);
@@ -60,42 +61,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                             SimpleDialogOption(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 20),
-                              onPressed: () async {
-                                final file = await PDFApi.pickPDF('');
-
-                                DateTime now = DateTime.now();
-                                _formattedDate = DateFormat(
-                                        DateFormat.YEAR_MONTH_WEEKDAY_DAY)
-                                    .format(now);
-                                _formattedTime =
-                                    DateFormat(DateFormat.HOUR_MINUTE)
-                                        .format(now);
-                                _fileOpenedAt =
-                                    "$_formattedDate $_formattedTime";
-
-                                String fileName = basename(file.path);
-                                Random random = new Random();
-                                String fileID =
-                                    random.nextInt(100000).toString();
-                                FileModel fileModel = FileModel(
-                                    filePath: file.path,
-                                    fileName: fileName,
-                                    fileType: 'PDF',
-                                    fileID: fileID,
-                                    file: file,
-                                    fileTimeOpened: _fileOpenedAt.toString());
-                                await readerController.addFile(fileModel);
-
-                                await readerController.addToFavFile(
-                                    fileModel.fileID, fileModel.fileName);
-                                await readerController.addToRecentFile(
-                                    fileModel.fileID, fileModel.fileName);
-
-                                Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                        builder: (context) => SyncPDFViewer(
-                                              file: file,
-                                              fileModel: fileModel,
+                              onPressed: () {
+                                Navigator.push(
+                                    (context),
+                                    MaterialPageRoute(
+                                        builder: (_) => SystemFilesScreen(
+                                              isFavFile: true,
                                             )));
                               },
                               child: Text(
@@ -106,6 +77,65 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                           ],
                         );
                       });
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return SimpleDialog(
+                  //         backgroundColor: Theme.of(context).backgroundColor,
+                  //         title: Text(
+                  //           "Select Files",
+                  //           style: Theme.of(context).textTheme.headline3,
+                  //         ),
+                  //         children: [
+                  //           SimpleDialogOption(
+                  //             padding: EdgeInsets.symmetric(
+                  //                 vertical: 8, horizontal: 20),
+                  //             onPressed: () async {
+                  //               final file = await PDFApi.pickPDF('');
+
+                  //               DateTime now = DateTime.now();
+                  //               _formattedDate = DateFormat(
+                  //                       DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+                  //                   .format(now);
+                  //               _formattedTime =
+                  //                   DateFormat(DateFormat.HOUR_MINUTE)
+                  //                       .format(now);
+                  //               _fileOpenedAt =
+                  //                   "$_formattedDate $_formattedTime";
+
+                  //               String fileName = basename(file.path);
+                  //               Random random = new Random();
+                  //               String fileID =
+                  //                   random.nextInt(100000).toString();
+                  //               FileModel fileModel = FileModel(
+                  //                   filePath: file.path,
+                  //                   fileName: fileName,
+                  //                   fileType: 'PDF',
+                  //                   fileID: fileID,
+                  //                   file: file,
+                  //                   fileTimeOpened: _fileOpenedAt.toString());
+                  //               await readerController.addFile(fileModel);
+
+                  //               await readerController.addToFavFile(
+                  //                   fileModel.fileID, fileModel.fileName);
+                  //               await readerController.addToRecentFile(
+                  //                   fileModel.fileID, fileModel.fileName);
+
+                  //               Navigator.of(context)
+                  //                   .pushReplacement(MaterialPageRoute(
+                  //                       builder: (context) => SyncPDFViewer(
+                  //                             file: file,
+                  //                             fileModel: fileModel,
+                  //                           )));
+                  //             },
+                  //             child: Text(
+                  //               "PDF Files",
+                  //               style: Theme.of(context).textTheme.headline2,
+                  //             ),
+                  //           )
+                  //         ],
+                  //       );
+                  //     });
                 },
                 label: Text(
                   "Add File",
@@ -122,7 +152,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,
               elevation: 0,
-              title: Text("Favourites",
+              title: Text("Starred Files ",
                   style: Theme.of(context).textTheme.headline6),
             ),
             body: readerController.favFiles.length == 0
@@ -213,22 +243,20 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
-                                                     action: SnackBarAction(
-                                                      onPressed: () {
-                                                        // TODO: Remove from fav
-                                                        setState(() {});
-                                                        readerController
-                                                            .addToFavFile(
-                                                                fileModel
-                                                                    .fileID,
-                                                                fileModel
-                                                                    .fileName);
-                                                        readerController
-                                                            .setFavFiles(); 
-                                                      },
-                                                      label: "UNDO", 
-                                                      textColor: Colors.white,
-                                                    ),                                               
+                                                action: SnackBarAction(
+                                                  onPressed: () {
+                                                    // TODO: Remove from fav
+                                                    setState(() {});
+                                                    readerController
+                                                        .addToFavFile(
+                                                            fileModel.fileID,
+                                                            fileModel.fileName);
+                                                    readerController
+                                                        .setFavFiles();
+                                                  },
+                                                  label: "UNDO",
+                                                  textColor: Colors.white,
+                                                ),
                                                 backgroundColor: primaryColor,
                                                 duration: Duration(
                                                     milliseconds: NumberConstants
@@ -282,6 +310,64 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           ),
           ElevatedButton.icon(
               onPressed: () {
+                // showDialog(
+                //     context: context,
+                //     builder: (context) {
+                //       return SimpleDialog(
+                //         backgroundColor: Theme.of(context).backgroundColor,
+                //         title: Text(
+                //           "Select Files",
+                //           style: Theme.of(context).textTheme.headline3,
+                //         ),
+                //         children: [
+                //           SimpleDialogOption(
+                //             padding: EdgeInsets.symmetric(
+                //                 vertical: 8, horizontal: 20),
+                //             onPressed: () async {
+                //               final file = await PDFApi.pickPDF('');
+
+                //               DateTime now = DateTime.now();
+                //               _formattedDate =
+                //                   DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
+                //                       .format(now);
+                //               _formattedTime =
+                //                   DateFormat(DateFormat.HOUR_MINUTE)
+                //                       .format(now);
+                //               _fileOpenedAt = "$_formattedDate $_formattedTime";
+
+                //               String fileName = basename(file.path);
+                //               Random random = new Random();
+                //               String fileID = random.nextInt(100000).toString();
+                //               FileModel fileModel = FileModel(
+                //                   filePath: file.path,
+                //                   fileName: fileName,
+                //                   fileType: 'PDF',
+                //                   fileID: fileID,
+                //                   file: file,
+                //                   fileTimeOpened: _fileOpenedAt.toString());
+                //               await readerController.addFile(fileModel);
+
+                //               await readerController.addToFavFile(
+                //                   fileModel.fileID, fileModel.fileName);
+                //               await readerController.addToRecentFile(
+                //                   fileModel.fileID, fileModel.fileName);
+
+                //               Navigator.of(context)
+                //                   .pushReplacement(MaterialPageRoute(
+                //                       builder: (context) => SyncPDFViewer(
+                //                             file: file,
+                //                             fileModel: fileModel,
+                //                           )));
+                //             },
+                //             child: Text(
+                //               "PDF Files",
+                //               style: Theme.of(context).textTheme.headline2,
+                //             ),
+                //           )
+                //         ],
+                //       );
+                //     });
+
                 showDialog(
                     context: context,
                     builder: (context) {
@@ -295,40 +381,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                           SimpleDialogOption(
                             padding: EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 20),
-                            onPressed: () async {
-                              final file = await PDFApi.pickPDF('');
-
-                              DateTime now = DateTime.now();
-                              _formattedDate =
-                                  DateFormat(DateFormat.YEAR_MONTH_WEEKDAY_DAY)
-                                      .format(now);
-                              _formattedTime =
-                                  DateFormat(DateFormat.HOUR_MINUTE)
-                                      .format(now);
-                              _fileOpenedAt = "$_formattedDate $_formattedTime";
-
-                              String fileName = basename(file.path);
-                              Random random = new Random();
-                              String fileID = random.nextInt(100000).toString();
-                              FileModel fileModel = FileModel(
-                                  filePath: file.path,
-                                  fileName: fileName,
-                                  fileType: 'PDF',
-                                  fileID: fileID,
-                                  file: file,
-                                  fileTimeOpened: _fileOpenedAt.toString());
-                              await readerController.addFile(fileModel);
-
-                              await readerController.addToFavFile(
-                                  fileModel.fileID, fileModel.fileName);
-                              await readerController.addToRecentFile(
-                                  fileModel.fileID, fileModel.fileName);
-
-                              Navigator.of(context)
-                                  .pushReplacement(MaterialPageRoute(
-                                      builder: (context) => SyncPDFViewer(
-                                            file: file,
-                                            fileModel: fileModel,
+                            onPressed: () {
+                              Navigator.push(
+                                  (context),
+                                  MaterialPageRoute(
+                                      builder: (_) => SystemFilesScreen(
+                                            isFavFile: true,
                                           )));
                             },
                             child: Text(

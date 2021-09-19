@@ -28,6 +28,8 @@ dependencies:
   file_picker: 
   path: 
   path_provider: 
+  path_provider_ex: 
+  flutter_file_manager: 
   syncfusion_flutter_core: ^19.2.49-beta
   syncfusion_flutter_pdfviewer: ^19.2.49-beta
   flutter_tts: ^3.1.0

@@ -269,7 +269,7 @@ class AppDatabase {
         "SELECT DISTINCT ${LocalSave.filesTable}.${LocalSave.file}, ${LocalSave.filesTable}.${LocalSave.fileID},${LocalSave.filesTable}.${LocalSave.fileName}, ${LocalSave.filesTable}.${LocalSave.filePath},${LocalSave.filesTable}.${LocalSave.fileType},${LocalSave.filesTable}.${LocalSave.fileTimeOpened} "
         "FROM ${LocalSave.filesTable}, ${LocalSave.fileRecentTable} "
         "WHERE ${LocalSave.filesTable}.${LocalSave.fileID} = ${LocalSave.fileRecentTable}.${LocalSave.fileID} "
-        " ORDER BY ${LocalSave.fileTimeOpened}";
+        " ORDER BY ${LocalSave.fileTimeOpened} DESC";
 
     var recentFileRecs = await db.rawQuery(query);
     print("Recent Files Records: " + recentFileRecs.toString());
@@ -279,6 +279,18 @@ class AppDatabase {
         : [];
 
     return list;
+  }
+
+  // This method updates  recent files....
+
+  Future updateRecentFiles(String updatedTime, String fileID) async {
+    Database db = await database;
+    String query = "UPDATE ${LocalSave.filesTable} "
+        " SET ${LocalSave.fileTimeOpened} = ?,"
+        " WHERE ${LocalSave.fileID} = ?"; 
+
+    db.rawUpdate(query, [updatedTime, fileID]);
+    
   }
 
   Future<List<FileModel>> getAllFiles() async {

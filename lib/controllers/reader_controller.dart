@@ -1,36 +1,36 @@
-
 import 'package:get/get.dart';
 import 'package:kenkan_app_x/db/diction_db/database.dart';
 import 'package:kenkan_app_x/models/fileModel.dart';
 
-class ReaderController extends GetxController{
+class ReaderController extends GetxController {
   static ReaderController instance = Get.find();
 
-  //instance variables 
+  //instance variables
 
-   var  recentFiles = [].obs;
-  var  favFiles = [].obs;
-  var  files = [].obs;
+  var recentFiles = [].obs;
+  var favFiles = [].obs;
+  var files = [].obs;
 
-//getters   
+//getters
 
   get getFavFiles => favFiles.reversed.toList();
-  get getRecentFiles => recentFiles.reversed.toList();
+  get getRecentFiles => recentFiles.toList();
   get getFiles => files.reversed.toList();
 
 //setters
- setRecentFiles() async {
+  setRecentFiles() async {
     recentFiles.value = await AppDatabase.db.getAllRecentFiles();
   }
 
   setFavFiles() async {
-      favFiles.value = await AppDatabase.db.getAllFavFiles();
-  }
-  setFiles() async {
-      files.value = await AppDatabase.db.getAllFiles();
+    favFiles.value = await AppDatabase.db.getAllFavFiles();
   }
 
-  bool isFavFile(String fileID)  {
+  setFiles() async {
+    files.value = await AppDatabase.db.getAllFiles();
+  }
+
+  bool isFavFile(String fileID) {
     setFavFiles();
     bool check = false;
 
@@ -43,7 +43,7 @@ class ReaderController extends GetxController{
     return check;
   }
 
-  Future addToRecentFile(String  fileID, String fileName) async {
+  Future addToRecentFile(String fileID, String fileName) async {
     bool check = false;
 
     recentFiles.forEach((element) {
@@ -57,11 +57,9 @@ class ReaderController extends GetxController{
       setRecentFiles();
       print(recentFiles);
     }
-    
   }
 
-
-  Future addFile(FileModel fileModel ) async {
+  Future addFile(FileModel fileModel) async {
     bool check = false;
 
     recentFiles.forEach((element) {
@@ -75,7 +73,6 @@ class ReaderController extends GetxController{
       setFiles();
       print(files);
     }
-
   }
 
   Future addToFavFile(String fileID, String fileName) async {
@@ -97,7 +94,12 @@ class ReaderController extends GetxController{
   Future removeRecentFileAt(String fileID) async {
     await AppDatabase.db.removeRecentFileAt(fileID);
     setRecentFiles();
-    
+  }
+
+  Future updateRecentFiles(String updatedTime, String fileID) async {
+    await AppDatabase.db.updateRecentFiles(updatedTime, fileID);
+    setFiles();
+    setRecentFiles();
   }
 
   Future clearRecentFiles() async {
@@ -114,7 +116,4 @@ class ReaderController extends GetxController{
     await AppDatabase.db.removeAllRecentFiles();
     setFavFiles();
   }
-
-
-
 }

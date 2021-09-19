@@ -275,28 +275,9 @@ class _NotesHomepageState extends State<NotesHomepage> with SingleTickerProvider
     return Container(
       color: Colors.red,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Icon(
-                Icons.delete,
-                color: Colors.white,
-              ),
-              Text(
-                "Delete",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.right,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-            ],
-          ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[

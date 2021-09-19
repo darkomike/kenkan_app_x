@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kenkan_app_x/constants/controllers.dart';
 import 'package:kenkan_app_x/constants/other_names.dart';
 import 'package:kenkan_app_x/constants/sytle.dart';
+import 'package:kenkan_app_x/models/fileModel.dart';
+import 'package:kenkan_app_x/views/reader/SyncFusionPDFViewer.dart';
 import '../reader_homepage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,8 +22,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(
+      if (readerController.recentFiles.length > 0){
+
+              FileModel fileModel =
+                            readerController.getRecentFiles[0];
+
+                             File file = File(fileModel.filePath);
+                                  // File file = File(fileModel.file);
+                                  print("File: ${file.exists()}");
+                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                      builder: (context) => SyncPDFViewer(
+                                            file: file,
+                                            fileModel: fileModel,
+                                          )));
+      } else {
+        Navigator.pushReplacement(
           (context), MaterialPageRoute(builder: (_) => ReaderHomepage()));
+      }
+      
     });
     super.initState();
   }
